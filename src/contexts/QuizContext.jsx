@@ -22,6 +22,8 @@ const initialState = {
     isQuizMode: false,
     isFinished: false,
     isPartsOfSpeechMarked: true,
+    isAnswered: false,
+
     current: 0,
     questions: [],
     answers: [],
@@ -44,12 +46,14 @@ function reducer(state, action) {
             return {
                 ...state,
                 answers: [...state.answers, action.payload],
+                isAnswered: true,
             };
 
         case "quiz/questionSwitchedNext":
             return {
                 ...state,
                 current: state.current + 1,
+                isAnswered: false,
             };
 
         case "quiz/finishedQuiz":
@@ -69,7 +73,15 @@ function reducer(state, action) {
 
 function QuizContextProvider({ children }) {
     const [
-        { isQuizMode, isFinished, isPartsOfSpeechMarked, current, questions },
+        {
+            isQuizMode,
+            isFinished,
+            isPartsOfSpeechMarked,
+            isAnswered,
+
+            current,
+            questions,
+        },
         dispatch,
     ] = useReducer(reducer, initialState);
 
@@ -79,6 +91,8 @@ function QuizContextProvider({ children }) {
                 isQuizMode,
                 isFinished,
                 isPartsOfSpeechMarked,
+                isAnswered,
+
                 current,
                 questions,
                 dispatch,

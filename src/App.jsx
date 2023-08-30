@@ -4,9 +4,10 @@ import GlobalStyles from "./styles/GlobalStyles";
 import { useQuiz } from "./contexts/QuizContext";
 // Components
 import QuizContainer from "./components/QuizContainer";
-import Questions from "./components/Questions";
 import StartScreen from "./components/StartScreen";
 import FinishScreen from "./components/FinishScreen";
+import Progress from "./components/Progress";
+import Questions from "./components/Questions";
 
 function App() {
     const { isQuizMode, isFinished } = useQuiz();
@@ -16,7 +17,12 @@ function App() {
             <GlobalStyles />
             <QuizContainer>
                 {!isQuizMode && !isFinished && <StartScreen />}
-                {isQuizMode && <Questions />}
+                {isQuizMode && (
+                    <>
+                        <Progress />
+                        <Questions />
+                    </>
+                )}
                 {isFinished && <FinishScreen />}
             </QuizContainer>
         </>

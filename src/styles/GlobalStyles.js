@@ -14,12 +14,15 @@ const GlobalStyles = createGlobalStyle`
 
     --color-variant-button-bg: #3d405b;
     --color-variant-button-bg-hover: #003249;
-    --color-variant-button-bg-correct: #4f772d;
-    --color-variant-button-bg-wrong: #9d0208;
+    --color-variant-button-bg-correct: #31572c;
+    --color-variant-button-bg-wrong: #800e13;
     --color-variant-button-text: #c0c0c0;
 
     --color-quiz-heading-correct: var(--color-button-bg-correct);
     --color-quiz-heading-wrong: var(--color-button-bg-wrong);
+
+    --color-progress-bar: #93a8ac;
+    --color-progress-bar-fill: var(--color-button-bg);
 
     --size-max-width: ${rem(600)};
 }

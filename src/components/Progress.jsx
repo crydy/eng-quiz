@@ -1,0 +1,51 @@
+import { styled } from "styled-components";
+import { rem } from "../utils/helpers";
+import { useQuiz } from "../contexts/QuizContext";
+
+const ProgressNumerical = styled.div`
+    font-family: "Share Tech Mono", monospace;
+    text-align: right;
+`;
+
+const ProgressBar = styled.div`
+    margin-top: ${rem(12)};
+    width: 100%;
+    height: ${rem(8)};
+    background-color: var(--color-progress-bar);
+    border-radius: 10px;
+    overflow: hidden;
+`;
+
+const ProgressCore = styled.div`
+    width: ${(props) => props.$width + "%"};
+
+    height: 100%;
+    background-color: var(--color-progress-bar-fill);
+    transition: width 0.5s ease-in-out;
+`;
+
+function Progress() {
+    const { questions, current, isAnswered } = useQuiz();
+    const prevPercentageProgress = (current / questions.length) * 100;
+    const currPercentageProgress = ((current + 1) / questions.length) * 100;
+
+    return (
+        <>
+            <ProgressNumerical>
+                <span>{isAnswered ? current + 1 : current}</span>/
+                <span>{questions.length}</span>
+            </ProgressNumerical>
+            <ProgressBar>
+                <ProgressCore
+                    $width={
+                        isAnswered
+                            ? currPercentageProgress
+                            : prevPercentageProgress
+                    }
+                />
+            </ProgressBar>
+        </>
+    );
+}
+
+export default Progress;
