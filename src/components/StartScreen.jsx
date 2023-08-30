@@ -25,6 +25,30 @@ const RangeBlock = styled.div`
     }
 `;
 
+const Heading3 = styled.h3`
+    position: relative;
+    padding: ${rem(20)} ${rem(0)};
+    /* Pseudo-element for the line */
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+
+        left: 50%;
+        width: ${rem(260)};
+        height: ${rem(3)};
+        background-color: var(--color-text-main);
+        transform: translateX(-50%); /* Center it precisely */
+    }
+
+    &::before {
+        top: 0;
+    }
+    &::after {
+        bottom: 0;
+    }
+`;
+
 const Amount = styled.span`
     font-family: "Share Tech Mono", monospace;
 `;
@@ -35,8 +59,9 @@ function StartScreen() {
 
     return (
         <StyledStartScreen>
-            <h1>English verbs pracrice quiz</h1>
-            <h2>- Simple present -</h2>
+            <h1>English verbs</h1>
+            <h2>- Present simple -</h2>
+            <Heading3>pronoun + verb</Heading3>
 
             <RangeBlock>
                 <label for="questionsAmount">

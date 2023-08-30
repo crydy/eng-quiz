@@ -112,7 +112,6 @@ const verbs = {
         "go",
         "grow",
         "happen",
-        "have",
         "hear",
         "help",
         "hide",
@@ -236,7 +235,6 @@ const verbs = {
     ],
 
     n700: [
-        "have",
         "do",
         "say",
         "get",

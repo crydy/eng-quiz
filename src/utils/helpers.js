@@ -15,7 +15,7 @@ export function constructPresentSimplePhrase(pronoun, verb) {
     return `${pronoun} ${modifyVerb(verb)}`;
 }
 
-function modifyVerb(verb) {
+export function modifyVerb(verb) {
     const esEndings = ["o", "sh", "ch", "x", "ss", "zz"];
 
     for (const ending of esEndings) {
@@ -83,7 +83,7 @@ export function constructQuestions(propronouns, verbs, amount = 30) {
         const variants = getShuffledArrayCopy([rightVariant, wrongVariant]);
 
         return {
-            question: `"${pronoun}" + "to ${verb}"`,
+            question: `"${pronoun}" + "${verb}"`,
             variants,
             correctIndex: variants.indexOf(rightVariant),
         };
