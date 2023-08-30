@@ -1,6 +1,8 @@
 import { styled } from "styled-components";
-import { useQuiz } from "../contexts/quizContext";
+
+import { useQuiz } from "../contexts/QuizContext";
 import { rem } from "../utils/helpers";
+
 import Button from "./ui/Button";
 
 const StyledFinishScreen = styled.div`

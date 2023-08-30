@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 import Button from "./ui/Button";
 import VariantButton from "./ui/VariantButton";
 // Context
-import { useQuiz } from "../contexts/quizContext";
+import { useQuiz } from "../contexts/QuizContext";
 // Data and utils
 import { emojis } from "../data/emojiVariants";
 import { getRandomItem, rem } from "../utils/helpers";
