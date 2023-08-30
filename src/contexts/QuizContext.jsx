@@ -81,6 +81,7 @@ function QuizContextProvider({ children }) {
 
             current,
             questions,
+            answers,
         },
         dispatch,
     ] = useReducer(reducer, initialState);
@@ -95,6 +96,7 @@ function QuizContextProvider({ children }) {
 
                 current,
                 questions,
+                answers,
                 dispatch,
             }}
         >

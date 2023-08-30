@@ -6,10 +6,7 @@ import { useQuiz } from "../contexts/QuizContext";
 // Data and utils
 import { emojis } from "../data/emojiVariants";
 import { getRandomItem, rem } from "../utils/helpers";
-import {
-    correctAnswerMessages,
-    wrongAnswerMessages,
-} from "../data/unswerMessages";
+import { correctAnswerMessages, wrongAnswerMessages } from "../data/messages";
 // Components
 import Button from "./ui/Button";
 import VariantButton from "./ui/VariantButton";
@@ -80,11 +77,17 @@ function Questions() {
     function handleAnswer(index) {
         audioRef.current.play();
 
+        const isCorrect = index === correctIndex;
+
         setIsAnswered(true);
         setUserChoice(index);
         dispatch({
             type: "quiz/questionAnswered",
-            payload: index === correctIndex,
+            payload: {
+                isCorrect,
+                correctVariant: variants[correctIndex],
+                wrongVariant: variants[index],
+            },
         });
     }
 

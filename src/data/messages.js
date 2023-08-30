@@ -52,4 +52,13 @@ const wrongAnswerMessages = {
     ],
 };
 
-export { correctAnswerMessages, wrongAnswerMessages };
+const finishScreenMessages = [
+    "Congratulations!",
+    "You did it!",
+    "Amazing work!",
+    "Good job!",
+    "Fantastic job!",
+    "Well done!",
+];
+
+export { correctAnswerMessages, wrongAnswerMessages, finishScreenMessages };

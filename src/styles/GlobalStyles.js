@@ -5,11 +5,17 @@ const GlobalStyles = createGlobalStyle`
 
 :root {
     --color-bg: #011627;
+
     --color-text-main: #C2A83E;
+    --color-text-neutral: #c0c0c0;
+
     --color-text-part-of-speach: #4c956c;
+    --color-text-result-correct: lightgreen;
+    --color-text-result-average: #f77f00;
+    --color-text-result-wrong: red;
 
     --color-button-bg: #243E36;
-    --color-button-text: #c0c0c0;
+    --color-button-text: var(--color-text-neutral);
     --color-button-bg-hover: #003249;
 
     --color-variant-button-bg: #3d405b;
