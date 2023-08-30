@@ -28,7 +28,7 @@ const RangeBlock = styled.div`
 const Heading3 = styled.h3`
     position: relative;
     padding: ${rem(20)} ${rem(0)};
-    /* Pseudo-element for the line */
+
     &::before,
     &::after {
         content: "";
@@ -38,7 +38,7 @@ const Heading3 = styled.h3`
         width: ${rem(260)};
         height: ${rem(3)};
         background-color: var(--color-text-main);
-        transform: translateX(-50%); /* Center it precisely */
+        transform: translateX(-50%);
     }
 
     &::before {
@@ -55,7 +55,7 @@ const Amount = styled.span`
 
 function StartScreen() {
     const { dispatch } = useQuiz();
-    const [amount, setAmount] = useState(30);
+    const [amount, setAmount] = useState(10);
 
     return (
         <StyledStartScreen>
@@ -71,8 +71,8 @@ function StartScreen() {
                     type="range"
                     id="questionsAmount"
                     name="questionsAmount"
-                    min="10"
-                    max="50"
+                    min="5"
+                    max="30"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                 />

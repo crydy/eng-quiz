@@ -21,6 +21,7 @@ const QuizContext = createContext();
 const initialState = {
     isQuizMode: false,
     isFinished: false,
+    isPartsOfSpeechMarked: true,
     current: 0,
     questions: [],
     answers: [],
@@ -67,14 +68,17 @@ function reducer(state, action) {
 }
 
 function QuizContextProvider({ children }) {
-    const [{ isQuizMode, isFinished, current, questions }, dispatch] =
-        useReducer(reducer, initialState);
+    const [
+        { isQuizMode, isFinished, isPartsOfSpeechMarked, current, questions },
+        dispatch,
+    ] = useReducer(reducer, initialState);
 
     return (
         <QuizContext.Provider
             value={{
                 isQuizMode,
                 isFinished,
+                isPartsOfSpeechMarked,
                 current,
                 questions,
                 dispatch,

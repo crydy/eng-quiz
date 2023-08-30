@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
 :root {
     --color-bg: #011627;
     --color-text-main: #C2A83E;
+    --color-text-part-of-speach: #4c956c;
 
     --color-button-bg: #243E36;
     --color-button-text: #c0c0c0;

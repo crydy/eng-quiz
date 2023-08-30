@@ -1,9 +1,6 @@
 // Libs
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { styled } from "styled-components";
-// Components
-import Button from "./ui/Button";
-import VariantButton from "./ui/VariantButton";
 // Context
 import { useQuiz } from "../contexts/QuizContext";
 // Data and utils
@@ -13,6 +10,11 @@ import {
     correctAnswerMessages,
     wrongAnswerMessages,
 } from "../data/unswerMessages";
+// Components
+import Button from "./ui/Button";
+import VariantButton from "./ui/VariantButton";
+// Sounds
+import buttonClickSound from "../assets/sounds/button-click.wav";
 
 const StyledQuestions = styled.div`
     display: flex;
@@ -35,6 +37,24 @@ const Heading = styled.h2`
             : "var(--color-quiz-heading-wrong)"};
 `;
 
+const PartOfSpeach = styled.span`
+    position: relative;
+
+    &::before {
+        content: "${(props) => props.$nature}";
+
+        position: absolute;
+        top: ${rem(-10)};
+        left: 50%;
+        width: max-content;
+        transform: translateX(-50%);
+
+        color: var(--color-text-part-of-speach);
+        font-size: 0.4em;
+        font-weight: 200;
+    }
+`;
+
 const AnswersBlock = styled.div`
     margin-top: ${rem(35)};
     margin-bottom: ${rem(30)};
@@ -46,7 +66,7 @@ const AnswersBlock = styled.div`
 `;
 
 function Questions() {
-    const { current, questions, dispatch } = useQuiz();
+    const { current, questions, isPartsOfSpeechMarked, dispatch } = useQuiz();
 
     const [isAnswered, setIsAnswered] = useState(false);
     const [userChoice, setUserChoice] = useState(null);
@@ -55,7 +75,11 @@ function Questions() {
     const isCorrectAnswer = userChoice === correctIndex;
     const isLastQuestion = questions.length === current + 1;
 
+    const audioRef = useRef(new Audio(buttonClickSound));
+
     function handleAnswer(index) {
+        audioRef.current.play();
+
         setIsAnswered(true);
         setUserChoice(index);
         dispatch({
@@ -79,12 +103,23 @@ function Questions() {
         setUserChoice(null);
     }
 
+    const [pronoun, sign, verb] = question.split(" ");
+
     return (
         <StyledQuestions>
             {!isAnswered && (
                 <>
                     <Emoji>{getRandomItem(emojis.neutral)}</Emoji>
-                    <h2>{question}</h2>
+                    {!isPartsOfSpeechMarked && <h2>{question}</h2>}
+                    {isPartsOfSpeechMarked && (
+                        <h2>
+                            <PartOfSpeach $nature="pronoun">
+                                {pronoun}
+                            </PartOfSpeach>{" "}
+                            {sign}{" "}
+                            <PartOfSpeach $nature="verb">{verb}</PartOfSpeach>
+                        </h2>
+                    )}
                 </>
             )}
 
