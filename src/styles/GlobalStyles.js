@@ -30,6 +30,9 @@ const GlobalStyles = createGlobalStyle`
     --color-progress-bar: #93a8ac;
     --color-progress-bar-fill: var(--color-button-bg);
 
+    --color-range-track: var(--color-progress-bar);
+    --color-range-thumb: var(--color-text-main);
+
     --size-max-width: ${rem(600)};
 }
 

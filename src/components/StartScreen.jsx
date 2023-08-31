@@ -5,6 +5,9 @@ import { useQuiz } from "../contexts/QuizContext";
 import { rem } from "../utils/helpers";
 
 import Button from "./ui/Button";
+import Checkbox from "./ui/Checkbox";
+import Range from "./ui/Range";
+import RangeBlock from "./RangeBlock";
 
 const StyledStartScreen = styled.div`
     display: flex;
@@ -13,16 +16,6 @@ const StyledStartScreen = styled.div`
     gap: ${rem(40)};
 
     text-align: center;
-`;
-
-const RangeBlock = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    & > input {
-        width: 100%;
-    }
 `;
 
 const Heading3 = styled.h3`
@@ -49,13 +42,37 @@ const Heading3 = styled.h3`
     }
 `;
 
-const Amount = styled.span`
-    font-family: "Share Tech Mono", monospace;
+const OptionsForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: ${rem(20)};
 `;
 
 function StartScreen() {
     const { dispatch } = useQuiz();
     const [amount, setAmount] = useState(10);
+    const [options, setOptions] = useState({
+        positives: true,
+        negatives: false,
+        questions: false,
+    });
+
+    function handleCheckboxChange(e) {
+        const { name } = e.target;
+
+        const isLastActive =
+            Object.values(options).filter(Boolean).length === 1;
+
+        if (options[name] && isLastActive) {
+            return;
+        }
+
+        setOptions({
+            ...options,
+            [name]: !options[name],
+        });
+    }
 
     return (
         <StyledStartScreen>
@@ -63,27 +80,46 @@ function StartScreen() {
             <h2>- Present simple -</h2>
             <Heading3>pronoun + verb</Heading3>
 
-            <RangeBlock>
-                <label htmlFor="questionsAmount">
-                    Questions amount: <Amount>{amount}</Amount>
-                </label>
-                <input
-                    type="range"
-                    id="questionsAmount"
-                    name="questionsAmount"
-                    min="5"
-                    max="30"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                />
-            </RangeBlock>
+            <RangeBlock
+                label="Questions amount:"
+                min="5"
+                max="30"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+            ></RangeBlock>
+
+            <OptionsForm>
+                <Checkbox
+                    name="positives"
+                    checked={options.positives}
+                    onChange={handleCheckboxChange}
+                >
+                    positives
+                </Checkbox>
+
+                <Checkbox
+                    name="negatives"
+                    checked={options.negatives}
+                    onChange={handleCheckboxChange}
+                >
+                    negatives
+                </Checkbox>
+
+                <Checkbox
+                    name="questions"
+                    checked={options.questions}
+                    onChange={handleCheckboxChange}
+                >
+                    questions
+                </Checkbox>
+            </OptionsForm>
 
             <Button
                 onClick={() =>
                     dispatch({ type: "quiz/started", payload: amount })
                 }
             >
-                Start
+                Start the Quiz
             </Button>
         </StyledStartScreen>
     );
