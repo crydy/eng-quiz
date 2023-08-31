@@ -1,5 +1,9 @@
 import { verbs } from "../data/verbs";
-import { modifyVerb } from "../utils/helpers";
+import {
+    constructPresentSimpleNegative,
+    constructPresentSimpleQuestion,
+    modifyVerb,
+} from "../utils/questionConstructors";
 
 function Test() {
     const allVerbs = verbs.n200;
@@ -7,9 +11,7 @@ function Test() {
     return (
         <div style={{ textWrap: "wrap" }}>
             {allVerbs.map((verb) => (
-                <span>
-                    {verb} - {modifyVerb(verb)}; {""}
-                </span>
+                <span>{constructPresentSimpleQuestion("she", verb)}, </span>
             ))}
         </div>
     );
