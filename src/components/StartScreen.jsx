@@ -121,7 +121,16 @@ function StartScreen() {
                 </Checkbox>
             </OptionsForm>
 
-            <Button onClick={handleStartQuiz}>Start the Quiz</Button>
+            <Button
+                onClick={handleStartQuiz}
+                disabled={
+                    !options.positives &&
+                    !options.negatives &&
+                    !options.questions
+                }
+            >
+                Start the Quiz
+            </Button>
         </StyledStartScreen>
     );
 }
