@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 import { pronouns } from "../data/pronouns";
 import { verbs } from "../data/verbs";
-import { constructQuestions } from "../utils/helpers";
+import { constructQuestions } from "../utils/questionConstructors";
 
 const QuizContext = createContext();
 
@@ -38,7 +38,8 @@ function reducer(state, action) {
                 questions: constructQuestions(
                     pronouns.personal.subject,
                     verbs.n200,
-                    action.payload
+                    action.payload.amount,
+                    action.payload.options
                 ),
             };
 

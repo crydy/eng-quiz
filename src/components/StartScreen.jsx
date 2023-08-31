@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 
+import { useLocalStorageState } from "../hooks/useLocalStorageState";
 import { useQuiz } from "../contexts/QuizContext";
 import { rem } from "../utils/helpers";
 
 import Button from "./ui/Button";
 import Checkbox from "./ui/Checkbox";
-import Range from "./ui/Range";
 import RangeBlock from "./RangeBlock";
 
 const StyledStartScreen = styled.div`
@@ -52,7 +52,7 @@ const OptionsForm = styled.form`
 function StartScreen() {
     const { dispatch } = useQuiz();
     const [amount, setAmount] = useState(10);
-    const [options, setOptions] = useState({
+    const [options, setOptions] = useLocalStorageState({
         positives: true,
         negatives: false,
         questions: false,
@@ -71,6 +71,13 @@ function StartScreen() {
         setOptions({
             ...options,
             [name]: !options[name],
+        });
+    }
+
+    function handleStartQuiz() {
+        dispatch({
+            type: "quiz/started",
+            payload: { amount, options },
         });
     }
 
@@ -114,13 +121,7 @@ function StartScreen() {
                 </Checkbox>
             </OptionsForm>
 
-            <Button
-                onClick={() =>
-                    dispatch({ type: "quiz/started", payload: amount })
-                }
-            >
-                Start the Quiz
-            </Button>
+            <Button onClick={handleStartQuiz}>Start the Quiz</Button>
         </StyledStartScreen>
     );
 }
