@@ -1,4 +1,6 @@
+import { useEffect, useRef } from "react";
 import { styled } from "styled-components";
+
 import { rem } from "../utils/helpers";
 import { useQuiz } from "../contexts/QuizContext";
 
@@ -26,8 +28,21 @@ const ProgressCore = styled.div`
 
 function Progress() {
     const { questions, current, isAnswered } = useQuiz();
+
     const prevPercentageProgress = (current / questions.length) * 100;
     const currPercentageProgress = ((current + 1) / questions.length) * 100;
+
+    const titleText = useRef(null);
+
+    useEffect(() => {
+        if (!titleText.current) titleText.current = document.title;
+
+        document.title = isAnswered
+            ? `${titleText.current} | - ${current + 1}/${questions.length} -`
+            : `${titleText.current} | - ${current}/${questions.length} -`;
+
+        return () => (document.title = titleText.current);
+    }, [current, isAnswered, questions.length]);
 
     return (
         <>
@@ -35,6 +50,7 @@ function Progress() {
                 <span>{isAnswered ? current + 1 : current}</span>/
                 <span>{questions.length}</span>
             </ProgressNumerical>
+
             <ProgressBar>
                 <ProgressCore
                     $width={

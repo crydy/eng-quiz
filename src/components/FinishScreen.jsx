@@ -97,7 +97,7 @@ function FinishScreen() {
                 {answers
                     .filter((item) => !item.isCorrect)
                     .map((item) => (
-                        <li>
+                        <li key={item.correctVariant}>
                             <Wrong>{item.wrongVariant}</Wrong>
                             <Correct>{item.correctVariant}</Correct>
                         </li>

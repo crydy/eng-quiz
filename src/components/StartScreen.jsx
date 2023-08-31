@@ -64,7 +64,7 @@ function StartScreen() {
             <Heading3>pronoun + verb</Heading3>
 
             <RangeBlock>
-                <label for="questionsAmount">
+                <label htmlFor="questionsAmount">
                     Questions amount: <Amount>{amount}</Amount>
                 </label>
                 <input
