@@ -37,7 +37,7 @@ function reducer(state, action) {
                 isQuizMode: true,
                 questions: constructQuestions(
                     pronouns.personal.subject,
-                    verbs.n50,
+                    verbs.n200,
                     action.payload.amount,
                     action.payload.options
                 ),
@@ -73,34 +73,10 @@ function reducer(state, action) {
 }
 
 function QuizContextProvider({ children }) {
-    const [
-        {
-            isQuizMode,
-            isFinished,
-            isPartsOfSpeechMarked,
-            isAnswered,
-
-            current,
-            questions,
-            answers,
-        },
-        dispatch,
-    ] = useReducer(reducer, initialState);
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     return (
-        <QuizContext.Provider
-            value={{
-                isQuizMode,
-                isFinished,
-                isPartsOfSpeechMarked,
-                isAnswered,
-
-                current,
-                questions,
-                answers,
-                dispatch,
-            }}
-        >
+        <QuizContext.Provider value={{ ...state, dispatch }}>
             {children}
         </QuizContext.Provider>
     );
