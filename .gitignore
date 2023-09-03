@@ -24,4 +24,6 @@ dist-ssr
 *.sw?
 
 # Workflow files
+@info/
+notes/
 notes.*

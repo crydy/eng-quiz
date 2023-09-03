@@ -51,8 +51,8 @@ const OptionsForm = styled.form`
 
 function StartScreen() {
     const { dispatch } = useQuiz();
-    const [amount, setAmount] = useState(10);
-    const [options, setOptions] = useLocalStorageState({
+    const [amount, setAmount] = useLocalStorageState("amount", 10);
+    const [options, setOptions] = useLocalStorageState("options", {
         positives: true,
         negatives: false,
         questions: false,
