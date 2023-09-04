@@ -72,14 +72,21 @@ function FinishScreen() {
     const scorePercentage = (correctAmount / total) * 100;
 
     let scoreColor;
-    if (scorePercentage < 33) scoreColor = "var(--color-text-result-wrong)";
-    else if (scorePercentage < 66)
+    let messageSource;
+    if (scorePercentage < 33) {
+        scoreColor = "var(--color-text-result-wrong)";
+        messageSource = langPack.messages.finishQuiz.low[lang];
+    } else if (scorePercentage < 66) {
         scoreColor = "var(--color-text-result-average)";
-    else scoreColor = "var(--color-text-result-correct)";
+        messageSource = langPack.messages.finishQuiz.medium[lang];
+    } else {
+        scoreColor = "var(--color-text-result-correct)";
+        messageSource = langPack.messages.finishQuiz.high[lang];
+    }
 
     return (
         <StyledFinishScreen>
-            <h1>{getRandomItem(langPack.messages.finishQuiz[lang])}</h1>
+            <h1>{getRandomItem(messageSource)}</h1>
 
             <HeadingH2>
                 - {`${langPack.finishQuiz.score[lang]} `}

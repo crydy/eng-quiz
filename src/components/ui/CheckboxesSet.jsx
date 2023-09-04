@@ -34,8 +34,6 @@ function CheckboxesSet({
     hideTitle = false,
     onChange,
 }) {
-    console.log(options);
-
     return (
         <StyledCheckboxesSet
             $sizeFont={sizeFont}

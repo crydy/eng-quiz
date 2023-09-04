@@ -20,7 +20,7 @@ function LanguageButton() {
 
     return (
         <LangButton onClick={handleClick}>
-            {lang === "eng" ? "rus" : "eng"}
+            {lang === "eng" ? "русский" : "english"}
         </LangButton>
     );
 }
