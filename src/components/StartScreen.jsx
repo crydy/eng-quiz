@@ -4,6 +4,8 @@ import { useLocalStorageState } from "../hooks/useLocalStorageState";
 import { useQuiz } from "../contexts/QuizContext";
 import { rem } from "../utils/helpers";
 import { verbs } from "../data/words/verbs";
+import { langPack } from "../data/langPack";
+import { LOCAL_STORAGE_KEY as KEY } from "../data/localStorageConfig";
 
 import Button from "./ui/Button";
 import RangeBlock from "./ui/RangeBlock";
@@ -29,7 +31,7 @@ const Heading3 = styled.h3`
         position: absolute;
 
         left: 50%;
-        width: ${rem(260)};
+        width: calc(100% + ${rem(40)});
         height: ${rem(3)};
         background-color: var(--color-text-main);
         transform: translateX(-50%);
@@ -44,21 +46,25 @@ const Heading3 = styled.h3`
 `;
 
 function StartScreen() {
-    const { dispatch } = useQuiz();
-    const [amount, setAmount] = useLocalStorageState("amount", "10");
-    const [options, setOptions] = useLocalStorageState("options", {
+    const { lang, dispatch } = useQuiz();
+    const [amount, setAmount] = useLocalStorageState(KEY.questionsAmount, "10");
+    const [options, setOptions] = useLocalStorageState(KEY.questionsTypes, {
         positives: true,
         negatives: false,
         questions: false,
     });
     const [verbsVariety, setVerbsVariety] = useLocalStorageState(
-        "verbs variety",
+        KEY.verbsVariety,
         verbs.getVariants().at(0)
     );
 
     const selectedOptions = Object.keys(options).filter(
         (item) => options[item] === true
     );
+
+    const optionsLabels = Object.values(
+        langPack.presentSimple.taskSettings.types.labels
+    ).map((item) => item[lang]);
 
     function handleCheckboxChange(e) {
         const { name } = e.target;
@@ -85,23 +91,29 @@ function StartScreen() {
 
     return (
         <StyledStartScreen>
-            <h1>English quiz</h1>
-            <h2>- present simple -</h2>
-            <Heading3>pronoun + verb</Heading3>
+            <h1>{langPack.appTitle[lang]}</h1>
+            <h2>
+                - <span>{langPack.presentSimple.title[lang]}</span> -
+            </h2>
+            <Heading3>{langPack.presentSimple.subtitle[lang]}</Heading3>
 
             <RangeBlock
-                title="Questions amount:"
+                title={
+                    langPack.presentSimple.taskSettings
+                        .questionsAmountRangeTitle[lang]
+                }
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                min="5"
-                max="30"
+                min="10"
+                max="40"
                 trackColor="var(--color-range-track)"
                 thumbColor="var(--color-range-thumb)"
             ></RangeBlock>
 
             <CheckboxesSet
-                title="types:"
+                title={langPack.presentSimple.taskSettings.types.title[lang]}
                 options={Object.keys(options)}
+                labels={optionsLabels}
                 selectedOptions={selectedOptions}
                 onChange={handleCheckboxChange}
                 sizeFont={36}
@@ -110,7 +122,9 @@ function StartScreen() {
             />
 
             <ToggleSet
-                title="verbs variety:"
+                title={
+                    langPack.presentSimple.taskSettings.verbsVarietyTitle[lang]
+                }
                 options={verbs.getVariants()}
                 selectedOption={verbsVariety}
                 onChange={handleToggleChange}
@@ -127,7 +141,7 @@ function StartScreen() {
                 onClick={handleStartQuiz}
                 disabled={!selectedOptions.length}
             >
-                Start the Quiz
+                {langPack.buttons.start[lang]}
             </Button>
         </StyledStartScreen>
     );

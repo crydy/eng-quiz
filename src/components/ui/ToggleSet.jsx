@@ -4,6 +4,7 @@ import { rem } from "../../utils/helpers";
 const StyledToggleSet = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: ${(props) => rem(props.$sizeTitleIndent)};
 
     & > h3 {
@@ -58,8 +59,6 @@ function ToggleSet({
     colorDevider = "red",
     hideTitle = false,
 }) {
-    console.log(selectedOption);
-
     const handleRadioButtonChange = (e) => {
         onChange(e);
     };

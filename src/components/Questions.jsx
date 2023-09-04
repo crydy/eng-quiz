@@ -6,12 +6,12 @@ import { useQuiz } from "../contexts/QuizContext";
 // Data and utils
 import { emojis } from "../data/emojiVariants";
 import { getRandomItem, rem } from "../utils/helpers";
-import { correctAnswerMessages, wrongAnswerMessages } from "../data/messages";
 // Components
 import Button from "./ui/Button";
 import VariantButton from "./ui/VariantButton";
 // Sounds
 import buttonClickSound from "../assets/sounds/button-click.wav";
+import { langPack } from "../data/langPack";
 
 const StyledQuestions = styled.div`
     display: flex;
@@ -68,7 +68,8 @@ const AnswersBlock = styled.div`
 `;
 
 function Questions() {
-    const { current, questions, isPartsOfSpeechMarked, dispatch } = useQuiz();
+    const { current, questions, isPartsOfSpeechMarked, lang, dispatch } =
+        useQuiz();
 
     const [isAnswered, setIsAnswered] = useState(false);
     const [userChoice, setUserChoice] = useState(null);
@@ -141,8 +142,8 @@ function Questions() {
                     <Heading $version={isCorrectAnswer ? "correct" : "wrong"}>
                         {getRandomItem(
                             isCorrectAnswer
-                                ? correctAnswerMessages.eng
-                                : wrongAnswerMessages.eng
+                                ? langPack.messages.correctAnswer[lang]
+                                : langPack.messages.wrongAnswer[lang]
                         )}
                     </Heading>
                 </>
@@ -172,7 +173,10 @@ function Questions() {
 
             {
                 <Button onClick={handleNext} visible={isAnswered}>
-                    {!isLastQuestion ? "Next" : "Finish the Quiz"}
+                    {/* {!isLastQuestion ? "Next" : "Finish the Quiz"} */}
+                    {!isLastQuestion
+                        ? langPack.buttons.next[lang]
+                        : langPack.buttons.finish[lang]}
                 </Button>
             }
         </StyledQuestions>

@@ -5,6 +5,8 @@ const RangeInput = styled.input.attrs({ type: "range" })`
     -webkit-appearance: none;
     appearance: none;
     background: transparent;
+
+    width: 100%;
     cursor: pointer;
 
     /* Removes default focus */

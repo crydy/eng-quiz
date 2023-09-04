@@ -5,7 +5,7 @@ import { rem } from "../utils/helpers";
 import { useQuiz } from "../contexts/QuizContext";
 
 const ProgressNumerical = styled.div`
-    font-family: "Share Tech Mono", monospace;
+    font-family: var(--font-numbers);
     text-align: right;
 `;
 

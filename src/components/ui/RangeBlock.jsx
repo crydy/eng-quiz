@@ -10,7 +10,7 @@ const StyledRangeBlock = styled.div`
 `;
 
 const Amount = styled.span`
-    font-family: "Share Tech Mono", monospace;
+    font-family: var(--font-numbers);
 `;
 
 function RangeBlock({ title, value, ...props }) {

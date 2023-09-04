@@ -3,7 +3,17 @@ import { rem } from "../utils/helpers";
 
 const GlobalStyles = createGlobalStyle`
 
+/*************************** Fonts ****************************
+font-family: 'Kanit', sans-serif;                   // 300, 500
+font-family: 'Yanone Kaffeesatz', sans-serif;       // 300, 500
+font-family: 'Share Tech Mono', monospace;          
+**************************************************************/
+
 :root {
+    // eng => 'Kanit', rus => 'Yanone Kaffeesatz'
+    --font-main: 'Kanit', 'Yanone Kaffeesatz', sans-serif;
+    --font-numbers: "Share Tech Mono", monospace;
+
     --color-bg: #011627;
 
     --color-text-main: #C2A83E;
@@ -65,8 +75,7 @@ body {
     min-width: max-content;
     overflow-x: hidden;
 
-    /* font-family: "Share Tech Mono", monospace; */
-    font-family: 'Kanit', sans-serif; // 300 and 500
+    font-family: var(--font-main); // 300 and 500
     line-height: 1.5;
     font-size: 1.9rem;
     font-weight: 300;
