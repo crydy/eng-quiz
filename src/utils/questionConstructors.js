@@ -100,7 +100,7 @@ export function constructQuestions(
         const variants = getShuffledArrayCopy([rightVariant, wrongVariant]);
 
         return {
-            question: `"${pronoun}" + "${verb}"`,
+            question: `${pronoun} + ${verb}`,
             variants,
             correctIndex: variants.indexOf(rightVariant),
         };

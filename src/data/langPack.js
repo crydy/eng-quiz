@@ -17,7 +17,7 @@ const langPack = {
         taskSettings: {
             questionsAmountRangeTitle: {
                 eng: "questions amount:",
-                rus: "количество заданий:",
+                rus: "количество предложений:",
             },
             types: {
                 title: {
