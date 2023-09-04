@@ -5,12 +5,12 @@ import { useQuiz } from "../contexts/QuizContext";
 import { rem } from "../utils/helpers";
 import { verbs } from "../data/words/verbs";
 import { langPack } from "../data/langPack";
+import { LOCAL_STORAGE_KEY as KEY } from "../data/localStorageConfig";
 
 import Button from "./ui/Button";
 import RangeBlock from "./ui/RangeBlock";
 import ToggleSet from "./ui/ToggleSet";
 import CheckboxesSet from "./ui/CheckboxesSet";
-import { LOCAL_STORAGE_KEY as KEY } from "../data/localStorageConfig";
 
 const StyledStartScreen = styled.div`
     display: flex;
@@ -104,8 +104,8 @@ function StartScreen() {
                 }
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                min="5"
-                max="30"
+                min="10"
+                max="40"
                 trackColor="var(--color-range-track)"
                 thumbColor="var(--color-range-thumb)"
             ></RangeBlock>
