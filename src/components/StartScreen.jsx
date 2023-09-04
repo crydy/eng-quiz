@@ -10,6 +10,7 @@ import Button from "./ui/Button";
 import RangeBlock from "./ui/RangeBlock";
 import ToggleSet from "./ui/ToggleSet";
 import CheckboxesSet from "./ui/CheckboxesSet";
+import { LOCAL_STORAGE_KEY as KEY } from "../data/localStorageConfig";
 
 const StyledStartScreen = styled.div`
     display: flex;
@@ -46,14 +47,14 @@ const Heading3 = styled.h3`
 
 function StartScreen() {
     const { lang, dispatch } = useQuiz();
-    const [amount, setAmount] = useLocalStorageState("amount", "10");
-    const [options, setOptions] = useLocalStorageState("options", {
+    const [amount, setAmount] = useLocalStorageState(KEY.questionsAmount, "10");
+    const [options, setOptions] = useLocalStorageState(KEY.questionsTypes, {
         positives: true,
         negatives: false,
         questions: false,
     });
     const [verbsVariety, setVerbsVariety] = useLocalStorageState(
-        "verbs variety",
+        KEY.verbsVariety,
         verbs.getVariants().at(0)
     );
 
