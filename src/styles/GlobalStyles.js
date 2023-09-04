@@ -15,7 +15,7 @@ const GlobalStyles = createGlobalStyle`
     --color-text-result-wrong: red;
 
     --color-button-bg: #243E36;
-    --color-button-text: var(--color-text-neutral);
+    --color-button-text: var(--color-text-main);
     --color-button-bg-hover: #003249;
 
     --color-variant-button-bg: #3d405b;
@@ -26,11 +26,11 @@ const GlobalStyles = createGlobalStyle`
 
     --color-quiz-heading-correct: var(--color-button-bg-correct);
     --color-quiz-heading-wrong: var(--color-button-bg-wrong);
-
+    
     --color-progress-bar: #93a8ac;
     --color-progress-bar-fill: var(--color-button-bg);
-
-    --color-range-track: var(--color-progress-bar);
+    
+    --color-range-track: var(--color-button-bg);
     --color-range-thumb: var(--color-text-main);
 
     --size-max-width: ${rem(600)};

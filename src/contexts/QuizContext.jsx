@@ -37,7 +37,7 @@ function reducer(state, action) {
                 isQuizMode: true,
                 questions: constructQuestions(
                     pronouns.personal.subject,
-                    verbs.n200,
+                    verbs.common[`n${action.payload.verbsVariety}`],
                     action.payload.amount,
                     action.payload.options
                 ),

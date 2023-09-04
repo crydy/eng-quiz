@@ -62,31 +62,33 @@ const RangeInput = styled.input.attrs({ type: "range" })`
     }
 `;
 
-function Range(props) {
-    const trackColor = "var(--color-range-track)";
-    const thumbColor = "var(--color-range-thumb)";
-    const thumbOutlineColor = thumbColor;
+function Range({
+    thumbSize = 30,
+    thumbBorderRadius = 50,
 
-    const thumbSize = 30;
-    const thumbBorderRadius = 50;
+    trackHeight = 10,
+    trackBorderRadius = 100,
 
-    const trackHeight = 10;
-    const trackBorderRadius = 100;
+    outlineSize = 4,
+    outlineOffset = 5,
 
-    const outlineSize = 4;
-    const outlineOffset = 5;
+    trackColor = "blue",
+    thumbColor = "purple",
+    thumbOutlineColor = thumbColor,
 
+    ...props
+}) {
     return (
         <RangeInput
-            $thumbColor={thumbColor}
-            $thumbOutlineColor={thumbOutlineColor}
-            $trackColor={trackColor}
             $thumbSize={thumbSize}
             $thumbBorderRadius={thumbBorderRadius}
             $trackHeight={trackHeight}
             $trackBorderRadius={trackBorderRadius}
             $outlineSize={outlineSize}
             $outlineOffset={outlineOffset}
+            $thumbColor={thumbColor}
+            $thumbOutlineColor={thumbOutlineColor}
+            $trackColor={trackColor}
             {...props}
         />
     );

@@ -21,6 +21,11 @@ const StyledQuestions = styled.div`
 
     text-align: center;
     padding: ${rem(40)};
+
+    position: relative;
+    width: min(320px, 80vw);
+    left: 50%;
+    transform: translateX(-50%);
 `;
 
 const Emoji = styled.div`

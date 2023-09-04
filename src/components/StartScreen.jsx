@@ -1,19 +1,20 @@
-import { useState } from "react";
 import { styled } from "styled-components";
 
 import { useLocalStorageState } from "../hooks/useLocalStorageState";
 import { useQuiz } from "../contexts/QuizContext";
 import { rem } from "../utils/helpers";
+import { verbs } from "../data/words/verbs";
 
 import Button from "./ui/Button";
-import Checkbox from "./ui/Checkbox";
-import RangeBlock from "./RangeBlock";
+import RangeBlock from "./ui/RangeBlock";
+import ToggleSet from "./ui/ToggleSet";
+import CheckboxesSet from "./ui/CheckboxesSet";
 
 const StyledStartScreen = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${rem(40)};
+    gap: ${rem(25)};
 
     text-align: center;
 `;
@@ -42,92 +43,89 @@ const Heading3 = styled.h3`
     }
 `;
 
-const OptionsForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: ${rem(20)};
-`;
-
 function StartScreen() {
     const { dispatch } = useQuiz();
-    const [amount, setAmount] = useLocalStorageState("amount", 10);
+    const [amount, setAmount] = useLocalStorageState("amount", "10");
     const [options, setOptions] = useLocalStorageState("options", {
         positives: true,
         negatives: false,
         questions: false,
     });
+    const [verbsVariety, setVerbsVariety] = useLocalStorageState(
+        "verbs variety",
+        verbs.getVariants().at(0)
+    );
+
+    const selectedOptions = Object.keys(options).filter(
+        (item) => options[item] === true
+    );
 
     function handleCheckboxChange(e) {
         const { name } = e.target;
 
-        const isLastActive =
-            Object.values(options).filter(Boolean).length === 1;
-
-        if (options[name] && isLastActive) {
-            return;
-        }
-
-        setOptions({
-            ...options,
-            [name]: !options[name],
+        setOptions((options) => {
+            return {
+                ...options,
+                [name]: !options[name],
+            };
         });
+    }
+
+    function handleToggleChange(e) {
+        const verbsVariety = e.target.value;
+        setVerbsVariety(() => verbsVariety);
     }
 
     function handleStartQuiz() {
         dispatch({
             type: "quiz/started",
-            payload: { amount, options },
+            payload: { amount, options, verbsVariety },
         });
     }
 
     return (
         <StyledStartScreen>
-            <h1>English verbs</h1>
-            <h2>- Present simple -</h2>
+            <h1>English quiz</h1>
+            <h2>- present simple -</h2>
             <Heading3>pronoun + verb</Heading3>
 
             <RangeBlock
-                label="Questions amount:"
-                min="5"
-                max="30"
+                title="Questions amount:"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
+                min="5"
+                max="30"
+                trackColor="var(--color-range-track)"
+                thumbColor="var(--color-range-thumb)"
             ></RangeBlock>
 
-            <OptionsForm>
-                <Checkbox
-                    name="positives"
-                    checked={options.positives}
-                    onChange={handleCheckboxChange}
-                >
-                    positives
-                </Checkbox>
+            <CheckboxesSet
+                title="types:"
+                options={Object.keys(options)}
+                selectedOptions={selectedOptions}
+                onChange={handleCheckboxChange}
+                sizeFont={36}
+                sizeItemsGap={16}
+                color="var(--color-text-main)"
+            />
 
-                <Checkbox
-                    name="negatives"
-                    checked={options.negatives}
-                    onChange={handleCheckboxChange}
-                >
-                    negatives
-                </Checkbox>
-
-                <Checkbox
-                    name="questions"
-                    checked={options.questions}
-                    onChange={handleCheckboxChange}
-                >
-                    questions
-                </Checkbox>
-            </OptionsForm>
+            <ToggleSet
+                title="verbs variety:"
+                options={verbs.getVariants()}
+                selectedOption={verbsVariety}
+                onChange={handleToggleChange}
+                sizeFont={30}
+                sizeTitleIndent={16}
+                sizeDevider={3}
+                colorFill="var(--color-button-bg)"
+                colorActiveFill="var(--color-text-main)"
+                colorActiveText="var(--color-bg)"
+                colorDevider="var(--color-bg)"
+            />
 
             <Button
                 onClick={handleStartQuiz}
-                disabled={
-                    !options.positives &&
-                    !options.negatives &&
-                    !options.questions
-                }
+                disabled={!selectedOptions.length}
             >
                 Start the Quiz
             </Button>

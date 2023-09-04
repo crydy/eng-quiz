@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import Range from "./ui/Range";
-import { rem } from "../utils/helpers";
+import Range from "./Range";
+import { rem } from "../../utils/helpers";
 
 const StyledRangeBlock = styled.div`
     display: flex;
@@ -13,13 +13,13 @@ const Amount = styled.span`
     font-family: "Share Tech Mono", monospace;
 `;
 
-function RangeBlock({ label, value, ...props }) {
+function RangeBlock({ title, value, ...props }) {
     return (
         <StyledRangeBlock>
-            <label>
-                {label} <Amount>{value > 9 ? value : "0" + value}</Amount>
+            <label htmlFor={title}>
+                {title} <Amount>{value > 9 ? value : "0" + value}</Amount>
             </label>
-            <Range value={value} {...props} />
+            <Range value={value} id={title} {...props} />
         </StyledRangeBlock>
     );
 }

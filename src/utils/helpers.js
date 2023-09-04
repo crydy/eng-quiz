@@ -32,3 +32,15 @@ export function getRandomItems(array, count) {
 export function getShuffledArrayCopy(array) {
     return array.slice().sort(() => Math.random() - 0.5);
 }
+
+export function getFormDataFromSubmitEvent(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const formObject = {};
+
+    formData.forEach((value, key) => {
+        formObject[key] = value;
+    });
+
+    return formObject;
+}
