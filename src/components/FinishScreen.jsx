@@ -2,9 +2,9 @@ import { styled } from "styled-components";
 
 import { useQuiz } from "../contexts/QuizContext";
 import { getRandomItem, rem } from "../utils/helpers";
-import { finishScreenMessages } from "../data/messages";
 
 import Button from "./ui/Button";
+import { langPack } from "../data/langPack";
 
 const StyledFinishScreen = styled.div`
     display: flex;
@@ -22,7 +22,7 @@ const HeadingH2 = styled.h2`
 `;
 
 const NumericSpan = styled.span`
-    font-family: "Share Tech Mono", monospace;
+    font-family: var(--font-numbers);
     font-weight: 600;
 
     & > span:first-child {
@@ -65,7 +65,7 @@ const Correct = styled.span`
 `;
 
 function FinishScreen() {
-    const { answers, dispatch } = useQuiz();
+    const { lang, answers, dispatch } = useQuiz();
     const correctAmount = answers.filter((item) => item.isCorrect).length;
     const total = answers.length;
 
@@ -79,10 +79,10 @@ function FinishScreen() {
 
     return (
         <StyledFinishScreen>
-            <h1>{getRandomItem(finishScreenMessages)}</h1>
+            <h1>{getRandomItem(langPack.messages.finishQuiz[lang])}</h1>
 
             <HeadingH2>
-                - {"Your score: "}
+                - {`${langPack.finishQuiz.score[lang]} `}
                 <NumericSpan $scoreColor={scoreColor}>
                     <span>{correctAmount}</span>/<span>{total}</span>
                 </NumericSpan>{" "}
@@ -90,7 +90,9 @@ function FinishScreen() {
             </HeadingH2>
 
             {total !== correctAmount && (
-                <HeadingH2 $scoreColor={scoreColor}>Your mistakes:</HeadingH2>
+                <HeadingH2 $scoreColor={scoreColor}>
+                    {langPack.finishQuiz.mistakes[lang]}
+                </HeadingH2>
             )}
 
             <Mistakes>
@@ -105,7 +107,7 @@ function FinishScreen() {
             </Mistakes>
 
             <Button onClick={() => dispatch({ type: "quiz/startMenu" })}>
-                Practice more!
+                {langPack.buttons.restart[lang]}
             </Button>
         </StyledFinishScreen>
     );

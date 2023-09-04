@@ -8,6 +8,7 @@ import StartScreen from "./components/StartScreen";
 import FinishScreen from "./components/FinishScreen";
 import Progress from "./components/Progress";
 import Questions from "./components/Questions";
+import LanguageButton from "./components/LanguageButton";
 
 function App() {
     const { isQuizMode, isFinished } = useQuiz();
@@ -24,6 +25,7 @@ function App() {
                     </>
                 )}
                 {isFinished && <FinishScreen />}
+                <LanguageButton />
             </QuizContainer>
         </>
     );

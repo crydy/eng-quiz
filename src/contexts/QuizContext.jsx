@@ -23,6 +23,7 @@ const initialState = {
     isFinished: false,
     isPartsOfSpeechMarked: true,
     isAnswered: false,
+    lang: "rus",
 
     current: 0,
     questions: [],
@@ -66,6 +67,9 @@ function reducer(state, action) {
 
         case "quiz/startMenu":
             return { ...initialState };
+
+        case "menu/languageChanged":
+            return { ...state, lang: state.lang === "eng" ? "rus" : "eng" };
 
         default:
             return state;

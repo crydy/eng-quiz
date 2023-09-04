@@ -23,6 +23,7 @@ const CheckboxesList = styled.ul`
 function CheckboxesSet({
     title = "test title",
     options = ["test 1", "test 2", "test 3"],
+    labels = options,
     selectedOptions = ["test 1"],
     sizeFont = 36,
     sizeFontTitle = sizeFont * 1.2,
@@ -33,6 +34,8 @@ function CheckboxesSet({
     hideTitle = false,
     onChange,
 }) {
+    console.log(options);
+
     return (
         <StyledCheckboxesSet
             $sizeFont={sizeFont}
@@ -42,7 +45,7 @@ function CheckboxesSet({
         >
             {!hideTitle && <h3>{title}</h3>}
             <CheckboxesList $sizeItemsGap={sizeItemsGap}>
-                {options.map((option) => {
+                {options.map((option, index) => {
                     option = String(option);
 
                     return (
@@ -57,7 +60,7 @@ function CheckboxesSet({
                                 )}
                                 onChange={onChange}
                             >
-                                {option}
+                                {labels.at(index)}
                             </Checkbox>
                         </li>
                     );
