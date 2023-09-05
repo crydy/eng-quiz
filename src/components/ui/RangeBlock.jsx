@@ -7,6 +7,12 @@ const StyledRangeBlock = styled.div`
     flex-direction: column;
     align-items: center;
     gap: ${rem(20)};
+
+    width: min-content;
+
+    & label {
+        white-space: nowrap;
+    }
 `;
 
 const Amount = styled.span`
