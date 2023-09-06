@@ -44,6 +44,8 @@ font-family: 'Share Tech Mono', monospace;
     --color-range-track: var(--color-button-bg);
     --color-range-thumb: var(--color-text-main);
 
+    --color-brace: var(--color-text-part-of-speach);
+
     --size-max-width: ${rem(600)};
 }
 

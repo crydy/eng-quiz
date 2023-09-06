@@ -5,7 +5,7 @@ import { useQuiz } from "../contexts/QuizContext";
 import { rem } from "../utils/helpers";
 import { verbs } from "../data/words/verbs";
 import { langPack } from "../data/langPack";
-import { LOCAL_STORAGE_KEY as KEY } from "../data/localStorageConfig";
+import { LOCAL_STORAGE_KEY as KEY } from "../config/localStorageConfig";
 
 import Button from "./ui/Button";
 import RangeBlock from "./ui/RangeBlock";

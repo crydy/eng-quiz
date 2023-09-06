@@ -1,4 +1,6 @@
-const UNIQUE_PREFIX = "01";
+import { config } from "./config";
+
+const UNIQUE_PREFIX = config.localStoragePrefix;
 
 const LOCAL_STORAGE_KEY = {
     questionsAmount: `${UNIQUE_PREFIX}_questionsAmount`,

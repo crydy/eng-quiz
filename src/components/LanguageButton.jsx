@@ -15,12 +15,12 @@ function LanguageButton() {
     const { lang, dispatch } = useQuiz();
 
     function handleClick() {
-        dispatch({ type: "menu/languageChanged" });
+        dispatch({ type: "menu/languageChanged", payload: "eng" });
     }
 
     return (
         <LangButton onClick={handleClick}>
-            {lang === "eng" ? "русский" : "english"}
+            {lang === "eng" ? "русское меню" : "eng menu"}
         </LangButton>
     );
 }

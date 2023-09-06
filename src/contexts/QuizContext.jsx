@@ -1,5 +1,8 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
-import { LOCAL_STORAGE_KEY as KEY } from "../data/localStorageConfig";
+import { createContext, useContext, useReducer } from "react";
+
+import { LOCAL_STORAGE_KEY as KEY } from "../config/localStorageConfig";
+import { config } from "../config/config";
+
 import { pronouns } from "../data/words/pronouns";
 import { verbs } from "../data/words/verbs";
 import { constructQuestions } from "../utils/questionConstructors";
@@ -22,10 +25,10 @@ const QuizContext = createContext();
 const initialState = {
     isQuizMode: false,
     isFinished: false,
-    isPartsOfSpeechMarked: true,
     isAnswered: false,
+    isPartsOfSpeechMarked: true,
 
-    lang: localStorage.getItem(KEY.userLanguage) || "rus",
+    lang: localStorage.getItem(KEY.userLanguage) || config.defaultLanguage,
 
     current: 0,
     questions: [],
@@ -82,13 +85,6 @@ function reducer(state, action) {
 
 function QuizContextProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, initialState);
-
-    useEffect(() => {
-        const userPreferLang = localStorage.getItem(KEY.userLanguage);
-        if (userPreferLang) {
-            dispatch({ type: "menu/languageChanged" });
-        }
-    }, []);
 
     return (
         <QuizContext.Provider value={{ ...state, dispatch }}>

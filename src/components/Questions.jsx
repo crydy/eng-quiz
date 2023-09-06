@@ -20,7 +20,7 @@ const StyledQuestions = styled.div`
     gap: ${rem(20)};
 
     text-align: center;
-    padding: ${rem(40)};
+    padding: ${rem(40)} 0;
 
     position: relative;
     width: min(320px, 80vw);

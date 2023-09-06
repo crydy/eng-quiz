@@ -1,17 +1,8 @@
 const pronouns = {
     personal: {
-        subject: ["I", "you", "he", "she", "it", "we", "you", "they"],
-        object: ["me", "you", "him", "her", "it", "us", "you", "them"],
-        possessive: [
-            "mine",
-            "yours",
-            "his",
-            "hers",
-            "its",
-            "ours",
-            "yours",
-            "theirs",
-        ],
+        subject: ["I", "you", "he", "she", "it", "we", "they"],
+        object: ["me", "you", "him", "her", "it", "us", "them"],
+        possessive: ["mine", "yours", "his", "hers", "its", "ours", "theirs"],
     },
     demonstrative: ["this", "these", "that", "those"],
     interrogative: ["who", "whom", "which", "what"],

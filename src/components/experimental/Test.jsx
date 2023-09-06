@@ -1,9 +1,5 @@
 import { verbs } from "../data/verbs";
-import {
-    constructPresentSimpleNegative,
-    constructPresentSimpleQuestion,
-    modifyVerb,
-} from "../utils/questionConstructors";
+import { constructPresentSimpleQuestion } from "../utils/questionConstructors";
 
 function Test() {
     const allVerbs = verbs.n200;
