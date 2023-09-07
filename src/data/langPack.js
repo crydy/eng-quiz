@@ -17,12 +17,12 @@ const langPack = {
         taskSettings: {
             questionsAmountRangeTitle: {
                 eng: "questions amount:",
-                rus: "количество предложений:",
+                rus: "количество фраз:",
             },
             types: {
                 title: {
                     eng: "types:",
-                    rus: "типы заданий:",
+                    rus: "типы фраз:",
                 },
                 labels: {
                     positives: {
@@ -73,6 +73,22 @@ const langPack = {
         restart: {
             eng: "Practice more!",
             rus: "Больше практики!",
+        },
+
+        modal: {
+            eng: "Close",
+            rus: "Закрыть",
+        },
+
+        modalSpecial: {
+            rulesOpen: {
+                eng: "Show rules",
+                rus: "Показать правила",
+            },
+            rulesClose: {
+                eng: "close rules",
+                rus: "закрыть правила",
+            },
         },
     },
 

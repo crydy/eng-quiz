@@ -4,14 +4,17 @@ import { styled } from "styled-components";
 // Context
 import { useQuiz } from "../contexts/QuizContext";
 // Data and utils
+import { langPack } from "../data/langPack";
+import { rulesData } from "../data/rulesData";
 import { emojis } from "../data/emojiVariants";
-import { getRandomItem, rem } from "../utils/helpers";
-// Components
-import Button from "./ui/Button";
-import VariantButton from "./ui/VariantButton";
+import { capitalize, getRandomItem, rem } from "../utils/helpers";
 // Sounds
 import buttonClickSound from "../assets/sounds/button-click.wav";
-import { langPack } from "../data/langPack";
+// Components
+import VariantButton from "./ui/VariantButton";
+import Button from "./ui/Button";
+import Modal from "./Modal";
+import Rules from "./Rules";
 
 const StyledQuestions = styled.div`
     display: flex;
@@ -67,16 +70,27 @@ const AnswersBlock = styled.div`
     gap: ${rem(20)};
 `;
 
+const ShowRulesButton = styled(Button)``;
+
 function Questions() {
     const { current, questions, isPartsOfSpeechMarked, lang, dispatch } =
         useQuiz();
+    const {
+        question,
+        variants,
+        correctIndex,
+        type: questionType,
+    } = questions.at(current);
 
     const [isAnswered, setIsAnswered] = useState(false);
     const [userChoice, setUserChoice] = useState(null);
+    const [isModalOpened, setIsModalOpened] = useState(false);
 
-    const { question, variants, correctIndex } = questions.at(current);
     const isCorrectAnswer = userChoice === correctIndex;
     const isLastQuestion = questions.length === current + 1;
+    const ruleTitle = `${capitalize(langPack.presentSimple.title[lang])}: ${
+        langPack.presentSimple.taskSettings.types.labels[questionType][lang]
+    }`;
 
     const audioRef = useRef(new Audio(buttonClickSound));
 
@@ -107,6 +121,10 @@ function Questions() {
         }
     }
 
+    function handleCloseModal() {
+        setIsModalOpened(false);
+    }
+
     function clearStates() {
         setIsAnswered(false);
         setUserChoice(null);
@@ -131,7 +149,6 @@ function Questions() {
                     )}
                 </>
             )}
-
             {isAnswered && (
                 <>
                     <Emoji>
@@ -148,7 +165,6 @@ function Questions() {
                     </Heading>
                 </>
             )}
-
             <AnswersBlock>
                 {variants.map((variant, index) => (
                     <VariantButton
@@ -170,15 +186,33 @@ function Questions() {
                     </VariantButton>
                 ))}
             </AnswersBlock>
+            <Button onClick={handleNext} visible={isAnswered}>
+                {!isLastQuestion
+                    ? langPack.buttons.next[lang]
+                    : langPack.buttons.finish[lang]}
+            </Button>
 
-            {
-                <Button onClick={handleNext} visible={isAnswered}>
-                    {/* {!isLastQuestion ? "Next" : "Finish the Quiz"} */}
-                    {!isLastQuestion
-                        ? langPack.buttons.next[lang]
-                        : langPack.buttons.finish[lang]}
-                </Button>
-            }
+            <ShowRulesButton
+                onClick={() => setIsModalOpened(true)}
+                colorless
+                visible={isAnswered && !isCorrectAnswer}
+            >
+                {langPack.buttons.modalSpecial.rulesOpen[lang]}
+            </ShowRulesButton>
+
+            {isModalOpened && (
+                <Modal
+                    onClose={handleCloseModal}
+                    closeButtonTitle={
+                        langPack.buttons.modalSpecial.rulesClose[lang]
+                    }
+                >
+                    <Rules
+                        title={ruleTitle}
+                        content={rulesData.presentSimple[questionType].content}
+                    />
+                </Modal>
+            )}
         </StyledQuestions>
     );
 }

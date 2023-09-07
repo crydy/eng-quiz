@@ -3,8 +3,10 @@ import { rem } from "../../utils/helpers";
 
 const StyledButton = styled.button`
     color: var(--color-button-text);
-    background-color: var(--color-button-bg);
-    border: none;
+    background-color: ${(props) =>
+        props.$colorless ? "transparent" : "var(--color-button-bg)"};
+    border: ${(props) =>
+        props.$colorless ? "1px solid var(--color-text-main)" : "none"};
     border-radius: 100px;
     padding: ${rem(10)} ${rem(30)};
 
@@ -12,13 +14,14 @@ const StyledButton = styled.button`
     pointer-events: ${(props) => (props.$visible ? "" : "none")};
 
     &:hover {
-        background-color: var(--color-button-bg-hover);
+        background-color: ${(props) =>
+            props.$colorless ? "none" : "var(--color-button-bg-hover)"};
     }
 `;
 
-function Button({ visible = true, children, ...props }) {
+function Button({ visible = true, colorless = false, children, ...props }) {
     return (
-        <StyledButton $visible={visible} {...props}>
+        <StyledButton $visible={visible} $colorless={colorless} {...props}>
             {children}
         </StyledButton>
     );

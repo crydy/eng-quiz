@@ -74,17 +74,30 @@ export function constructQuestions(
     verbs,
     amount = 30,
     options = {
-        positives: false,
+        positives: true,
         negatives: false,
-        questions: true,
+        questions: false,
     }
 ) {
     const { positives, negatives, questions } = options;
 
     let questionsTypes = [];
-    if (positives) questionsTypes.push(constructPresentSimplePositive);
-    if (negatives) questionsTypes.push(constructPresentSimpleNegative);
-    if (questions) questionsTypes.push(constructPresentSimpleQuestion);
+
+    if (positives)
+        questionsTypes.push({
+            type: "positives",
+            func: constructPresentSimplePositive,
+        });
+    if (negatives)
+        questionsTypes.push({
+            type: "negatives",
+            func: constructPresentSimpleNegative,
+        });
+    if (questions)
+        questionsTypes.push({
+            type: "questions",
+            func: constructPresentSimpleQuestion,
+        });
 
     const numberOfQuestions = Math.min(verbs.length, amount);
 
@@ -92,7 +105,8 @@ export function constructQuestions(
 
     const result = choosenVerbs.map((verb) => {
         const pronoun = getRandomItem(propronouns);
-        const questionFunc = getRandomItem(questionsTypes);
+        const { type: questionType, func: questionFunc } =
+            getRandomItem(questionsTypes);
 
         const rightVariant = questionFunc(pronoun, verb).correct;
         const wrongVariant = questionFunc(pronoun, verb).wrong;
@@ -103,6 +117,7 @@ export function constructQuestions(
             question: `${pronoun} + ${verb}`,
             variants,
             correctIndex: variants.indexOf(rightVariant),
+            type: questionType,
         };
     });
 

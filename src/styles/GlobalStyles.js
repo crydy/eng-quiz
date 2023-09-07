@@ -47,6 +47,12 @@ font-family: 'Share Tech Mono', monospace;
     --color-brace: var(--color-text-part-of-speach);
 
     --size-max-width: ${rem(600)};
+
+    --z-index-modal: 50;
+    --z-index-dropdown: 40;
+    --z-index-header: 30;
+    --z-index-sidebar: 20;
+    --z-index-overlay: 10;
 }
 
 *,

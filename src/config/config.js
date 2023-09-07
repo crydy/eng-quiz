@@ -1,5 +1,5 @@
 const config = {
-    localStoragePrefix: "02",
+    localStoragePrefix: "03",
     defaultLanguage: "rus",
 };
 
