@@ -196,11 +196,26 @@ function StartScreen() {
                                 langPack.presentSimple.taskSettings.types
                                     .labels[type][lang]
                             }`}
-                            content={rulesData.presentSimple[type].content}
-                            mark={rulesData.presentSimple[type].mark}
+                            content={
+                                rulesData.presentSimpleTableData[type].content
+                            }
+                            mark={rulesData.presentSimpleTableData[type].mark}
                             noTitle
                         />
                     ))}
+
+                    {rulesDataTypes.includes("positives") && (
+                        <Rules
+                            title={
+                                `"She loves":` +
+                                langPack.presentSimple
+                                    .positiveVerbsMutationTitle[lang]
+                            }
+                            content={
+                                rulesData.presentSimplePositiveVerbsMutation
+                            }
+                        />
+                    )}
                 </Modal>
             )}
         </StyledStartScreen>

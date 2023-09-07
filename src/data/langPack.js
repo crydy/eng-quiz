@@ -44,6 +44,11 @@ const langPack = {
                 ru: "кол-во глаголов:",
             },
         },
+
+        positiveVerbsMutationTitle: {
+            en: `(he / she / it + verb)`,
+            ru: `(he / she / it + глагол)`,
+        },
     },
 
     finishQuiz: {

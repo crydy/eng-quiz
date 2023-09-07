@@ -1,5 +1,5 @@
 const rulesData = {
-    presentSimple: {
+    presentSimpleTableData: {
         positives: {
             title: "Present simple: positives",
             content: [
@@ -25,6 +25,32 @@ const rulesData = {
             mark: ["does", "es"],
         },
     },
+    presentSimplePositiveVerbsMutation: [
+        [
+            ["-o", "-ss", "-sh", "-ch", "-x"],
+            ["go", "pass", "push", "watch", "mix"],
+            ["+es"],
+            ["goes", "passes", "pushes", "watches", "mixes"],
+        ],
+        [
+            ["-ay", "-ey", "-oy", "-uy"],
+            ["play", "obey", "endjoy", "buy"],
+            ["+s"],
+            ["plays", "obeys", "endjoys", "buys"],
+        ],
+        [
+            ["consonant", "& -y"],
+            ["try", "cry", "study"],
+            ["-y", "+ies"],
+            ["tries", "cries", "studies"],
+        ],
+        [
+            ["...other", "cases"],
+            ["like", "check", "read", "travel"],
+            ["+s"],
+            ["likes", "checks", "reads", "travels"],
+        ],
+    ],
 };
 
 export { rulesData };

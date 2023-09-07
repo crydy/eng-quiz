@@ -209,8 +209,13 @@ function Questions() {
                 >
                     <Rules
                         title={ruleTitle}
-                        content={rulesData.presentSimple[questionType].content}
-                        mark={rulesData.presentSimple[questionType].mark}
+                        content={
+                            rulesData.presentSimpleTableData[questionType]
+                                .content
+                        }
+                        mark={
+                            rulesData.presentSimpleTableData[questionType].mark
+                        }
                     />
                 </Modal>
             )}

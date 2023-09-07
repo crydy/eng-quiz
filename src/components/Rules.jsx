@@ -4,10 +4,12 @@ import { rem, trimEndIfMatch } from "../utils/helpers";
 const Grid = styled.div`
     display: grid;
     grid-template-columns: repeat(${(props) => props.$columnsAmount}, auto);
-    gap: ${rem(15)};
+    gap: ${rem(10)};
 
-    line-height: 1;
     margin: ${rem(25)};
+
+    font-size: clamp(${rem(20)}, 4vw, ${rem(30)});
+    line-height: 1;
 `;
 
 const MainTitle = styled.h2`
