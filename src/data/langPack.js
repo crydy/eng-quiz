@@ -1,100 +1,100 @@
 const langPack = {
     appTitle: {
-        eng: "English quiz",
-        rus: "Английский язык",
+        en: "English quiz",
+        ru: "Английский язык",
     },
 
     presentSimple: {
         title: {
-            eng: "present simple",
-            rus: "настоящее простое",
+            en: "present simple",
+            ru: "настоящее простое",
         },
         subtitle: {
-            eng: "pronoun + verb",
-            rus: "местоимение + глагол",
+            en: "pronoun + verb",
+            ru: "местоимение + глагол",
         },
 
         taskSettings: {
             questionsAmountRangeTitle: {
-                eng: "questions amount:",
-                rus: "количество фраз:",
+                en: "questions amount:",
+                ru: "количество фраз:",
             },
             types: {
                 title: {
-                    eng: "types:",
-                    rus: "типы фраз:",
+                    en: "types:",
+                    ru: "типы фраз:",
                 },
                 labels: {
                     positives: {
-                        eng: "positives",
-                        rus: "утверждения",
+                        en: "positives",
+                        ru: "утверждения",
                     },
                     negatives: {
-                        eng: "negatives",
-                        rus: "отрицания",
+                        en: "negatives",
+                        ru: "отрицания",
                     },
                     questions: {
-                        eng: "questions",
-                        rus: "вопросы",
+                        en: "questions",
+                        ru: "вопросы",
                     },
                 },
             },
             verbsVarietyTitle: {
-                eng: "verbs variety:",
-                rus: "кол-во глаголов:",
+                en: "verbs variety:",
+                ru: "кол-во глаголов:",
             },
         },
     },
 
     finishQuiz: {
         score: {
-            eng: "Your score:",
-            rus: "Твои баллы:",
+            en: "Your score:",
+            ru: "Твои баллы:",
         },
         mistakes: {
-            eng: "Mistakes:",
-            rus: "Ошибки:",
+            en: "Mistakes:",
+            ru: "Ошибки:",
         },
     },
 
     buttons: {
         start: {
-            eng: "Start",
-            rus: "Начать",
+            en: "Start",
+            ru: "Начать",
         },
         next: {
-            eng: "Next",
-            rus: "Дальше",
+            en: "Next",
+            ru: "Дальше",
         },
         finish: {
-            eng: "Finish the Quiz",
-            rus: "Закончить",
+            en: "Finish the Quiz",
+            ru: "Закончить",
         },
         restart: {
-            eng: "Practice more!",
-            rus: "Больше практики!",
+            en: "Practice more!",
+            ru: "Больше практики!",
         },
 
         modal: {
-            eng: "Close",
-            rus: "Закрыть",
+            en: "Close",
+            ru: "Закрыть",
         },
 
         modalSpecial: {
             rulesOpen: {
-                eng: "Show rules",
-                rus: "Показать правила",
+                en: "Remind rules",
+                ru: "Напомнить правила",
             },
             rulesClose: {
-                eng: "close rules",
-                rus: "закрыть правила",
+                en: "close rules",
+                ru: "закрыть правила",
             },
         },
     },
 
     messages: {
         correctAnswer: {
-            eng: [
+            en: [
                 "You're right!",
                 "Absolutely!",
                 "Great job!",
@@ -106,7 +106,7 @@ const langPack = {
                 "Spot on!",
                 "Excellent!",
             ],
-            rus: [
+            ru: [
                 "Вы правы!",
                 "Абсолютно верно!",
                 "Отличная работа!",
@@ -120,7 +120,7 @@ const langPack = {
             ],
         },
         wrongAnswer: {
-            eng: [
+            en: [
                 "Incorrect...",
                 "Not right...",
                 "Try again...",
@@ -132,7 +132,7 @@ const langPack = {
                 "No luck...",
                 "Not quite...",
             ],
-            rus: [
+            ru: [
                 "Ох, не то...",
                 "Неправильно...",
                 "Не верно...",
@@ -147,8 +147,8 @@ const langPack = {
         },
         finishQuiz: {
             high: {
-                eng: ["Congratulations!", "Amazing work!", "Fantastic job!"],
-                rus: [
+                en: ["Congratulations!", "Amazing work!", "Fantastic job!"],
+                ru: [
                     "Превосходно!",
                     "Великолепно!",
                     "Восхитительно!",
@@ -156,8 +156,8 @@ const langPack = {
                 ],
             },
             medium: {
-                eng: ["Well done!", "You did it!", "Pretty well!", "Good job!"],
-                rus: [
+                en: ["Well done!", "You did it!", "Pretty well!", "Good job!"],
+                ru: [
                     "Молодец!",
                     "Вы справились!",
                     "Хорошая работа!",
@@ -165,12 +165,12 @@ const langPack = {
                 ],
             },
             low: {
-                eng: [
+                en: [
                     "Keep practicing!",
                     "Just Keep learning!",
                     "Don't give up!",
                 ],
-                rus: [
+                ru: [
                     "Упражнение сделано!",
                     "Больше практики!",
                     "Не сдавайтесь!",

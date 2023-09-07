@@ -10,8 +10,8 @@ font-family: 'Share Tech Mono', monospace;
 **************************************************************/
 
 :root {
-    // eng => 'Kanit' (rus not supported)
-    // rus => 'Yanone Kaffeesatz'
+    // en => 'Kanit' (ru not supported)
+    // ru => 'Yanone Kaffeesatz'
     --font-main: 'Kanit', 'Yanone Kaffeesatz', sans-serif;
     --font-numbers: "Share Tech Mono", monospace;
 

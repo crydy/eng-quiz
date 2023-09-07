@@ -1,6 +1,6 @@
 const config = {
-    localStoragePrefix: "03",
-    defaultLanguage: "rus",
+    localStoragePrefix: "04",
+    defaultLanguage: "ru",
 };
 
 export { config };

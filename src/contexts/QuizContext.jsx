@@ -6,6 +6,7 @@ import { config } from "../config/config";
 import { pronouns } from "../data/words/pronouns";
 import { verbs } from "../data/words/verbs";
 import { constructQuestions } from "../utils/questionConstructors";
+import { updateLangAttribute } from "../utils/helpers";
 
 const QuizContext = createContext();
 
@@ -74,8 +75,9 @@ function reducer(state, action) {
             return { ...initialState };
 
         case "menu/languageChanged":
-            const newLang = state.lang === "eng" ? "rus" : "eng";
+            const newLang = state.lang === "en" ? "ru" : "en";
             localStorage.setItem(KEY.userLanguage, newLang);
+            updateLangAttribute(newLang);
             return { ...state, lang: newLang };
 
         default:
@@ -85,6 +87,8 @@ function reducer(state, action) {
 
 function QuizContextProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, initialState);
+
+    updateLangAttribute(state.lang);
 
     return (
         <QuizContext.Provider value={{ ...state, dispatch }}>

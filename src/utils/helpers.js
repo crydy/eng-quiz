@@ -52,3 +52,9 @@ export function getFormDataFromSubmitEvent(e) {
 
     return formObject;
 }
+
+// Effects
+
+export function updateLangAttribute(selectedLanguage) {
+    document.documentElement.lang = selectedLanguage;
+}
