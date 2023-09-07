@@ -1,16 +1,20 @@
+import { useState } from "react";
 import { styled } from "styled-components";
 
+import { LOCAL_STORAGE_KEY as KEY } from "../config/localStorageConfig";
 import { useLocalStorageState } from "../hooks/useLocalStorageState";
 import { useQuiz } from "../contexts/QuizContext";
-import { rem } from "../utils/helpers";
+import { capitalize, rem } from "../utils/helpers";
 import { verbs } from "../data/words/verbs";
 import { langPack } from "../data/langPack";
-import { LOCAL_STORAGE_KEY as KEY } from "../config/localStorageConfig";
 
 import Button from "./ui/Button";
 import RangeBlock from "./ui/RangeBlock";
 import ToggleSet from "./ui/ToggleSet";
 import CheckboxesSet from "./ui/CheckboxesSet";
+import Modal from "./Modal";
+import Rules from "./Rules";
+import { rulesData } from "../data/rulesData";
 
 const StyledStartScreen = styled.div`
     display: flex;
@@ -45,6 +49,17 @@ const Heading3 = styled.h3`
     }
 `;
 
+const ButtonsBlock = styled.div`
+    display: flex;
+    gap: ${rem(20)};
+`;
+
+const RulesModalHeader = styled.h3`
+    font-size: ${rem(50)};
+    margin-top: ${rem(25)};
+    margin-bottom: ${rem(25)};
+`;
+
 function StartScreen() {
     const { lang, dispatch } = useQuiz();
     const [amount, setAmount] = useLocalStorageState(KEY.questionsAmount, "10");
@@ -57,6 +72,7 @@ function StartScreen() {
         KEY.verbsVariety,
         verbs.getVariants().at(0)
     );
+    const [isRulesOpened, setIsRulesOpened] = useState(false);
 
     const selectedOptions = Object.keys(options).filter(
         (item) => options[item] === true
@@ -65,6 +81,9 @@ function StartScreen() {
     const optionsLabels = Object.values(
         langPack.presentSimple.taskSettings.types.labels
     ).map((item) => item[lang]);
+
+    const rulesDataTypes = selectedOptions;
+    // const rulesDataTypes = Object.keys(rulesData.presentSimple);
 
     function handleCheckboxChange(e) {
         const { name } = e.target;
@@ -80,6 +99,10 @@ function StartScreen() {
     function handleToggleChange(e) {
         const verbsVariety = e.target.value;
         setVerbsVariety(() => verbsVariety);
+    }
+
+    function handleOpenRules() {
+        setIsRulesOpened(true);
     }
 
     function handleStartQuiz() {
@@ -137,12 +160,49 @@ function StartScreen() {
                 colorDevider="var(--color-bg)"
             />
 
-            <Button
-                onClick={handleStartQuiz}
-                disabled={!selectedOptions.length}
-            >
-                {langPack.buttons.start[lang]}
-            </Button>
+            <ButtonsBlock>
+                <Button
+                    onClick={handleOpenRules}
+                    disabled={!selectedOptions.length}
+                    colorless
+                >
+                    {langPack.buttons.modalSpecial.rulesOpenStartScreen[lang]}
+                </Button>
+
+                <Button
+                    onClick={handleStartQuiz}
+                    disabled={!selectedOptions.length}
+                >
+                    {langPack.buttons.start[lang]}
+                </Button>
+            </ButtonsBlock>
+
+            {isRulesOpened && (
+                <Modal
+                    onClose={() => setIsRulesOpened(false)}
+                    closeButtonTitle={
+                        langPack.buttons.modalSpecial.rulesClose[lang]
+                    }
+                >
+                    <RulesModalHeader>
+                        {langPack.presentSimple.title[lang].toUpperCase()}
+                    </RulesModalHeader>
+
+                    {rulesDataTypes.map((type) => (
+                        <Rules
+                            title={`${capitalize(
+                                langPack.presentSimple.title[lang]
+                            )}: ${
+                                langPack.presentSimple.taskSettings.types
+                                    .labels[type][lang]
+                            }`}
+                            content={rulesData.presentSimple[type].content}
+                            mark={rulesData.presentSimple[type].mark}
+                            noTitle
+                        />
+                    ))}
+                </Modal>
+            )}
         </StyledStartScreen>
     );
 }

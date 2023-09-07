@@ -10,6 +10,13 @@ export function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+export function trimEndIfMatch(str, ending) {
+    if (str.endsWith(ending)) {
+        return str.slice(0, -ending.length);
+    }
+    return str;
+}
+
 // Arrays
 
 export function removeDuplicates(arr) {

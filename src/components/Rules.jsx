@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { rem } from "../utils/helpers";
+import { rem, trimEndIfMatch } from "../utils/helpers";
 
 const Grid = styled.div`
     display: grid;
@@ -29,12 +29,21 @@ const Cell = styled.div`
     outline: 1px solid var(--color-text-main);
 `;
 
+const MarkedSpan = styled.span`
+    text-decoration: underline;
+    text-decoration-color: var(--color-text-rules-underline-mark);
+`;
+
 function Rules({
     title = "Present simple: questions",
     content = [
         [["do"], ["I", "you", "we", "they"], ["love?"]],
         [["does"], ["he", "she", "it"], ["love?"]],
     ],
+    mark = ["does", "es"],
+
+    noTitle = false,
+    noSubtitle = false,
 }) {
     const columnsAmount = content[0].length;
 
@@ -43,17 +52,29 @@ function Rules({
     }, []);
 
     const [mainTitle, subTitle] = title.split(":");
+    const [string, substrToMark] = mark;
+
+    function markLetters(word) {
+        if (word !== string) return <span>{word}</span>;
+        else
+            return (
+                <>
+                    {trimEndIfMatch(string, substrToMark)}
+                    <MarkedSpan>{substrToMark}</MarkedSpan>
+                </>
+            );
+    }
 
     return (
         <>
-            <MainTitle>{mainTitle}</MainTitle>
-            <SubTitle>- {subTitle} -</SubTitle>
+            {mainTitle && !noTitle && <MainTitle>{mainTitle}</MainTitle>}
+            {subTitle && !noSubtitle && <SubTitle>- {subTitle} -</SubTitle>}
 
             <Grid $columnsAmount={columnsAmount}>
                 {contentPlain.map((set) => (
                     <Cell>
                         {set.map((word) => (
-                            <span>{word}</span>
+                            <span>{markLetters(word)}</span>
                         ))}
                     </Cell>
                 ))}

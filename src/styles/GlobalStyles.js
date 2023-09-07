@@ -21,6 +21,8 @@ font-family: 'Share Tech Mono', monospace;
     --color-text-neutral: #c0c0c0;
 
     --color-text-part-of-speach: #4c956c;
+    --color-text-rules-underline-mark: var(--color-text-part-of-speach);
+
     --color-text-result-correct: lightgreen;
     --color-text-result-average: #f77f00;
     --color-text-result-wrong: red;

@@ -210,6 +210,7 @@ function Questions() {
                     <Rules
                         title={ruleTitle}
                         content={rulesData.presentSimple[questionType].content}
+                        mark={rulesData.presentSimple[questionType].mark}
                     />
                 </Modal>
             )}

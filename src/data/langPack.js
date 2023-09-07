@@ -59,8 +59,8 @@ const langPack = {
 
     buttons: {
         start: {
-            en: "Start",
-            ru: "Начать",
+            en: "Practice",
+            ru: "Упражняться",
         },
         next: {
             en: "Next",
@@ -81,6 +81,11 @@ const langPack = {
         },
 
         modalSpecial: {
+            rulesOpenStartScreen: {
+                en: "Rules",
+                ru: "Правила",
+            },
+
             rulesOpen: {
                 en: "Remind rules",
                 ru: "Напомнить правила",
@@ -138,7 +143,7 @@ const langPack = {
                 "Не верно...",
                 "Ой, не то...",
                 "В другой раз...",
-                "Близко, но то...",
+                "Близко, но не то...",
                 "Нет...",
                 "Неа...",
                 "Увы...",
