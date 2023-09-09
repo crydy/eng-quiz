@@ -15,7 +15,7 @@ const StyledButton = styled.button`
 
     opacity: ${(props) => (props.$visible ? 1 : 0)};
 
-    &:hover {
+    &:not(:disabled):hover {
         background-color: ${(props) =>
             props.$colorless ? "none" : "var(--color-button-bg-hover)"};
         background-color: ${(props) =>

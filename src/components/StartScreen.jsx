@@ -168,7 +168,7 @@ function StartScreen() {
             <ButtonsBlock>
                 <Button
                     onClick={handleOpenRules}
-                    disabled={!selectedOptions.length}
+                    disabled={!selectedOptions.length || isRulesOpened}
                     colorless
                 >
                     {langPack.buttons.modalSpecial.rulesOpenStartScreen[lang]}

@@ -111,7 +111,7 @@ function Questions() {
         });
     }
 
-    function handleNext() {
+    function handleNext(e) {
         clearStates();
 
         if (!isLastQuestion) {
@@ -186,7 +186,11 @@ function Questions() {
                     </VariantButton>
                 ))}
             </AnswersBlock>
-            <Button onClick={handleNext} visible={isAnswered}>
+            <Button
+                onClick={handleNext}
+                visible={isAnswered}
+                disabled={!isAnswered}
+            >
                 {!isLastQuestion
                     ? langPack.buttons.next[lang]
                     : langPack.buttons.finish[lang]}
@@ -196,6 +200,7 @@ function Questions() {
                 onClick={() => setIsModalOpened(true)}
                 colorless
                 visible={isAnswered && !isCorrectAnswer}
+                disabled={isModalOpened}
             >
                 {langPack.buttons.modalSpecial.rulesOpen[lang]}
             </ShowRulesButton>
