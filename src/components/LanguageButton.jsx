@@ -2,9 +2,9 @@ import { styled } from "styled-components";
 import { rem } from "../utils/helpers";
 import { useQuiz } from "../contexts/QuizContext";
 
-import ButtonRound from "./ui/ButtonRound";
+import ToggleSet from "./ui/ToggleSet";
 
-const LangButton = styled(ButtonRound)`
+const Switcher = styled.div`
     position: absolute;
     right: ${rem(14)};
     top: ${rem(14)};
@@ -14,14 +14,33 @@ const LangButton = styled(ButtonRound)`
 function LanguageButton() {
     const { lang, dispatch } = useQuiz();
 
-    function handleClick() {
-        dispatch({ type: "menu/languageChanged", payload: "eng" });
+    const selectedLang = lang === "en" ? "eng" : "rus";
+
+    function handleChangeLanguage(e) {
+        const value = e.target.value;
+
+        if (value === "eng" && lang !== "en")
+            dispatch({ type: "menu/languageChanged", payload: "en" });
+        if (value === "rus" && lang !== "ru")
+            dispatch({ type: "menu/languageChanged", payload: "ru" });
     }
 
     return (
-        <LangButton onClick={handleClick}>
-            {lang === "en" ? "русское меню" : "eng menu"}
-        </LangButton>
+        <Switcher>
+            <ToggleSet
+                title="app language"
+                hideTitle
+                options={["rus", "eng"]}
+                selectedOption={selectedLang}
+                onChange={handleChangeLanguage}
+                sizeFont={20}
+                sizeDevider={3}
+                colorFill="var(--color-button-bg)"
+                colorActiveFill="var(--color-text-main)"
+                colorActiveText="var(--color-bg)"
+                colorDevider="var(--color-bg)"
+            />
+        </Switcher>
     );
 }
 

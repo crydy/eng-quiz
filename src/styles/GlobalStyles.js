@@ -3,21 +3,36 @@ import { rem } from "../utils/helpers";
 
 const GlobalStyles = createGlobalStyle`
 
-/*************************** Fonts ****************************
-font-family: 'Kanit', sans-serif;                   // 300, 500
-font-family: 'Yanone Kaffeesatz', sans-serif;       // 300, 500
-font-family: 'Share Tech Mono', monospace;          
-**************************************************************/
 
 :root {
-    // en => 'Kanit' (ru not supported)
+    /************************ Fonts *************************
+    font-family: 'Kanit', sans-serif;             // 300, 500
+    font-family: 'Yanone Kaffeesatz', sans-serif; // 300, 500
+    font-family: 'Share Tech Mono', monospace;          
+    ********************************************************/
+
+    // en => 'Kanit' (russian not supported)
     // ru => 'Yanone Kaffeesatz'
     --font-main: 'Kanit', 'Yanone Kaffeesatz', sans-serif;
     --font-numbers: "Share Tech Mono", monospace;
 
+    /************************ Sizings ***********************/
+    
+    --size-max-width: ${rem(600)};
+
+    --z-index-modal: 50;
+    --z-index-dropdown: 40;
+    --z-index-header: 30;
+    --z-index-sidebar: 20;
+    --z-index-overlay: 10;
+
+    /************************ Colors ************************/
+
     --color-bg: #011627;
 
-    --color-text-main: #C2A83E;
+    /* --color-text-main: #C2A83E; */
+    /* --color-text-main: #fbf9d8; */
+    --color-text-main: #d6d2a6;
     --color-text-neutral: #c0c0c0;
 
     --color-text-part-of-speach: #4c956c;
@@ -29,13 +44,13 @@ font-family: 'Share Tech Mono', monospace;
 
     --color-button-bg: #243E36;
     --color-button-text: var(--color-text-main);
-    --color-button-bg-hover: #003249;
+    --color-button-bg-hover: #bb3e03;
 
     --color-variant-button-bg: #3d405b;
-    --color-variant-button-bg-hover: #003249;
+    --color-variant-button-bg-hover: var(--color-button-bg-hover);
     --color-variant-button-bg-correct: #31572c;
     --color-variant-button-bg-wrong: #800e13;
-    --color-variant-button-text: #c0c0c0;
+    --color-variant-button-text: var(--color-text-main);
 
     --color-quiz-heading-correct: var(--color-button-bg-correct);
     --color-quiz-heading-wrong: var(--color-button-bg-wrong);
@@ -48,13 +63,25 @@ font-family: 'Share Tech Mono', monospace;
 
     --color-brace: var(--color-text-part-of-speach);
 
-    --size-max-width: ${rem(600)};
+    &.color-theme-light {
+        --color-bg: #F0F8FF;
 
-    --z-index-modal: 50;
-    --z-index-dropdown: 40;
-    --z-index-header: 30;
-    --z-index-sidebar: 20;
-    --z-index-overlay: 10;
+        --color-text-main: #283618;
+
+        --color-button-bg: #85B09A;
+        --color-button-text: var(--color-text-main);
+        --color-button-bg-hover: #F4C430;
+
+        --color-variant-button-bg: lightgray;
+        --color-variant-button-bg-hover: var(--color-button-bg-hover);
+        --color-variant-button-bg-correct: #80ed99;
+        --color-variant-button-bg-wrong: #f57777;
+
+        --color-progress-bar: #E5E4E2;
+        --color-progress-bar-fill: var(--color-button-bg);
+
+        --color-text-result-correct: green;
+    }
 }
 
 *,

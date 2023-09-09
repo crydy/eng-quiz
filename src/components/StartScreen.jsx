@@ -20,14 +20,19 @@ const StyledStartScreen = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${rem(25)};
+    gap: clamp(1.7rem, 3.2vh, 4rem);
+    /* gap: ${rem(22)}; */
 
     text-align: center;
 `;
 
+const Heading1 = styled.h1`
+    line-height: 1;
+`;
+
 const Heading3 = styled.h3`
     position: relative;
-    padding: ${rem(20)} ${rem(0)};
+    padding: ${rem(10)} ${rem(0)};
 
     &::before,
     &::after {
@@ -114,7 +119,7 @@ function StartScreen() {
 
     return (
         <StyledStartScreen>
-            <h1>{langPack.appTitle[lang]}</h1>
+            <Heading1>{langPack.appTitle[lang]}</Heading1>
             <h2>
                 - <span>{langPack.presentSimple.title[lang]}</span> -
             </h2>
@@ -140,7 +145,7 @@ function StartScreen() {
                 selectedOptions={selectedOptions}
                 onChange={handleCheckboxChange}
                 sizeFont={36}
-                sizeItemsGap={16}
+                sizeItemsGap={10}
                 color="var(--color-text-main)"
             />
 

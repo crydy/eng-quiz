@@ -19,7 +19,6 @@ const RadioList = styled.ul`
     border-radius: 500px;
     overflow: hidden;
     background-color: ${(props) => props.$colorDevider};
-    max-height: fit-content;
 
     & li {
         & input {
@@ -35,6 +34,14 @@ const RadioList = styled.ul`
             line-height: 1;
             padding: ${rem(6)} ${rem(20)};
             cursor: pointer;
+
+            &:hover {
+                background-color: var(--color-button-bg-hover);
+            }
+
+            & > svg {
+                display: block;
+            }
         }
 
         & input[type="radio"]:checked + label {
@@ -51,7 +58,8 @@ const RadioList = styled.ul`
 function ToggleSet({
     title = "test",
     options = ["test 1", "test 2", "test 3"],
-    selectedOption,
+    optionsReplacingIcons = null,
+    selectedOption = "test 1",
     onChange,
     sizeFont = 36,
     sizeFontTitle = sizeFont * 1.2,
@@ -81,7 +89,7 @@ function ToggleSet({
                 $colorActiveText={colorActiveText}
                 $colorDevider={colorDevider}
             >
-                {options.map((option) => {
+                {options.map((option, index) => {
                     option = String(option);
 
                     return (
@@ -94,7 +102,11 @@ function ToggleSet({
                                 onClick={handleRadioButtonChange}
                                 defaultChecked={option === selectedOption}
                             />
-                            <label htmlFor={option}>{option}</label>
+                            <label htmlFor={option}>
+                                {optionsReplacingIcons?.at(index)
+                                    ? optionsReplacingIcons.at(index)
+                                    : option}
+                            </label>
                         </li>
                     );
                 })}
