@@ -19,17 +19,21 @@ const RadioList = styled.ul`
     border-radius: 500px;
     overflow: hidden;
     background-color: ${(props) => props.$colorDevider};
+    max-height: fit-content;
 
     & li {
         & input {
             appearance: none;
+            display: none;
         }
 
         & label {
+            display: block;
             font-size: ${(props) => rem(props.$sizeFont)};
 
             background-color: ${(props) => props.$colorFill};
-            padding: ${rem(8)} ${rem(20)};
+            line-height: 1;
+            padding: ${rem(6)} ${rem(20)};
             cursor: pointer;
         }
 
