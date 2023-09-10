@@ -10,15 +10,25 @@ const StyledFinishScreen = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${rem(40)};
+    gap: ${rem(20)};
 
     text-align: center;
+`;
+
+const HeadingH1 = styled.h1`
+    color: ${(props) => props.$scoreColor};
+    text-decoration: ${(props) =>
+        props.$scoreColor ? "underline" : "inherit"};
+
+    font-size: ${rem(38)};
 `;
 
 const HeadingH2 = styled.h2`
     color: ${(props) => props.$scoreColor};
     text-decoration: ${(props) =>
         props.$scoreColor ? "underline" : "inherit"};
+
+    font-size: ${rem(28)};
 `;
 
 const NumericSpan = styled.span`
@@ -33,11 +43,11 @@ const NumericSpan = styled.span`
 const Mistakes = styled.ul`
     display: flex;
     flex-direction: column;
-    gap: ${rem(20)};
+    gap: ${rem(8)};
 
     color: var(--color-text-neutral);
 
-    max-height: 40vh;
+    max-height: 50vh;
     min-width: 100%;
 
     overflow: scroll;
@@ -86,7 +96,7 @@ function FinishScreen() {
 
     return (
         <StyledFinishScreen>
-            <h1>{getRandomItem(messageSource)}</h1>
+            <HeadingH1>{getRandomItem(messageSource)}</HeadingH1>
 
             <HeadingH2>
                 - {`${langPack.finishQuiz.score[lang]} `}

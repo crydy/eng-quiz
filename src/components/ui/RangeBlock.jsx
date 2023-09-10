@@ -1,12 +1,12 @@
 import { styled } from "styled-components";
-import Range from "./Range";
 import { rem } from "../../utils/helpers";
+import Range from "./Range";
 
 const StyledRangeBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${rem(10)};
+    gap: ${rem(6)};
 
     width: min-content;
 

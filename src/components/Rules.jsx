@@ -4,20 +4,20 @@ import { rem, trimEndIfMatch } from "../utils/helpers";
 const Grid = styled.div`
     display: grid;
     grid-template-columns: repeat(${(props) => props.$columnsAmount}, auto);
-    gap: ${rem(10)};
+    gap: ${rem(5)};
 
-    margin: ${rem(25)};
+    margin: ${rem(10)};
 
-    font-size: clamp(${rem(20)}, 4vw, ${rem(30)});
+    font-size: clamp(${rem(10)}, 4vw, ${rem(16)});
     line-height: 1;
 `;
 
 const MainTitle = styled.h2`
-    font-size: ${rem(40)};
+    font-size: ${rem(24)};
 `;
 
 const SubTitle = styled.h3`
-    font-size: ${rem(35)};
+    font-size: ${rem(18)};
 `;
 
 const Cell = styled.div`
@@ -26,9 +26,9 @@ const Cell = styled.div`
     align-items: center;
     justify-content: center;
 
-    padding: ${rem(15)};
+    padding: ${rem(8)};
 
-    outline: 1px solid var(--color-text-main);
+    outline: ${rem(1)} solid var(--color-text-main);
 `;
 
 const MarkedSpan = styled.span`

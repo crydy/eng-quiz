@@ -20,19 +20,19 @@ const StyledQuestions = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${rem(20)};
+    gap: ${rem(10)};
 
     text-align: center;
-    padding: ${rem(40)} 0;
+    padding: ${rem(20)} 0;
 
     position: relative;
-    width: min(320px, 80vw);
+    width: min(${rem(320)}, 80vw);
     left: 50%;
     transform: translateX(-50%);
 `;
 
 const Emoji = styled.div`
-    font-size: ${rem(80)};
+    font-size: ${rem(50)};
 `;
 
 const Heading = styled.h2`
@@ -40,6 +40,8 @@ const Heading = styled.h2`
         props.$version === "correct"
             ? "var(--color-quiz-heading-correct)"
             : "var(--color-quiz-heading-wrong)"};
+
+    font-size: ${rem(28)};
 `;
 
 const PartOfSpeach = styled.span`
@@ -61,13 +63,13 @@ const PartOfSpeach = styled.span`
 `;
 
 const AnswersBlock = styled.div`
-    margin-top: ${rem(35)};
-    margin-bottom: ${rem(30)};
+    margin-top: ${rem(22)};
+    margin-bottom: ${rem(22)};
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${rem(20)};
+    gap: ${rem(14)};
 `;
 
 const ShowRulesButton = styled(Button)``;
@@ -139,13 +141,13 @@ function Questions() {
                     <Emoji>{getRandomItem(emojis.neutral)}</Emoji>
                     {!isPartsOfSpeechMarked && <h2>{question}</h2>}
                     {isPartsOfSpeechMarked && (
-                        <h2>
+                        <Heading>
                             <PartOfSpeach $nature="pronoun">
                                 {pronoun}
                             </PartOfSpeach>{" "}
                             {sign}{" "}
                             <PartOfSpeach $nature="verb">{verb}</PartOfSpeach>
-                        </h2>
+                        </Heading>
                     )}
                 </>
             )}

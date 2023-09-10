@@ -41,13 +41,13 @@ const StyledCheckbox = styled.input`
 `;
 
 function Checkbox({
-    sizeFont = 40,
+    sizeFont = 16,
     color = "red",
-    sizeLableIndent = 10,
+    sizeLableIndent = 8,
     children,
     ...props
 }) {
-    const checkboxSize = 30;
+    const checkboxSize = sizeFont;
     const checkboxCoreSize = checkboxSize * 0.4;
 
     return (

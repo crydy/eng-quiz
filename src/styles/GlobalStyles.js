@@ -104,18 +104,12 @@ body, html {
     align-items: center;
 }
 
-html {
-    font-size: 62.5%;
-}
-
 body {
     min-height: 100vh;
     min-width: max-content;
     overflow-x: hidden;
 
     font-family: var(--font-main); // 300 and 500
-    line-height: 1.5;
-    font-size: 1.9rem;
     font-weight: 300;
 
     color: var(--color-text-main);

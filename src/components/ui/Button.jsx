@@ -1,9 +1,8 @@
 import { styled } from "styled-components";
-import { rem } from "../../utils/helpers";
 
 const StyledButton = styled.button`
     border-radius: 100px;
-    padding: ${rem(10)} ${rem(30)};
+    padding: 0.4em 1.2em;
 
     color: var(--color-button-text);
     background-color: ${(props) =>

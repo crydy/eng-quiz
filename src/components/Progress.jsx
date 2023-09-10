@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import { styled } from "styled-components";
 
-import { rem } from "../utils/helpers";
 import { useQuiz } from "../contexts/QuizContext";
+import { rem } from "../utils/helpers";
 
 const ProgressNumerical = styled.div`
     font-family: var(--font-numbers);
@@ -10,11 +10,11 @@ const ProgressNumerical = styled.div`
 `;
 
 const ProgressBar = styled.div`
-    margin-top: ${rem(12)};
+    margin-top: ${rem(8)};
     width: 100%;
-    height: ${rem(8)};
+    height: ${rem(6)};
     background-color: var(--color-progress-bar);
-    border-radius: 10px;
+    border-radius: 100px;
     overflow: hidden;
 `;
 

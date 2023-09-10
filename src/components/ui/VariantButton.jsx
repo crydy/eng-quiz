@@ -3,8 +3,8 @@ import { rem } from "../../utils/helpers";
 
 const StyledButton = styled.button`
     display: block;
-    min-width: ${rem(350)};
-    padding: ${rem(10)} ${rem(20)};
+    min-width: ${rem(220)};
+    padding: 0.4em 1.2em;
 
     border-radius: 100px;
     border: none;

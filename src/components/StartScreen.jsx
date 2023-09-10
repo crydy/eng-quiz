@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 
-import { LOCAL_STORAGE_KEY as KEY } from "../config/localStorageConfig";
-import { useLocalStorageState } from "../hooks/useLocalStorageState";
 import { useQuiz } from "../contexts/QuizContext";
+import { useLocalStorageState } from "../hooks/useLocalStorageState";
 import { capitalize, rem } from "../utils/helpers";
+
+import { LOCAL_STORAGE_KEY as KEY } from "../config/localStorageConfig";
 import { verbs } from "../data/words/verbs";
 import { langPack } from "../data/langPack";
+import { rulesData } from "../data/rulesData";
 
 import Button from "./ui/Button";
 import RangeBlock from "./ui/RangeBlock";
@@ -14,25 +16,30 @@ import ToggleSet from "./ui/ToggleSet";
 import CheckboxesSet from "./ui/CheckboxesSet";
 import Modal from "./Modal";
 import Rules from "./Rules";
-import { rulesData } from "../data/rulesData";
 
 const StyledStartScreen = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(1.7rem, 3.2vh, 4rem);
-    /* gap: ${rem(22)}; */
+    gap: clamp(1rem, 3.8vh, 2.7rem);
 
     text-align: center;
 `;
 
 const Heading1 = styled.h1`
     line-height: 1;
+    font-size: ${rem(38)};
+`;
+
+const Heading2 = styled.h2`
+    line-height: 1;
+    font-size: ${rem(28)};
 `;
 
 const Heading3 = styled.h3`
     position: relative;
-    padding: ${rem(10)} ${rem(0)};
+    font-size: ${rem(22)};
+    padding: ${rem(6)} ${rem(0)};
 
     &::before,
     &::after {
@@ -40,8 +47,8 @@ const Heading3 = styled.h3`
         position: absolute;
 
         left: 50%;
-        width: calc(100% + ${rem(40)});
-        height: ${rem(3)};
+        width: calc(100% + ${rem(22)});
+        height: ${rem(2)};
         background-color: var(--color-text-main);
         transform: translateX(-50%);
     }
@@ -56,13 +63,13 @@ const Heading3 = styled.h3`
 
 const ButtonsBlock = styled.div`
     display: flex;
-    gap: ${rem(20)};
+    gap: ${rem(12)};
 `;
 
 const RulesModalHeader = styled.h3`
-    font-size: ${rem(50)};
-    margin-top: ${rem(25)};
-    margin-bottom: ${rem(25)};
+    font-size: ${rem(31)};
+    margin-top: ${rem(15)};
+    margin-bottom: ${rem(15)};
 `;
 
 function StartScreen() {
@@ -88,7 +95,6 @@ function StartScreen() {
     ).map((item) => item[lang]);
 
     const rulesDataTypes = selectedOptions;
-    // const rulesDataTypes = Object.keys(rulesData.presentSimple);
 
     function handleCheckboxChange(e) {
         const { name } = e.target;
@@ -120,9 +126,9 @@ function StartScreen() {
     return (
         <StyledStartScreen>
             <Heading1>{langPack.appTitle[lang]}</Heading1>
-            <h2>
+            <Heading2>
                 - <span>{langPack.presentSimple.title[lang]}</span> -
-            </h2>
+            </Heading2>
             <Heading3>{langPack.presentSimple.subtitle[lang]}</Heading3>
 
             <RangeBlock
@@ -133,7 +139,7 @@ function StartScreen() {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 min="10"
-                max="40"
+                max="30"
                 trackColor="var(--color-range-track)"
                 thumbColor="var(--color-range-thumb)"
             ></RangeBlock>
@@ -144,8 +150,8 @@ function StartScreen() {
                 labels={optionsLabels}
                 selectedOptions={selectedOptions}
                 onChange={handleCheckboxChange}
-                sizeFont={36}
-                sizeItemsGap={10}
+                sizeFont={20}
+                sizeItemsGap={6}
                 color="var(--color-text-main)"
             />
 
@@ -156,9 +162,10 @@ function StartScreen() {
                 options={verbs.getVariants()}
                 selectedOption={verbsVariety}
                 onChange={handleToggleChange}
-                sizeFont={30}
-                sizeTitleIndent={16}
-                sizeDevider={3}
+                sizeFont={16}
+                sizeFontTitle={24}
+                sizeTitleIndent={8}
+                sizeDevider={1.5}
                 colorFill="var(--color-button-bg)"
                 colorActiveFill="var(--color-text-main)"
                 colorActiveText="var(--color-bg)"

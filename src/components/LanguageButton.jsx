@@ -6,9 +6,8 @@ import ToggleSet from "./ui/ToggleSet";
 
 const Switcher = styled.div`
     position: absolute;
-    right: ${rem(14)};
-    top: ${rem(14)};
-    font-size: ${rem(22)};
+    right: ${rem(10)};
+    top: ${rem(10)};
 `;
 
 function LanguageButton() {
@@ -33,8 +32,8 @@ function LanguageButton() {
                 options={["rus", "eng"]}
                 selectedOption={selectedLang}
                 onChange={handleChangeLanguage}
-                sizeFont={20}
-                sizeDevider={3}
+                sizeFont={12}
+                sizeDevider={1.5}
                 colorFill="var(--color-button-bg)"
                 colorActiveFill="var(--color-text-main)"
                 colorActiveText="var(--color-bg)"

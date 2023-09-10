@@ -10,9 +10,8 @@ import ToggleSet from "./ui/ToggleSet";
 
 const Switcher = styled.div`
     position: absolute;
-    left: ${rem(14)};
-    top: ${rem(14)};
-    font-size: ${rem(22)};
+    left: ${rem(10)};
+    top: ${rem(10)};
 `;
 
 function ColorThemeSwitcher() {
@@ -48,8 +47,8 @@ function ColorThemeSwitcher() {
                 optionsReplacingIcons={options.map((item) => item.icon)}
                 selectedOption={currentOption.label}
                 onChange={handleThemeToggle}
-                sizeFont={20}
-                sizeDevider={3}
+                sizeFont={12}
+                sizeDevider={1.5}
                 colorFill="var(--color-button-bg)"
                 colorActiveFill="var(--color-text-main)"
                 colorActiveText="var(--color-bg)"

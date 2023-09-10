@@ -32,7 +32,7 @@ const RadioList = styled.ul`
 
             background-color: ${(props) => props.$colorFill};
             line-height: 1;
-            padding: ${rem(6)} ${rem(20)};
+            padding: 0.35em 0.8em;
             cursor: pointer;
 
             &:hover {
@@ -61,9 +61,9 @@ function ToggleSet({
     optionsReplacingIcons = null,
     selectedOption = "test 1",
     onChange,
-    sizeFont = 36,
+    sizeFont = 16,
     sizeFontTitle = sizeFont * 1.2,
-    sizeTitleIndent = 16,
+    sizeTitleIndent = 8,
     sizeDevider = 0,
     colorFill = "green",
     colorActiveFill = "purple",

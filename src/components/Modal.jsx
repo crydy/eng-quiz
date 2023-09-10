@@ -7,6 +7,11 @@ import { useQuiz } from "../contexts/QuizContext";
 import { langPack } from "../data/langPack";
 
 const StyledModal = styled.div`
+    /*  TEMP */
+    /* & > * {
+        outline: 1px solid red;
+    } */
+
     z-index: var(--z-index-modal);
     position: fixed;
 
@@ -23,11 +28,14 @@ const StyledModal = styled.div`
     min-width: max-content;
     max-width: var(--size-max-width);
     max-height: 80vh;
-    padding: ${rem(40)} ${rem(20)};
+
+    padding: ${(props) =>
+        rem(props.$padding[0]) + " " + rem(props.$padding[1]) + ";"};
+    padding-bottom: 0;
 
     background-color: var(--color-bg);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    border-radius: ${rem(8)};
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    border-radius: ${rem(5)};
 
     overflow: scroll;
     scrollbar-width: none;
@@ -39,11 +47,17 @@ const StyledModal = styled.div`
 const CloseButton = styled.button`
     z-index: var(--z-index-modal);
     position: ${(props) => (props.$inStream ? "static" : "absolute")};
+    top: 0;
+    right: 0;
 
-    top: 10px;
-    right: 10px;
+    padding: ${(props) => (props.$inStream ? "" : ".6em")};
 
     line-height: ${(props) => (props.$inStream ? "inherit" : "0.1")};
+
+    margin-top: ${(props) =>
+        props.$inStream ? rem(props.$padding[0] / 2) : ""};
+    margin-bottom: ${(props) =>
+        props.$inStream ? rem(props.$padding[0]) : ""};
 
     background-color: transparent;
     border: none;
@@ -60,12 +74,13 @@ const Overlay = styled.div`
     right: 0;
     bottom: -600px;
 
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(2px) grayscale(70%);
 `;
 
-function Modal({ onClose, closeButtonTitle, children }) {
+function Modal({ onClose, closeButtonTitle, padding = [20, 8], children }) {
     const { lang } = useQuiz();
+
     closeButtonTitle = closeButtonTitle
         ? closeButtonTitle
         : langPack.buttons.modal[lang];
@@ -74,14 +89,18 @@ function Modal({ onClose, closeButtonTitle, children }) {
         <>
             {createPortal(
                 <>
-                    <StyledModal>
-                        <CloseButton onClick={onClose}>
+                    <StyledModal $padding={padding}>
+                        <CloseButton onClick={onClose} $padding={padding}>
                             <CgCloseR />
                         </CloseButton>
 
                         {children}
 
-                        <CloseButton onClick={onClose} $inStream>
+                        <CloseButton
+                            onClick={onClose}
+                            $padding={padding}
+                            $inStream
+                        >
                             - {closeButtonTitle} -
                         </CloseButton>
                     </StyledModal>

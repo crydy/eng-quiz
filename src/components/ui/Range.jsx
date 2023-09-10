@@ -65,14 +65,14 @@ const RangeInput = styled.input.attrs({ type: "range" })`
 `;
 
 function Range({
-    thumbSize = 30,
+    thumbSize = 16,
     thumbBorderRadius = 50,
 
-    trackHeight = 10,
+    trackHeight = 6,
     trackBorderRadius = 100,
 
-    outlineSize = 4,
-    outlineOffset = 5,
+    outlineSize = 2,
+    outlineOffset = 2,
 
     trackColor = "blue",
     thumbColor = "purple",
