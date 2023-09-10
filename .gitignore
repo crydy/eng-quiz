@@ -27,3 +27,4 @@ dist-ssr
 @info/
 notes/
 notes.*
+src/components/experimental/

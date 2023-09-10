@@ -17,17 +17,11 @@ const StyledFinishScreen = styled.div`
 
 const HeadingH1 = styled.h1`
     color: ${(props) => props.$scoreColor};
-    text-decoration: ${(props) =>
-        props.$scoreColor ? "underline" : "inherit"};
-
     font-size: ${rem(38)};
 `;
 
 const HeadingH2 = styled.h2`
     color: ${(props) => props.$scoreColor};
-    text-decoration: ${(props) =>
-        props.$scoreColor ? "underline" : "inherit"};
-
     font-size: ${rem(28)};
 `;
 
@@ -99,11 +93,10 @@ function FinishScreen() {
             <HeadingH1>{getRandomItem(messageSource)}</HeadingH1>
 
             <HeadingH2>
-                - {`${langPack.finishQuiz.score[lang]} `}
+                {`${langPack.finishQuiz.score[lang]} `}
                 <NumericSpan $scoreColor={scoreColor}>
                     <span>{correctAmount}</span>/<span>{total}</span>
                 </NumericSpan>{" "}
-                -
             </HeadingH2>
 
             {total !== correctAmount && (

@@ -29,6 +29,7 @@ const Cell = styled.div`
     padding: ${rem(8)};
 
     outline: ${rem(1)} solid var(--color-text-main);
+    border-radius: ${rem(6)};
 `;
 
 const MarkedSpan = styled.span`
@@ -38,6 +39,7 @@ const MarkedSpan = styled.span`
 
 function Rules({
     title = "Present simple: questions",
+    subtitle = "Subtitle example",
     content = [
         [["do"], ["I", "you", "we", "they"], ["love?"]],
         [["does"], ["he", "she", "it"], ["love?"]],
@@ -53,7 +55,6 @@ function Rules({
         return [...acc, ...cur];
     }, []);
 
-    const [mainTitle, subTitle] = title.split(":");
     const [string, substrToMark] = mark;
 
     function markLetters(word) {
@@ -69,8 +70,8 @@ function Rules({
 
     return (
         <>
-            {mainTitle && !noTitle && <MainTitle>{mainTitle}</MainTitle>}
-            {subTitle && !noSubtitle && <SubTitle>- {subTitle} -</SubTitle>}
+            {title && !noTitle && <MainTitle>{title}</MainTitle>}
+            {subtitle && !noSubtitle && <SubTitle>{subtitle}</SubTitle>}
 
             <Grid $columnsAmount={columnsAmount}>
                 {contentPlain.map((set) => (

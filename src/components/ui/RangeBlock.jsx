@@ -6,7 +6,7 @@ const StyledRangeBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${rem(6)};
+    gap: ${rem(12)};
 
     width: min-content;
 

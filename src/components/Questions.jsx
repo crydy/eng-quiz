@@ -95,10 +95,6 @@ function Questions() {
     const isCorrectAnswer = userChoice === correctIndex;
     const isLastQuestion = questions.length === current + 1;
 
-    const ruleTitle = `${capitalize(langPack.presentSimple.title[lang])}: ${
-        langPack.presentSimple.taskSettings.types.labels[questionType][lang]
-    }`;
-
     const audioRef = useRef(new Audio(buttonClickSound));
 
     function handleAnswer(index) {
@@ -220,7 +216,12 @@ function Questions() {
                     }
                 >
                     <Rules
-                        title={ruleTitle}
+                        title={capitalize(langPack.presentSimple.title[lang])}
+                        subtitle={
+                            langPack.presentSimple.taskSettings.types.labels[
+                                questionType
+                            ][lang]
+                        }
                         content={
                             rulesData.presentSimpleTableData[questionType]
                                 .content

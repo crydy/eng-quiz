@@ -200,17 +200,18 @@ function StartScreen() {
                     }
                 >
                     <RulesModalHeader>
-                        {langPack.presentSimple.title[lang].toUpperCase()}
+                        {capitalize(langPack.presentSimple.title[lang])}
                     </RulesModalHeader>
 
                     {rulesDataTypes.map((type) => (
                         <Rules
-                            title={`${capitalize(
-                                langPack.presentSimple.title[lang]
-                            )}: ${
+                            // title={capitalize(
+                            //     langPack.presentSimple.title[lang]
+                            // )}
+                            subtitle={
                                 langPack.presentSimple.taskSettings.types
                                     .labels[type][lang]
-                            }`}
+                            }
                             content={
                                 rulesData.presentSimpleTableData[type].content
                             }
@@ -221,8 +222,8 @@ function StartScreen() {
 
                     {rulesDataTypes.includes("positives") && (
                         <Rules
-                            title={
-                                `"She loves":` +
+                            noTitle
+                            subtitle={
                                 langPack.presentSimple
                                     .positiveVerbsMutationTitle[lang]
                             }

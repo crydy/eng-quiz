@@ -46,8 +46,8 @@ const langPack = {
         },
 
         positiveVerbsMutationTitle: {
-            en: `(he / she / it + verb)`,
-            ru: `(he / she / it + глагол)`,
+            en: `he/she/it + verb (special ends)`,
+            ru: `he/she/it + глагол (особые окончания)`,
         },
     },
 

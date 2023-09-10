@@ -1,5 +1,5 @@
 const config = {
-    localStoragePrefix: "07",
+    localStoragePrefix: "08",
     defaultLanguage: "ru",
 
     colorThemes: {

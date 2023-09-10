@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 
-function useForbidBodyScroll(isOpen) {
+// prevent body movements when scrolling inside modal
+function useForbidBodyScroll(isModalOpened) {
     const scrollYRef = useRef(null);
     const bodyOverflowRef = useRef(null);
 
@@ -11,25 +12,26 @@ function useForbidBodyScroll(isOpen) {
 
         window.addEventListener("scroll", handleScroll);
 
-        if (isOpen) {
+        if (isModalOpened) {
             scrollYRef.current = window.scrollY;
             bodyOverflowRef.current = document.body.style.overflow;
 
+            document.body.style.overflow = "hidden";
             document.body.style.position = "fixed";
-            document.body.style.overflowY = "hidden";
+            document.body.style.top = `-${scrollYRef.current}px`;
             document.body.style.width = "100%";
         } else {
-            window.scrollTo(0, scrollYRef.current);
-
+            document.body.style.overflow = bodyOverflowRef.current;
             document.body.style.position = "";
-            document.body.style.overflowY = bodyOverflowRef.current;
+            document.body.style.top = "";
             document.body.style.width = "";
+            window.scrollTo(0, scrollYRef.current);
         }
 
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-    }, [isOpen]);
+    }, [isModalOpened]);
 }
 
 export { useForbidBodyScroll };
