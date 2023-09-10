@@ -1,15 +1,17 @@
+// Libs
 import { useState } from "react";
 import { styled } from "styled-components";
-
+// Context and hooks
 import { useQuiz } from "../contexts/QuizContext";
 import { useLocalStorageState } from "../hooks/useLocalStorageState";
-import { capitalize, rem } from "../utils/helpers";
-
+import { useForbidBodyScroll } from "../hooks/useForbidBodyScroll";
+// Data and utils
 import { LOCAL_STORAGE_KEY as KEY } from "../config/localStorageConfig";
 import { verbs } from "../data/words/verbs";
 import { langPack } from "../data/langPack";
 import { rulesData } from "../data/rulesData";
-
+import { capitalize, rem } from "../utils/helpers";
+// Components
 import Button from "./ui/Button";
 import RangeBlock from "./ui/RangeBlock";
 import ToggleSet from "./ui/ToggleSet";
@@ -85,6 +87,7 @@ function StartScreen() {
         verbs.getVariants().at(0)
     );
     const [isRulesOpened, setIsRulesOpened] = useState(false);
+    useForbidBodyScroll(isRulesOpened);
 
     const selectedOptions = Object.keys(options).filter(
         (item) => options[item] === true

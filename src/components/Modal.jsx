@@ -7,11 +7,6 @@ import { useQuiz } from "../contexts/QuizContext";
 import { langPack } from "../data/langPack";
 
 const StyledModal = styled.div`
-    /*  TEMP */
-    /* & > * {
-        outline: 1px solid red;
-    } */
-
     z-index: var(--z-index-modal);
     position: fixed;
 

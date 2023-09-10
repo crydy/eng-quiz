@@ -1,8 +1,9 @@
 // Libs
 import { useRef, useState } from "react";
 import { styled } from "styled-components";
-// Context
+// Context and hooks
 import { useQuiz } from "../contexts/QuizContext";
+import { useForbidBodyScroll } from "../hooks/useForbidBodyScroll";
 // Data and utils
 import { langPack } from "../data/langPack";
 import { rulesData } from "../data/rulesData";
@@ -77,6 +78,7 @@ const ShowRulesButton = styled(Button)``;
 function Questions() {
     const { current, questions, isPartsOfSpeechMarked, lang, dispatch } =
         useQuiz();
+
     const {
         question,
         variants,
@@ -86,10 +88,13 @@ function Questions() {
 
     const [isAnswered, setIsAnswered] = useState(false);
     const [userChoice, setUserChoice] = useState(null);
+
     const [isModalOpened, setIsModalOpened] = useState(false);
+    useForbidBodyScroll(isModalOpened);
 
     const isCorrectAnswer = userChoice === correctIndex;
     const isLastQuestion = questions.length === current + 1;
+
     const ruleTitle = `${capitalize(langPack.presentSimple.title[lang])}: ${
         langPack.presentSimple.taskSettings.types.labels[questionType][lang]
     }`;
