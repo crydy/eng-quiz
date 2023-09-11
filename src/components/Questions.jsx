@@ -34,6 +34,7 @@ const StyledQuestions = styled.div`
 
 const Emoji = styled.div`
     font-size: ${rem(50)};
+    opacity: ${(props) => (props.$muted ? ".3" : "1")};
 `;
 
 const Heading = styled.h2`
@@ -87,6 +88,7 @@ function Questions() {
     } = questions.at(current);
 
     const [isAnswered, setIsAnswered] = useState(false);
+    console.log(isAnswered);
     const [userChoice, setUserChoice] = useState(null);
 
     const [isModalOpened, setIsModalOpened] = useState(false);
@@ -139,7 +141,7 @@ function Questions() {
         <StyledQuestions>
             {!isAnswered && (
                 <>
-                    <Emoji>{getRandomItem(emojis.neutral)}</Emoji>
+                    <Emoji $muted>{getRandomItem(emojis.neutral)}</Emoji>
                     {!isPartsOfSpeechMarked && <h2>{question}</h2>}
                     {isPartsOfSpeechMarked && (
                         <Heading>

@@ -32,24 +32,12 @@ const rulesData = {
             ["+es"],
             ["goes", "passes", "pushes", "watches", "mixes"],
         ],
-        // [
-        //     ["-ay", "-ey", "-oy", "-uy"],
-        //     ["play", "obey", "endjoy", "buy"],
-        //     ["+s"],
-        //     ["plays", "obeys", "endjoys", "buys"],
-        // ],
         [
             ["consonant", "& -y"],
             ["try", "cry", "study"],
-            ["-y", "+ies"],
+            ["+ies"],
             ["tries", "cries", "studies"],
         ],
-        // [
-        //     ["...other", "cases"],
-        //     ["like", "check", "read", "travel"],
-        //     ["+s"],
-        //     ["likes", "checks", "reads", "travels"],
-        // ],
     ],
 };
 
