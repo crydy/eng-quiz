@@ -7,6 +7,10 @@ import Button from "./ui/Button";
 import { langPack } from "../data/langPack";
 
 const StyledFinishScreen = styled.div`
+    /* & > * {
+        outline: 1px solid green;
+    } */
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,12 +21,10 @@ const StyledFinishScreen = styled.div`
 
 const HeadingH1 = styled.h1`
     color: ${(props) => props.$scoreColor};
-    font-size: ${rem(38)};
 `;
 
 const HeadingH2 = styled.h2`
     color: ${(props) => props.$scoreColor};
-    font-size: ${rem(28)};
 `;
 
 const NumericSpan = styled.span`
@@ -100,9 +102,9 @@ function FinishScreen() {
             </HeadingH2>
 
             {total !== correctAmount && (
-                <HeadingH2 $scoreColor={scoreColor}>
+                <h3 $scoreColor={scoreColor}>
                     {langPack.finishQuiz.mistakes[lang]}
-                </HeadingH2>
+                </h3>
             )}
 
             <Mistakes>

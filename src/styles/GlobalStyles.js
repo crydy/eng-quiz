@@ -172,6 +172,25 @@ h6 {
     line-height: 1;
 }
 
+h1 {
+    font-size: ${rem(38)};
+    font-size: min(12vw, 80px);
+}
+
+h2 {
+    font-size: ${rem(28)};
+    font-size: min(9vw, 60px);
+}
+
+h3 {
+    font-size: ${rem(22)};
+    font-size: min(6vw, 40px);
+}
+
+body {
+    font-size: min(6vw, 20px);
+}
+
 h1,
 h2,
 h3,

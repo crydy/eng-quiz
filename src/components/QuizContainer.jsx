@@ -4,6 +4,7 @@ const StyledQuizContainer = styled.div`
     max-width: var(--size-max-width);
     margin-left: auto;
     margin-right: auto;
+
     /* outline: 1px solid red; */
 `;
 

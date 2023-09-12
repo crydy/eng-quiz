@@ -6,9 +6,11 @@ const StyledRangeBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${rem(12)};
+    gap: ${rem(10)};
 
     width: min-content;
+    /* font-size: ${(props) => rem(props.$sizeFont)}; */
+    font-size: min(6vw, 30px);
 
     & label {
         white-space: nowrap;
@@ -19,9 +21,9 @@ const Amount = styled.span`
     font-family: var(--font-numbers);
 `;
 
-function RangeBlock({ title, value, ...props }) {
+function RangeBlock({ title, value, sizeFont = 20, ...props }) {
     return (
-        <StyledRangeBlock>
+        <StyledRangeBlock $sizeFont={sizeFont}>
             <label htmlFor={title}>
                 {title} <Amount>{value > 9 ? value : "0" + value}</Amount>
             </label>

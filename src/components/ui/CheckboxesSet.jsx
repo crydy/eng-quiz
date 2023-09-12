@@ -8,10 +8,16 @@ const StyledCheckboxesSet = styled.div`
     align-items: center;
     gap: ${(props) => rem(props.$sizeTitleIndent)};
 
+    font-size: min(6vw, 30px);
+
     & > h3 {
         font-size: ${(props) => rem(props.$sizeFontTitle)};
         color: ${(props) => props.$color};
     }
+`;
+
+const Title = styled.h4`
+    font-size: min(8vw, 40px);
 `;
 
 const CheckboxesList = styled.ul`
@@ -41,7 +47,7 @@ function CheckboxesSet({
             $sizeTitleIndent={sizeTitleIndent}
             $color={color}
         >
-            {!hideTitle && <h3>{title}</h3>}
+            {!hideTitle && <Title>{title}</Title>}
             <CheckboxesList $sizeItemsGap={sizeItemsGap}>
                 {options.map((option, index) => {
                     option = String(option);

@@ -8,11 +8,7 @@ import { rem } from "../utils/helpers";
 
 import ToggleSet from "./ui/ToggleSet";
 
-const Switcher = styled.div`
-    position: absolute;
-    left: ${rem(10)};
-    top: ${rem(10)};
-`;
+const Switcher = styled.div``;
 
 function ColorThemeSwitcher() {
     const { colorTheme, setColorTheme } = useColorTheme();

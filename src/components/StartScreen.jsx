@@ -18,8 +18,14 @@ import ToggleSet from "./ui/ToggleSet";
 import CheckboxesSet from "./ui/CheckboxesSet";
 import Modal from "./Modal";
 import Rules from "./Rules";
+import TaskScreen from "./layout/TaskScreen";
+import { doubleLine } from "../styles/stylesPatterns";
 
 const StyledStartScreen = styled.div`
+    & > * {
+        outline: 1px solid green;
+    }
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,44 +34,13 @@ const StyledStartScreen = styled.div`
     text-align: center;
 `;
 
-const Heading1 = styled.h1`
-    line-height: 1;
-    font-size: ${rem(38)};
-`;
+const Heading1 = styled.h1``;
 
-const Heading2 = styled.h2`
-    line-height: 1;
-    font-size: ${rem(28)};
-`;
+const Heading2 = styled.h2``;
 
 const Heading3 = styled.h3`
-    position: relative;
-    font-size: ${rem(22)};
+    ${doubleLine}
     padding: ${rem(6)} ${rem(0)};
-
-    &::before,
-    &::after {
-        content: "";
-        position: absolute;
-
-        left: 50%;
-        width: calc(100% + ${rem(22)});
-        height: ${rem(2)};
-        background-color: var(--color-text-main);
-        transform: translateX(-50%);
-    }
-
-    &::before {
-        top: 0;
-    }
-    &::after {
-        bottom: 0;
-    }
-`;
-
-const ButtonsBlock = styled.div`
-    display: flex;
-    gap: ${rem(12)};
 `;
 
 const RulesModalHeader = styled.h3`
@@ -127,55 +102,65 @@ function StartScreen() {
     }
 
     return (
-        <StyledStartScreen>
-            <Heading1>{langPack.appTitle[lang]}</Heading1>
-            <Heading2>
-                - <span>{langPack.presentSimple.title[lang]}</span> -
-            </Heading2>
-            <Heading3>{langPack.presentSimple.subtitle[lang]}</Heading3>
+        <TaskScreen>
+            {/* <TaskScreen.TopBar>top</TaskScreen.TopBar> */}
 
-            <RangeBlock
-                title={
-                    langPack.presentSimple.taskSettings
-                        .questionsAmountRangeTitle[lang]
-                }
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                min="10"
-                max="30"
-                trackColor="var(--color-range-track)"
-                thumbColor="var(--color-range-thumb)"
-            ></RangeBlock>
+            <TaskScreen.Titles>
+                <Heading1>{langPack.appTitle[lang]}</Heading1>
+                <Heading2>
+                    - <span>{langPack.presentSimple.title[lang]}</span> -
+                </Heading2>
+                <Heading3>{langPack.presentSimple.subtitle[lang]}</Heading3>
+            </TaskScreen.Titles>
 
-            <CheckboxesSet
-                title={langPack.presentSimple.taskSettings.types.title[lang]}
-                options={Object.keys(options)}
-                labels={optionsLabels}
-                selectedOptions={selectedOptions}
-                onChange={handleCheckboxChange}
-                sizeFont={20}
-                sizeItemsGap={6}
-                color="var(--color-text-main)"
-            />
+            <TaskScreen.Content>
+                <RangeBlock
+                    title={
+                        langPack.presentSimple.taskSettings
+                            .questionsAmountRangeTitle[lang]
+                    }
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    min="10"
+                    max="30"
+                    trackColor="var(--color-range-track)"
+                    thumbColor="var(--color-range-thumb)"
+                ></RangeBlock>
 
-            <ToggleSet
-                title={
-                    langPack.presentSimple.taskSettings.verbsVarietyTitle[lang]
-                }
-                options={verbs.getVariants()}
-                selectedOption={verbsVariety}
-                onChange={handleToggleChange}
-                sizeFont={16}
-                sizeFontTitle={24}
-                sizeTitleIndent={8}
-                sizeDevider={1.5}
-                colorFill="var(--color-button-bg)"
-                colorActiveFill="var(--color-text-main)"
-                colorActiveText="var(--color-bg)"
-                colorDevider="var(--color-bg)"
-            />
+                <CheckboxesSet
+                    title={
+                        langPack.presentSimple.taskSettings.types.title[lang]
+                    }
+                    options={Object.keys(options)}
+                    labels={optionsLabels}
+                    selectedOptions={selectedOptions}
+                    onChange={handleCheckboxChange}
+                    sizeFont={20}
+                    sizeItemsGap={6}
+                    color="var(--color-text-main)"
+                />
 
-            <ButtonsBlock>
+                <ToggleSet
+                    title={
+                        langPack.presentSimple.taskSettings.verbsVarietyTitle[
+                            lang
+                        ]
+                    }
+                    options={verbs.getVariants()}
+                    selectedOption={verbsVariety}
+                    onChange={handleToggleChange}
+                    sizeFont={16}
+                    sizeFontTitle={24}
+                    sizeTitleIndent={8}
+                    sizeDevider={1.5}
+                    colorFill="var(--color-button-bg)"
+                    colorActiveFill="var(--color-text-main)"
+                    colorActiveText="var(--color-bg)"
+                    colorDevider="var(--color-bg)"
+                />
+            </TaskScreen.Content>
+
+            <TaskScreen.Buttons>
                 <Button
                     onClick={handleOpenRules}
                     disabled={!selectedOptions.length || isRulesOpened}
@@ -190,51 +175,53 @@ function StartScreen() {
                 >
                     {langPack.buttons.start[lang]}
                 </Button>
-            </ButtonsBlock>
+            </TaskScreen.Buttons>
 
-            {isRulesOpened && (
-                <Modal
-                    onClose={() => setIsRulesOpened(false)}
-                    closeButtonTitle={
-                        langPack.buttons.modalSpecial.rulesClose[lang]
-                    }
-                >
-                    <RulesModalHeader>
-                        {capitalize(langPack.presentSimple.title[lang])}
-                    </RulesModalHeader>
+            <TaskScreen.Modal>
+                {isRulesOpened && (
+                    <Modal
+                        onClose={() => setIsRulesOpened(false)}
+                        closeButtonTitle={
+                            langPack.buttons.modalSpecial.rulesClose[lang]
+                        }
+                    >
+                        <RulesModalHeader>
+                            {capitalize(langPack.presentSimple.title[lang])}
+                        </RulesModalHeader>
 
-                    {rulesDataTypes.map((type) => (
-                        <Rules
-                            // title={capitalize(
-                            //     langPack.presentSimple.title[lang]
-                            // )}
-                            subtitle={
-                                langPack.presentSimple.taskSettings.types
-                                    .labels[type][lang]
-                            }
-                            content={
-                                rulesData.presentSimpleTableData[type].content
-                            }
-                            mark={rulesData.presentSimpleTableData[type].mark}
-                            noTitle
-                        />
-                    ))}
+                        {rulesDataTypes.map((type) => (
+                            <Rules
+                                subtitle={
+                                    langPack.presentSimple.taskSettings.types
+                                        .labels[type][lang]
+                                }
+                                content={
+                                    rulesData.presentSimpleTableData[type]
+                                        .content
+                                }
+                                mark={
+                                    rulesData.presentSimpleTableData[type].mark
+                                }
+                                noTitle
+                            />
+                        ))}
 
-                    {rulesDataTypes.includes("positives") && (
-                        <Rules
-                            noTitle
-                            subtitle={
-                                langPack.presentSimple
-                                    .positiveVerbsMutationTitle[lang]
-                            }
-                            content={
-                                rulesData.presentSimplePositiveVerbsMutation
-                            }
-                        />
-                    )}
-                </Modal>
-            )}
-        </StyledStartScreen>
+                        {rulesDataTypes.includes("positives") && (
+                            <Rules
+                                noTitle
+                                subtitle={
+                                    langPack.presentSimple
+                                        .positiveVerbsMutationTitle[lang]
+                                }
+                                content={
+                                    rulesData.presentSimplePositiveVerbsMutation
+                                }
+                            />
+                        )}
+                    </Modal>
+                )}
+            </TaskScreen.Modal>
+        </TaskScreen>
     );
 }
 

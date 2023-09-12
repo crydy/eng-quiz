@@ -7,7 +7,9 @@ const Label = styled.label`
     gap: ${rem(15)};
     gap: ${(props) => rem(props.$sizeLabelIndent)};
 
-    font-size: ${(props) => rem(props.$sizeFont)};
+    /* font-size: ${(props) => rem(props.$sizeFont)}; */
+    font-size: min(6vw, 30px);
+
     line-height: 1;
     color: ${(props) => props.$color};
 

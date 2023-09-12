@@ -4,11 +4,7 @@ import { useQuiz } from "../contexts/QuizContext";
 
 import ToggleSet from "./ui/ToggleSet";
 
-const Switcher = styled.div`
-    position: absolute;
-    right: ${rem(10)};
-    top: ${rem(10)};
-`;
+const Switcher = styled.div``;
 
 function LanguageButton() {
     const { lang, dispatch } = useQuiz();

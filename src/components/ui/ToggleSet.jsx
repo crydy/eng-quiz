@@ -6,10 +6,10 @@ const StyledToggleSet = styled.div`
     flex-direction: column;
     align-items: center;
     gap: ${(props) => rem(props.$sizeTitleIndent)};
+`;
 
-    & > h3 {
-        font-size: ${(props) => rem(props.$sizeFontTitle)};
-    }
+const Title = styled.h3`
+    font-size: min(8vw, 40px);
 `;
 
 const RadioList = styled.ul`
@@ -28,7 +28,8 @@ const RadioList = styled.ul`
 
         & label {
             display: block;
-            font-size: ${(props) => rem(props.$sizeFont)};
+            /* font-size: ${(props) => rem(props.$sizeFont)}; */
+            font-size: min(5vw, 25px);
 
             background-color: ${(props) => props.$colorFill};
             line-height: 1;
@@ -80,7 +81,7 @@ function ToggleSet({
             $sizeTitleIndent={sizeTitleIndent}
             $sizeFontTitle={sizeFontTitle}
         >
-            {!hideTitle && <h3>{title}</h3>}
+            {!hideTitle && <Title>{title}</Title>}
             <RadioList
                 $sizeFont={sizeFont}
                 $sizeDevider={sizeDevider}

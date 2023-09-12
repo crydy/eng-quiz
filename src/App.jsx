@@ -8,8 +8,7 @@ import StartScreen from "./components/StartScreen";
 import FinishScreen from "./components/FinishScreen";
 import Progress from "./components/Progress";
 import Questions from "./components/Questions";
-import LanguageButton from "./components/LanguageButton";
-import ColorThemeSwitcher from "./components/ColorThemeSwitcher";
+import TopBar from "./components/TopBar";
 
 function App() {
     const { isQuizMode, isFinished } = useQuiz();
@@ -17,19 +16,18 @@ function App() {
     return (
         <>
             <GlobalStyles />
-            <LanguageButton />
-            <ColorThemeSwitcher />
+            <TopBar />
 
-            <QuizContainer>
-                {!isQuizMode && !isFinished && <StartScreen />}
-                {isQuizMode && (
-                    <>
-                        <Progress />
-                        <Questions />
-                    </>
-                )}
-                {isFinished && <FinishScreen />}
-            </QuizContainer>
+            {/* <QuizContainer> */}
+            {!isQuizMode && !isFinished && <StartScreen />}
+            {isQuizMode && (
+                <>
+                    <Progress />
+                    <Questions />
+                </>
+            )}
+            {isFinished && <FinishScreen />}
+            {/* </QuizContainer> */}
         </>
     );
 }
