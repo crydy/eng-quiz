@@ -41,6 +41,7 @@ function reducer(state, action) {
         case "quiz/started":
             return {
                 ...initialState,
+                lang: state.lang,
                 isQuizMode: true,
                 questions: constructQuestions(
                     pronouns.personal.subject,
