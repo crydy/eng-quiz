@@ -11,6 +11,8 @@ import { verbs } from "../data/words/verbs";
 import { langPack } from "../data/langPack";
 import { rulesData } from "../data/rulesData";
 import { capitalize, rem } from "../utils/helpers";
+// Styles
+import { doubleLine, flexRow } from "../styles/stylesPatterns";
 // Components
 import Button from "./ui/Button";
 import RangeBlock from "./ui/RangeBlock";
@@ -18,29 +20,49 @@ import ToggleSet from "./ui/ToggleSet";
 import CheckboxesSet from "./ui/CheckboxesSet";
 import Modal from "./Modal";
 import Rules from "./Rules";
-import TaskScreen from "./layout/TaskScreen";
-import { doubleLine } from "../styles/stylesPatterns";
 
 const StyledStartScreen = styled.div`
-    & > * {
+    /* & > * {
         outline: 1px solid green;
-    }
+    } */
+
+    height: var(--size-body-height);
 
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    gap: clamp(1rem, 3.8vh, 2.7rem);
+    gap: 1em;
+
+    padding-top: 1em;
+    padding-bottom: 1em;
 
     text-align: center;
 `;
 
-const Heading1 = styled.h1``;
+const Headings = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+`;
 
-const Heading2 = styled.h2``;
+const Settings = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+`;
 
-const Heading3 = styled.h3`
+const HeadingDoubleLined = styled.h3`
+    width: fit-content;
+    margin: 0 auto;
     ${doubleLine}
     padding: ${rem(6)} ${rem(0)};
+`;
+
+const Buttons = styled.div`
+    ${flexRow}
+    gap: ${rem(16)};
 `;
 
 const RulesModalHeader = styled.h3`
@@ -102,18 +124,20 @@ function StartScreen() {
     }
 
     return (
-        <TaskScreen>
-            {/* <TaskScreen.TopBar>top</TaskScreen.TopBar> */}
+        <StyledStartScreen>
+            <Headings>
+                <h1>{langPack.appTitle[lang]}</h1>
 
-            <TaskScreen.Titles>
-                <Heading1>{langPack.appTitle[lang]}</Heading1>
-                <Heading2>
+                <h2>
                     - <span>{langPack.presentSimple.title[lang]}</span> -
-                </Heading2>
-                <Heading3>{langPack.presentSimple.subtitle[lang]}</Heading3>
-            </TaskScreen.Titles>
+                </h2>
 
-            <TaskScreen.Content>
+                <HeadingDoubleLined>
+                    {langPack.presentSimple.subtitle[lang]}
+                </HeadingDoubleLined>
+            </Headings>
+
+            <Settings>
                 <RangeBlock
                     title={
                         langPack.presentSimple.taskSettings
@@ -125,6 +149,8 @@ function StartScreen() {
                     max="30"
                     trackColor="var(--color-range-track)"
                     thumbColor="var(--color-range-thumb)"
+                    sizeFont="1.2em"
+                    sizeGap=".5em"
                 ></RangeBlock>
 
                 <CheckboxesSet
@@ -135,8 +161,8 @@ function StartScreen() {
                     labels={optionsLabels}
                     selectedOptions={selectedOptions}
                     onChange={handleCheckboxChange}
-                    sizeFont={20}
-                    sizeItemsGap={6}
+                    sizeFont="1em"
+                    sizeItemsGap=".7em"
                     color="var(--color-text-main)"
                 />
 
@@ -149,18 +175,18 @@ function StartScreen() {
                     options={verbs.getVariants()}
                     selectedOption={verbsVariety}
                     onChange={handleToggleChange}
-                    sizeFont={16}
-                    sizeFontTitle={24}
-                    sizeTitleIndent={8}
+                    sizeFont="1em"
+                    sizeFontTitle="1.3em"
+                    sizeTitleIndent={10}
                     sizeDevider={1.5}
                     colorFill="var(--color-button-bg)"
                     colorActiveFill="var(--color-text-main)"
                     colorActiveText="var(--color-bg)"
                     colorDevider="var(--color-bg)"
                 />
-            </TaskScreen.Content>
+            </Settings>
 
-            <TaskScreen.Buttons>
+            <Buttons>
                 <Button
                     onClick={handleOpenRules}
                     disabled={!selectedOptions.length || isRulesOpened}
@@ -175,53 +201,48 @@ function StartScreen() {
                 >
                     {langPack.buttons.start[lang]}
                 </Button>
-            </TaskScreen.Buttons>
+            </Buttons>
 
-            <TaskScreen.Modal>
-                {isRulesOpened && (
-                    <Modal
-                        onClose={() => setIsRulesOpened(false)}
-                        closeButtonTitle={
-                            langPack.buttons.modalSpecial.rulesClose[lang]
-                        }
-                    >
-                        <RulesModalHeader>
-                            {capitalize(langPack.presentSimple.title[lang])}
-                        </RulesModalHeader>
+            {isRulesOpened && (
+                <Modal
+                    onClose={() => setIsRulesOpened(false)}
+                    closeButtonTitle={
+                        langPack.buttons.modalSpecial.rulesClose[lang]
+                    }
+                >
+                    <RulesModalHeader>
+                        {capitalize(langPack.presentSimple.title[lang])}
+                    </RulesModalHeader>
 
-                        {rulesDataTypes.map((type) => (
-                            <Rules
-                                subtitle={
-                                    langPack.presentSimple.taskSettings.types
-                                        .labels[type][lang]
-                                }
-                                content={
-                                    rulesData.presentSimpleTableData[type]
-                                        .content
-                                }
-                                mark={
-                                    rulesData.presentSimpleTableData[type].mark
-                                }
-                                noTitle
-                            />
-                        ))}
+                    {rulesDataTypes.map((type) => (
+                        <Rules
+                            subtitle={
+                                langPack.presentSimple.taskSettings.types
+                                    .labels[type][lang]
+                            }
+                            content={
+                                rulesData.presentSimpleTableData[type].content
+                            }
+                            mark={rulesData.presentSimpleTableData[type].mark}
+                            noTitle
+                        />
+                    ))}
 
-                        {rulesDataTypes.includes("positives") && (
-                            <Rules
-                                noTitle
-                                subtitle={
-                                    langPack.presentSimple
-                                        .positiveVerbsMutationTitle[lang]
-                                }
-                                content={
-                                    rulesData.presentSimplePositiveVerbsMutation
-                                }
-                            />
-                        )}
-                    </Modal>
-                )}
-            </TaskScreen.Modal>
-        </TaskScreen>
+                    {rulesDataTypes.includes("positives") && (
+                        <Rules
+                            noTitle
+                            subtitle={
+                                langPack.presentSimple
+                                    .positiveVerbsMutationTitle[lang]
+                            }
+                            content={
+                                rulesData.presentSimplePositiveVerbsMutation
+                            }
+                        />
+                    )}
+                </Modal>
+            )}
+        </StyledStartScreen>
     );
 }
 

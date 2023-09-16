@@ -1,6 +1,21 @@
 import { css } from "styled-components";
 import { rem } from "../utils/helpers";
 
+export const container = css`
+    max-width: var(--size-max-width);
+    margin-left: auto;
+    margin-right: auto;
+`;
+
+export const scrollNoBars = css`
+    overflow: scroll;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+`;
+
 export const flexColumn = css`
     display: flex;
     flex-direction: column;

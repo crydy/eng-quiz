@@ -5,16 +5,28 @@ const StyledToggleSet = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${(props) => rem(props.$sizeTitleIndent)};
+    gap: ${(props) =>
+        typeof props.$sizeTitleIndent === "string"
+            ? props.$sizeTitleIndent
+            : rem(props.$sizeTitleIndent)};
 `;
 
 const Title = styled.h3`
-    font-size: min(8vw, 40px);
+    font-size: ${(props) =>
+        typeof props.$sizeFontTitle === "string"
+            ? props.$sizeFontTitle
+            : rem(props.$sizeFontTitle)};
 `;
 
 const RadioList = styled.ul`
     display: flex;
-    ${(props) => props.$colorDevider && `gap: ${rem(props.$sizeDevider)};`}
+    ${(props) =>
+        props.$colorDevider &&
+        `gap: ${
+            typeof props.$sizeDevider === "string"
+                ? props.$sizeDevider
+                : rem(props.$sizeDevider)
+        };`}
 
     border-radius: 500px;
     overflow: hidden;
@@ -28,12 +40,16 @@ const RadioList = styled.ul`
 
         & label {
             display: block;
-            /* font-size: ${(props) => rem(props.$sizeFont)}; */
-            font-size: min(5vw, 25px);
+
+            padding: 0.35em 0.8em;
+            line-height: 1;
+            font-size: ${(props) =>
+                typeof props.$sizeFont === "string"
+                    ? props.$sizeFont
+                    : rem(props.$sizeFont)};
 
             background-color: ${(props) => props.$colorFill};
-            line-height: 1;
-            padding: 0.35em 0.8em;
+
             cursor: pointer;
 
             &:hover {
@@ -57,31 +73,36 @@ const RadioList = styled.ul`
 `;
 
 function ToggleSet({
-    title = "test",
+    title = "Test title:",
+    hideTitle = false,
     options = ["test 1", "test 2", "test 3"],
     optionsReplacingIcons = null,
     selectedOption = "test 1",
+
     onChange,
-    sizeFont = 16,
-    sizeFontTitle = sizeFont * 1.2,
+
+    // string: valid css-value (as '1em')
+    // number: (px size implied, will converted px=>rem)
+    sizeFont = "1em",
+    sizeFontTitle = "1.5em",
     sizeTitleIndent = 8,
     sizeDevider = 0,
+
     colorFill = "green",
     colorActiveFill = "purple",
     colorActiveText = "white",
     colorDevider = "red",
-    hideTitle = false,
 }) {
     const handleRadioButtonChange = (e) => {
         onChange(e);
     };
 
     return (
-        <StyledToggleSet
-            $sizeTitleIndent={sizeTitleIndent}
-            $sizeFontTitle={sizeFontTitle}
-        >
-            {!hideTitle && <Title>{title}</Title>}
+        <StyledToggleSet $sizeTitleIndent={sizeTitleIndent}>
+            {!hideTitle && (
+                <Title $sizeFontTitle={sizeFontTitle}>{title}</Title>
+            )}
+
             <RadioList
                 $sizeFont={sizeFont}
                 $sizeDevider={sizeDevider}

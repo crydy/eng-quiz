@@ -12,19 +12,23 @@ import { capitalize, getRandomItem, rem } from "../utils/helpers";
 // Sounds
 import buttonClickSound from "../assets/sounds/button-click.wav";
 // Components
-import VariantButton from "./ui/VariantButton";
+import Progress from "./Progress";
 import Button from "./ui/Button";
+import VariantButton from "./ui/VariantButton";
 import Modal from "./Modal";
 import Rules from "./Rules";
 
 const StyledQuestions = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     align-items: center;
     gap: ${rem(10)};
 
+    min-height: var(--size-body-height);
+
     text-align: center;
-    padding: ${rem(20)} 0;
+    padding-bottom: ${rem(20)};
 
     position: relative;
     width: min(${rem(320)}, 80vw);
@@ -32,8 +36,14 @@ const StyledQuestions = styled.div`
     transform: translateX(-50%);
 `;
 
+const QuestionBlock = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: ${rem(20)};
+`;
+
 const Emoji = styled.div`
-    font-size: ${rem(50)};
+    font-size: 3.5em;
     opacity: ${(props) => (props.$muted ? ".3" : "1")};
 `;
 
@@ -43,7 +53,7 @@ const Heading = styled.h2`
             ? "var(--color-quiz-heading-correct)"
             : "var(--color-quiz-heading-wrong)"};
 
-    font-size: ${rem(28)};
+    font-size: 1.8em;
 `;
 
 const PartOfSpeach = styled.span`
@@ -64,7 +74,24 @@ const PartOfSpeach = styled.span`
     }
 `;
 
-const AnswersBlock = styled.div`
+const ButtonsBlock = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+const VariantsButtons = styled.div`
+    margin-top: ${rem(22)};
+    margin-bottom: ${rem(22)};
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: ${rem(14)};
+`;
+
+const AnswersButtons = styled.div`
     margin-top: ${rem(22)};
     margin-bottom: ${rem(22)};
 
@@ -88,7 +115,6 @@ function Questions() {
     } = questions.at(current);
 
     const [isAnswered, setIsAnswered] = useState(false);
-    console.log(isAnswered);
     const [userChoice, setUserChoice] = useState(null);
 
     const [isModalOpened, setIsModalOpened] = useState(false);
@@ -139,76 +165,91 @@ function Questions() {
 
     return (
         <StyledQuestions>
-            {!isAnswered && (
-                <>
-                    <Emoji $muted>{getRandomItem(emojis.neutral)}</Emoji>
-                    {!isPartsOfSpeechMarked && <h2>{question}</h2>}
-                    {isPartsOfSpeechMarked && (
-                        <Heading>
-                            <PartOfSpeach $nature="pronoun">
-                                {pronoun}
-                            </PartOfSpeach>{" "}
-                            {sign}{" "}
-                            <PartOfSpeach $nature="verb">{verb}</PartOfSpeach>
-                        </Heading>
-                    )}
-                </>
-            )}
-            {isAnswered && (
-                <>
-                    <Emoji>
-                        {isCorrectAnswer
-                            ? getRandomItem(emojis.glad)
-                            : getRandomItem(emojis.sad)}
-                    </Emoji>
-                    <Heading $version={isCorrectAnswer ? "correct" : "wrong"}>
-                        {getRandomItem(
-                            isCorrectAnswer
-                                ? langPack.messages.correctAnswer[lang]
-                                : langPack.messages.wrongAnswer[lang]
-                        )}
-                    </Heading>
-                </>
-            )}
-            <AnswersBlock>
-                {variants.map((variant, index) => (
-                    <VariantButton
-                        type="button"
-                        onClick={() => handleAnswer(index)}
-                        disabled={isAnswered}
-                        version={
-                            !isAnswered
-                                ? "neutral"
-                                : index === correctIndex
-                                ? "correct"
-                                : !isCorrectAnswer &&
-                                  userChoice === index &&
-                                  "wrong"
-                        }
-                        key={question + variant}
-                    >
-                        {variant}
-                    </VariantButton>
-                ))}
-            </AnswersBlock>
-            <Button
-                onClick={handleNext}
-                visible={isAnswered}
-                disabled={!isAnswered}
-            >
-                {!isLastQuestion
-                    ? langPack.buttons.next[lang]
-                    : langPack.buttons.finish[lang]}
-            </Button>
+            <Progress />
 
-            <ShowRulesButton
-                onClick={() => setIsModalOpened(true)}
-                colorless
-                visible={isAnswered && !isCorrectAnswer}
-                disabled={isModalOpened}
-            >
-                {langPack.buttons.modalSpecial.rulesOpen[lang]}
-            </ShowRulesButton>
+            <QuestionBlock>
+                {!isAnswered && (
+                    <>
+                        <Emoji $muted>{getRandomItem(emojis.neutral)}</Emoji>
+                        {!isPartsOfSpeechMarked && <h2>{question}</h2>}
+                        {isPartsOfSpeechMarked && (
+                            <Heading>
+                                <PartOfSpeach $nature="pronoun">
+                                    {pronoun}
+                                </PartOfSpeach>{" "}
+                                {sign}{" "}
+                                <PartOfSpeach $nature="verb">
+                                    {verb}
+                                </PartOfSpeach>
+                            </Heading>
+                        )}
+                    </>
+                )}
+
+                {isAnswered && (
+                    <>
+                        <Emoji>
+                            {isCorrectAnswer
+                                ? getRandomItem(emojis.glad)
+                                : getRandomItem(emojis.sad)}
+                        </Emoji>
+                        <Heading
+                            $version={isCorrectAnswer ? "correct" : "wrong"}
+                        >
+                            {getRandomItem(
+                                isCorrectAnswer
+                                    ? langPack.messages.correctAnswer[lang]
+                                    : langPack.messages.wrongAnswer[lang]
+                            )}
+                        </Heading>
+                    </>
+                )}
+            </QuestionBlock>
+
+            <ButtonsBlock>
+                <VariantsButtons>
+                    {variants.map((variant, index) => (
+                        <VariantButton
+                            type="button"
+                            onClick={() => handleAnswer(index)}
+                            disabled={isAnswered}
+                            version={
+                                !isAnswered
+                                    ? "neutral"
+                                    : index === correctIndex
+                                    ? "correct"
+                                    : !isCorrectAnswer &&
+                                      userChoice === index &&
+                                      "wrong"
+                            }
+                            key={question + variant}
+                        >
+                            {variant}
+                        </VariantButton>
+                    ))}
+                </VariantsButtons>
+
+                <AnswersButtons>
+                    <Button
+                        onClick={handleNext}
+                        visible={isAnswered}
+                        disabled={!isAnswered}
+                    >
+                        {!isLastQuestion
+                            ? langPack.buttons.next[lang]
+                            : langPack.buttons.finish[lang]}
+                    </Button>
+
+                    <ShowRulesButton
+                        onClick={() => setIsModalOpened(true)}
+                        colorless
+                        visible={isAnswered && !isCorrectAnswer}
+                        disabled={isModalOpened}
+                    >
+                        {langPack.buttons.modalSpecial.rulesOpen[lang]}
+                    </ShowRulesButton>
+                </AnswersButtons>
+            </ButtonsBlock>
 
             {isModalOpened && (
                 <Modal

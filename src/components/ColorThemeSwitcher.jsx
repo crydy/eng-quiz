@@ -1,16 +1,12 @@
-import { styled } from "styled-components";
 import { HiMoon } from "react-icons/hi";
 import { FaSun } from "react-icons/fa";
 
 import { useColorTheme } from "../contexts/ColorThemeContext";
 import { config } from "../config/config";
-import { rem } from "../utils/helpers";
 
 import ToggleSet from "./ui/ToggleSet";
 
-const Switcher = styled.div``;
-
-function ColorThemeSwitcher() {
+function ColorThemeSwitcher({ size }) {
     const { colorTheme, setColorTheme } = useColorTheme();
 
     const options = [
@@ -35,22 +31,20 @@ function ColorThemeSwitcher() {
     };
 
     return (
-        <Switcher>
-            <ToggleSet
-                title="color theme"
-                hideTitle
-                options={options.map((item) => item.label)}
-                optionsReplacingIcons={options.map((item) => item.icon)}
-                selectedOption={currentOption.label}
-                onChange={handleThemeToggle}
-                sizeFont={12}
-                sizeDevider={1.5}
-                colorFill="var(--color-button-bg)"
-                colorActiveFill="var(--color-text-main)"
-                colorActiveText="var(--color-bg)"
-                colorDevider="var(--color-bg)"
-            />
-        </Switcher>
+        <ToggleSet
+            title="color theme"
+            hideTitle
+            options={options.map((item) => item.label)}
+            optionsReplacingIcons={options.map((item) => item.icon)}
+            selectedOption={currentOption.label}
+            onChange={handleThemeToggle}
+            sizeFont={size}
+            sizeDevider={1.5}
+            colorFill="var(--color-button-bg)"
+            colorActiveFill="var(--color-text-main)"
+            colorActiveText="var(--color-bg)"
+            colorDevider="var(--color-bg)"
+        />
     );
 }
 

@@ -3,7 +3,6 @@ import { rem } from "../utils/helpers";
 
 const GlobalStyles = createGlobalStyle`
 
-
 :root {
     /************************ Fonts *************************
     font-family: 'Kanit', sans-serif;             // 300, 500
@@ -19,6 +18,8 @@ const GlobalStyles = createGlobalStyle`
     /************************ Sizings ***********************/
     
     --size-max-width: ${rem(600)};
+    --size-top-bar-height: 6vh;
+    --size-body-height: calc(100vh - var(--size-top-bar-height));
 
     --z-index-modal: 50;
     --z-index-dropdown: 40;
@@ -172,23 +173,24 @@ h6 {
     line-height: 1;
 }
 
+body {
+    font-size: min(6vw, 20px);
+}
+
 h1 {
-    font-size: ${rem(38)};
-    font-size: min(12vw, 80px);
+    font-size: 2.7em;
 }
 
 h2 {
-    font-size: ${rem(28)};
-    font-size: min(9vw, 60px);
+    font-size: 2em;
 }
 
 h3 {
-    font-size: ${rem(22)};
-    font-size: min(6vw, 40px);
+    font-size: 1.5em;
 }
 
-body {
-    font-size: min(6vw, 20px);
+h4 {
+    font-size: 1.3em;
 }
 
 h1,

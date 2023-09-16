@@ -3,6 +3,14 @@ import { styled } from "styled-components";
 
 import { useQuiz } from "../contexts/QuizContext";
 import { rem } from "../utils/helpers";
+import { container } from "../styles/stylesPatterns";
+
+const StyledProgress = styled.div`
+    ${container};
+
+    width: 80vw;
+    max-width: 100%;
+`;
 
 const ProgressNumerical = styled.div`
     font-family: var(--font-numbers);
@@ -45,7 +53,7 @@ function Progress() {
     }, [current, isAnswered, questions.length]);
 
     return (
-        <>
+        <StyledProgress>
             <ProgressNumerical>
                 <span>{isAnswered ? current + 1 : current}</span>/
                 <span>{questions.length}</span>
@@ -60,7 +68,7 @@ function Progress() {
                     }
                 />
             </ProgressBar>
-        </>
+        </StyledProgress>
     );
 }
 

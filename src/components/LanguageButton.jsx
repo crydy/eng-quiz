@@ -1,12 +1,8 @@
-import { styled } from "styled-components";
-import { rem } from "../utils/helpers";
 import { useQuiz } from "../contexts/QuizContext";
 
 import ToggleSet from "./ui/ToggleSet";
 
-const Switcher = styled.div``;
-
-function LanguageButton() {
+function LanguageButton({ size }) {
     const { lang, dispatch } = useQuiz();
 
     const selectedLang = lang === "en" ? "eng" : "rus";
@@ -21,21 +17,19 @@ function LanguageButton() {
     }
 
     return (
-        <Switcher>
-            <ToggleSet
-                title="app language"
-                hideTitle
-                options={["rus", "eng"]}
-                selectedOption={selectedLang}
-                onChange={handleChangeLanguage}
-                sizeFont={12}
-                sizeDevider={1.5}
-                colorFill="var(--color-button-bg)"
-                colorActiveFill="var(--color-text-main)"
-                colorActiveText="var(--color-bg)"
-                colorDevider="var(--color-bg)"
-            />
-        </Switcher>
+        <ToggleSet
+            title="app language"
+            hideTitle
+            options={["rus", "eng"]}
+            selectedOption={selectedLang}
+            onChange={handleChangeLanguage}
+            sizeFont={size}
+            sizeDevider={1.5}
+            colorFill="var(--color-button-bg)"
+            colorActiveFill="var(--color-text-main)"
+            colorActiveText="var(--color-bg)"
+            colorDevider="var(--color-bg)"
+        />
     );
 }
 
