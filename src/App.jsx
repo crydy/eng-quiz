@@ -3,33 +3,23 @@ import GlobalStyles from "./styles/GlobalStyles";
 // Context
 import { useQuiz } from "./contexts/QuizContext";
 // Components
-import QuizContainer from "./components/QuizContainer";
+import TopBar from "./components/layout/TopBar";
 import StartScreen from "./components/StartScreen";
 import FinishScreen from "./components/FinishScreen";
-import Progress from "./components/Progress";
 import Questions from "./components/Questions";
-import LanguageButton from "./components/LanguageButton";
-import ColorThemeSwitcher from "./components/ColorThemeSwitcher";
 
 function App() {
     const { isQuizMode, isFinished } = useQuiz();
+    const topBarHeight = 6;
 
     return (
         <>
             <GlobalStyles />
-            <LanguageButton />
-            <ColorThemeSwitcher />
+            <TopBar height={topBarHeight} />
 
-            <QuizContainer>
-                {!isQuizMode && !isFinished && <StartScreen />}
-                {isQuizMode && (
-                    <>
-                        <Progress />
-                        <Questions />
-                    </>
-                )}
-                {isFinished && <FinishScreen />}
-            </QuizContainer>
+            {!isQuizMode && !isFinished && <StartScreen />}
+            {isQuizMode && <Questions />}
+            {isFinished && <FinishScreen />}
         </>
     );
 }

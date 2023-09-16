@@ -1,47 +1,69 @@
 import { styled } from "styled-components";
 import { rem } from "../../utils/helpers";
+
 import Checkbox from "./Checkbox";
 
 const StyledCheckboxesSet = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${(props) => rem(props.$sizeTitleIndent)};
+    gap: ${(props) =>
+        typeof props.$sizeTitleIndent === "string"
+            ? props.$sizeTitleIndent
+            : rem(props.$sizeTitleIndent)};
 
-    & > h3 {
-        font-size: ${(props) => rem(props.$sizeFontTitle)};
-        color: ${(props) => props.$color};
-    }
+    font-size: ${(props) =>
+        typeof props.$sizeFont === "string"
+            ? props.$sizeFont
+            : rem(props.$sizeFont)};
+`;
+
+const Title = styled.h4`
+    font-size: ${(props) =>
+        typeof props.$sizeFontTitle === "string"
+            ? props.$sizeFontTitle
+            : rem(props.$sizeFontTitle)};
 `;
 
 const CheckboxesList = styled.ul`
     display: flex;
     flex-direction: column;
-    gap: ${(props) => rem(props.$sizeItemsGap)};
+    gap: ${(props) =>
+        typeof props.$sizeItemsGap === "string"
+            ? props.$sizeItemsGap
+            : rem(props.$sizeItemsGap)};
 `;
 
 function CheckboxesSet({
     title = "test title",
-    options = ["test 1", "test 2", "test 3"],
-    labels = options,
-    selectedOptions = ["test 1"],
-    sizeFont = 16,
-    sizeFontTitle = sizeFont * 1.2,
-    sizeItemsGap = 8,
-    sizeTitleIndent = sizeItemsGap,
-    sizeLablesIndent = 8,
-    color = "red",
     hideTitle = false,
+    // inner values
+    options = ["test 1", "test 2", "test 3"],
+    // visible values
+    labels = options,
+    selectedOptions = ["test 1", "test 3"],
+
     onChange,
+
+    // string: valid css-value (as '1em')
+    // number: (px size implied, will converted px=>rem)
+    sizeFont = "1.2em",
+    sizeFontTitle = "1.3em",
+    sizeItemsGap = ".7em",
+    sizeTitleIndent = ".7em",
+    sizeLablesIndent = ".7em",
+
+    color = "red",
 }) {
     return (
         <StyledCheckboxesSet
             $sizeFont={sizeFont}
-            $sizeFontTitle={sizeFontTitle}
             $sizeTitleIndent={sizeTitleIndent}
-            $color={color}
         >
-            {!hideTitle && <h3>{title}</h3>}
+            {!hideTitle && (
+                <Title $sizeFontTitle={sizeFontTitle}>{title}</Title>
+            )}
+
             <CheckboxesList $sizeItemsGap={sizeItemsGap}>
                 {options.map((option, index) => {
                     option = String(option);
@@ -52,7 +74,7 @@ function CheckboxesSet({
                                 name={option}
                                 sizeFont={sizeFont}
                                 color={color}
-                                sizeLableIndent={sizeLablesIndent}
+                                sizeLabelIndent={sizeLablesIndent}
                                 defaultChecked={selectedOptions.includes(
                                     option
                                 )}

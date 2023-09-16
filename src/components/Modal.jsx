@@ -19,10 +19,10 @@ const StyledModal = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    width: 80vw;
+    width: 90vw;
     min-width: max-content;
     max-width: var(--size-max-width);
-    max-height: 80vh;
+    max-height: 90vh;
 
     padding: ${(props) =>
         rem(props.$padding[0]) + " " + rem(props.$padding[1]) + ";"};

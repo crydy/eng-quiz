@@ -65,7 +65,7 @@ const RangeInput = styled.input.attrs({ type: "range" })`
 `;
 
 function Range({
-    thumbSize = 16,
+    thumbSize = 20,
     thumbBorderRadius = 50,
 
     trackHeight = 6,

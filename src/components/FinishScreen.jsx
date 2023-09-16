@@ -1,29 +1,49 @@
 import { styled } from "styled-components";
 
+import { container, scrollNoBars } from "../styles/stylesPatterns";
 import { useQuiz } from "../contexts/QuizContext";
 import { getRandomItem, rem } from "../utils/helpers";
-
-import Button from "./ui/Button";
 import { langPack } from "../data/langPack";
 
+import Button from "./ui/Button";
+
 const StyledFinishScreen = styled.div`
+    ${container};
+    height: var(--size-body-height);
+
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     align-items: center;
     gap: ${rem(20)};
 
+    padding-bottom: min(5vh, ${rem(60)});
+    padding-left: 1em;
+    padding-right: 1em;
+
     text-align: center;
+
+    /* & > * {
+        outline: 1px solid green;
+    } */
+`;
+
+const HeadingsBlock = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: ${rem(15)};
+    max-width: 100vw;
+
+    color: ${(props) => props.$scoreColor};
 `;
 
 const HeadingH1 = styled.h1`
-    color: ${(props) => props.$scoreColor};
-    font-size: ${rem(38)};
+    white-space: break-spaces;
 `;
 
-const HeadingH2 = styled.h2`
-    color: ${(props) => props.$scoreColor};
-    font-size: ${rem(28)};
-`;
+const HeadingH2 = styled.h2``;
+const HeadingH3 = styled.h3``;
 
 const NumericSpan = styled.span`
     font-family: var(--font-numbers);
@@ -34,21 +54,16 @@ const NumericSpan = styled.span`
     }
 `;
 
-const Mistakes = styled.ul`
+const MistakesList = styled.ul`
+    ${scrollNoBars};
+
     display: flex;
     flex-direction: column;
     gap: ${rem(8)};
 
-    color: var(--color-text-neutral);
+    color: var(--color-text-main);
 
-    max-height: 50vh;
     min-width: 100%;
-
-    overflow: scroll;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-        display: none;
-    }
 
     & > li {
         display: flex;
@@ -56,6 +71,7 @@ const Mistakes = styled.ul`
         justify-content: space-between;
 
         line-height: 1;
+        font-size: inherit;
     }
 `;
 
@@ -90,22 +106,24 @@ function FinishScreen() {
 
     return (
         <StyledFinishScreen>
-            <HeadingH1>{getRandomItem(messageSource)}</HeadingH1>
+            <HeadingsBlock>
+                <HeadingH1>{getRandomItem(messageSource)}</HeadingH1>
 
-            <HeadingH2>
-                {`${langPack.finishQuiz.score[lang]} `}
-                <NumericSpan $scoreColor={scoreColor}>
-                    <span>{correctAmount}</span>/<span>{total}</span>
-                </NumericSpan>{" "}
-            </HeadingH2>
-
-            {total !== correctAmount && (
-                <HeadingH2 $scoreColor={scoreColor}>
-                    {langPack.finishQuiz.mistakes[lang]}
+                <HeadingH2>
+                    {`${langPack.finishQuiz.score[lang]} `}
+                    <NumericSpan $scoreColor={scoreColor}>
+                        <span>{correctAmount}</span>/<span>{total}</span>
+                    </NumericSpan>{" "}
                 </HeadingH2>
-            )}
+            </HeadingsBlock>
 
-            <Mistakes>
+            <MistakesList>
+                {total !== correctAmount && (
+                    <HeadingH3 $scoreColor={scoreColor}>
+                        {langPack.finishQuiz.mistakes[lang]}
+                    </HeadingH3>
+                )}
+
                 {answers
                     .filter((item) => !item.isCorrect)
                     .map((item) => (
@@ -114,7 +132,7 @@ function FinishScreen() {
                             <Correct>{item.correctVariant}</Correct>
                         </li>
                     ))}
-            </Mistakes>
+            </MistakesList>
 
             <Button onClick={() => dispatch({ type: "quiz/startMenu" })}>
                 {langPack.buttons.restart[lang]}
