@@ -4,6 +4,11 @@ const langPack = {
         ru: "Английский язык",
     },
 
+    tastChoiceTitle: {
+        en: "Choose a practice:",
+        ru: "Выберите занятие:",
+    },
+
     presentSimple: {
         title: {
             en: "present simple",

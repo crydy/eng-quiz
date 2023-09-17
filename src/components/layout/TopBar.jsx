@@ -3,6 +3,8 @@ import { container } from "../../styles/stylesPatterns";
 
 import ColorThemeSwitcher from "../ColorThemeSwitcher";
 import LanguageButton from "../LanguageButton";
+import Button from "../ui/Button";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const StyledTopBar = styled.div`
     ${container};
@@ -21,12 +23,31 @@ const StyledTopBar = styled.div`
 `;
 
 function TopBar() {
-    const buttonsSize = ".6em";
+    const currentLocation = useLocation();
+    const isIndexPage = currentLocation.pathname === "/";
+
+    const buttonsFontSize = ".6em";
+    const navigate = useNavigate();
+
+    function handleOnHomeButtonClick() {
+        navigate("/");
+    }
 
     return (
         <StyledTopBar>
-            <ColorThemeSwitcher size={buttonsSize} />
-            <LanguageButton size={buttonsSize} />
+            <ColorThemeSwitcher size={buttonsFontSize} />
+
+            {!isIndexPage && (
+                <Button
+                    sizeFont={buttonsFontSize}
+                    sizePadding="0.35em 0.8em"
+                    onClick={handleOnHomeButtonClick}
+                >
+                    Back to index
+                </Button>
+            )}
+
+            <LanguageButton size={buttonsFontSize} />
         </StyledTopBar>
     );
 }

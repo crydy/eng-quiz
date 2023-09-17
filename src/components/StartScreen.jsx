@@ -126,11 +126,9 @@ function StartScreen() {
     return (
         <StyledStartScreen>
             <Headings>
-                <h1>{langPack.appTitle[lang]}</h1>
+                {/* <h1>{langPack.appTitle[lang]}</h1> */}
 
-                <h2>
-                    - <span>{langPack.presentSimple.title[lang]}</span> -
-                </h2>
+                <h2>{langPack.presentSimple.title[lang].toUpperCase()}</h2>
 
                 <HeadingDoubleLined>
                     {langPack.presentSimple.subtitle[lang]}

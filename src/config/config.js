@@ -1,5 +1,6 @@
 const config = {
-    localStoragePrefix: "08",
+    base: "/eng-verbs-quiz/",
+    localStoragePrefix: "09",
     defaultLanguage: "ru",
 
     colorThemes: {

@@ -1,26 +1,37 @@
-// Styles
-import GlobalStyles from "./styles/GlobalStyles";
-// Context
-import { useQuiz } from "./contexts/QuizContext";
+// Libs
+import { Outlet } from "react-router-dom";
 // Components
 import TopBar from "./components/layout/TopBar";
-import StartScreen from "./components/StartScreen";
-import FinishScreen from "./components/FinishScreen";
-import Questions from "./components/Questions";
+import { styled } from "styled-components";
+
+const StyledApp = styled.div`
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`;
+
+const Body = styled.div`
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    /* outline: 1px solid red; */
+`;
 
 function App() {
-    const { isQuizMode, isFinished } = useQuiz();
-    const topBarHeight = 6;
-
     return (
-        <>
-            <GlobalStyles />
-            <TopBar height={topBarHeight} />
-
-            {!isQuizMode && !isFinished && <StartScreen />}
-            {isQuizMode && <Questions />}
-            {isFinished && <FinishScreen />}
-        </>
+        <StyledApp>
+            <TopBar />
+            <Body>
+                <Outlet />
+            </Body>
+        </StyledApp>
     );
 }
 

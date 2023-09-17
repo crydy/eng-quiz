@@ -24,12 +24,12 @@ const QuizContext = createContext();
 // ];
 
 const initialState = {
+    isPartsOfSpeechMarked: true,
+    lang: localStorage.getItem(KEY.userLanguage) || config.defaultLanguage,
+
     isQuizMode: false,
     isFinished: false,
     isAnswered: false,
-    isPartsOfSpeechMarked: true,
-
-    lang: localStorage.getItem(KEY.userLanguage) || config.defaultLanguage,
 
     current: 0,
     questions: [],
