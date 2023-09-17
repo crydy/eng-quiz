@@ -2,26 +2,9 @@ import { createContext, useContext, useReducer } from "react";
 
 import { LOCAL_STORAGE_KEY as KEY } from "../config/localStorageConfig";
 import { config } from "../config/config";
-
-import { pronouns } from "../data/words/pronouns";
-import { verbs } from "../data/words/verbs";
-import { constructQuestions } from "../utils/questionConstructors";
 import { updateLangAttribute } from "../utils/helpers";
 
 const QuizContext = createContext();
-
-// const testQuestions = [
-//     {
-//         question: "Who can run?",
-//         variants: ["turtle", "cat", "worm", "flower"],
-//         correctIndex: 1,
-//     },
-//     {
-//         question: "Are you animal?",
-//         variants: ["Absolutely", "I am the god"],
-//         correctIndex: 0,
-//     },
-// ];
 
 const initialState = {
     isPartsOfSpeechMarked: true,
@@ -43,12 +26,7 @@ function reducer(state, action) {
                 ...initialState,
                 lang: state.lang,
                 isQuizMode: true,
-                questions: constructQuestions(
-                    pronouns.personal.subject,
-                    verbs.common[`n${action.payload.verbsVariety}`],
-                    action.payload.amount,
-                    action.payload.options
-                ),
+                questions: action.payload.questions,
             };
 
         case "quiz/questionAnswered":

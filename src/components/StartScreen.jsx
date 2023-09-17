@@ -20,6 +20,8 @@ import ToggleSet from "./ui/ToggleSet";
 import CheckboxesSet from "./ui/CheckboxesSet";
 import Modal from "./Modal";
 import Rules from "./Rules";
+import { constructQuestions } from "../utils/questionConstructors";
+import { pronouns } from "../data/words/pronouns";
 
 const StyledStartScreen = styled.div`
     /* & > * {
@@ -117,17 +119,35 @@ function StartScreen() {
     }
 
     function handleStartQuiz() {
+        const testQuestions = [
+            {
+                question: "Who can run?",
+                variants: ["turtle", "cat", "worm", "flower"],
+                correctIndex: 1,
+            },
+            {
+                question: "Are you animal?",
+                variants: ["Absolutely", "I am the god"],
+                correctIndex: 0,
+            },
+        ];
+
+        const questions = constructQuestions(
+            pronouns.personal.subject,
+            verbs.common[`n${verbsVariety}`],
+            amount,
+            options
+        );
+
         dispatch({
             type: "quiz/started",
-            payload: { amount, options, verbsVariety },
+            payload: { questions },
         });
     }
 
     return (
         <StyledStartScreen>
             <Headings>
-                {/* <h1>{langPack.appTitle[lang]}</h1> */}
-
                 <h2>{langPack.presentSimple.title[lang].toUpperCase()}</h2>
 
                 <HeadingDoubleLined>

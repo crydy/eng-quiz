@@ -5,7 +5,7 @@ const langPack = {
     },
 
     tastChoiceTitle: {
-        en: "Choose a practice:",
+        en: "Choose your practice:",
         ru: "Выберите занятие:",
     },
 
