@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-import { container, scrollNoBars } from "../styles/stylesPatterns";
+import { container, englishFontOnly, scrollNoBars } from "../styles/styles";
 import { useQuiz } from "../contexts/QuizContext";
 import { getRandomItem, rem } from "../utils/helpers";
 import { langPack } from "../data/langPack";
@@ -56,6 +56,7 @@ const NumericSpan = styled.span`
 
 const MistakesList = styled.ul`
     ${scrollNoBars};
+    ${englishFontOnly};
 
     display: flex;
     flex-direction: column;

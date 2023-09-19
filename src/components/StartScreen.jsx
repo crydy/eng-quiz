@@ -14,7 +14,7 @@ import { rulesData } from "../data/rulesData";
 import { constructQuestions } from "../utils/questionConstructors";
 import { capitalize, rem } from "../utils/helpers";
 // Styles
-import { doubleLine, flexRow } from "../styles/stylesPatterns";
+import { doubleLine, flexRow } from "../styles/styles";
 // Components
 import Button from "./ui/Button";
 import RangeBlock from "./ui/RangeBlock";
@@ -119,18 +119,18 @@ function StartScreen() {
     }
 
     function handleStartQuiz() {
-        const testQuestions = [
-            {
-                question: "Who can run?",
-                variants: ["turtle", "cat", "worm", "flower"],
-                correctIndex: 1,
-            },
-            {
-                question: "Are you animal?",
-                variants: ["Absolutely", "I am the god"],
-                correctIndex: 0,
-            },
-        ];
+        // const testQuestions = [
+        //     {
+        //         question: "Who can run?",
+        //         variants: ["turtle", "cat", "worm", "flower"],
+        //         correctIndex: 1,
+        //     },
+        //     {
+        //         question: "Are you animal?",
+        //         variants: ["Absolutely", "I am the god"],
+        //         correctIndex: 0,
+        //     },
+        // ];
 
         const questions = constructQuestions(
             pronouns.personal.subject,

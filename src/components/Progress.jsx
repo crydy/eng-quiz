@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 import { useQuiz } from "../contexts/QuizContext";
 import { rem } from "../utils/helpers";
-import { container } from "../styles/stylesPatterns";
+import { container } from "../styles/styles";
 
 const StyledProgress = styled.div`
     ${container};

@@ -1,6 +1,8 @@
 // Libs
 import { useRef, useState } from "react";
 import { styled } from "styled-components";
+// Styles
+import { englishFontOnly } from "../styles/styles";
 // Context and hooks
 import { useQuiz } from "../contexts/QuizContext";
 import { useForbidBodyScroll } from "../hooks/useForbidBodyScroll";
@@ -19,6 +21,8 @@ import Modal from "./layout/Modal";
 import Rules from "./Rules";
 
 const StyledQuestions = styled.div`
+    ${englishFontOnly}
+
     display: flex;
     flex-direction: column;
     justify-content: space-around;

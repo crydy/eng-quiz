@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { container } from "../../styles/stylesPatterns";
+import { container } from "../../styles/styles";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { useQuiz } from "../../contexts/QuizContext";

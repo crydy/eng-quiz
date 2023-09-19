@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import { langPack } from "../data/langPack";
 import { useQuiz } from "../contexts/QuizContext";
-import { doubleLine } from "../styles/stylesPatterns";
 import { modules } from "../main";
 
 const StyledIndexPage = styled.div`
@@ -16,8 +15,7 @@ const StyledIndexPage = styled.div`
     margin-bottom: 15vh;
 
     & > h1 {
-        ${doubleLine}
-        padding: .3em 0 .4em;
+        padding: 0.2em 0;
         margin-bottom: 0.6em;
     }
 

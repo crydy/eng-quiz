@@ -1,7 +1,10 @@
 import { styled } from "styled-components";
 import { rem, trimEndIfMatch } from "../utils/helpers";
+import { englishFontOnly } from "../styles/styles";
 
 const Grid = styled.div`
+    ${englishFontOnly};
+
     display: grid;
     grid-template-columns: repeat(${(props) => props.$columnsAmount}, auto);
     gap: ${rem(5)};
