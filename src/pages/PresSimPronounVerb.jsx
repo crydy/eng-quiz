@@ -4,7 +4,7 @@ import FinishScreen from "../components/FinishScreen";
 import Questions from "../components/Questions";
 import StartScreen from "../components/StartScreen";
 
-function QuizPage() {
+function PresSimPronounVerb() {
     const { isQuizMode, isFinished } = useQuiz();
 
     return (
@@ -16,4 +16,4 @@ function QuizPage() {
     );
 }
 
-export default QuizPage;
+export default PresSimPronounVerb;

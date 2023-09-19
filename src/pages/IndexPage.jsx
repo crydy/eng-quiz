@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import { langPack } from "../data/langPack";
 import { useQuiz } from "../contexts/QuizContext";
 import { doubleLine } from "../styles/stylesPatterns";
+import { modules } from "../main";
 
 const StyledIndexPage = styled.div`
     flex-grow: 1;
@@ -50,31 +51,17 @@ function IndexPage() {
             <div>
                 <h2>{langPack.tastChoiceTitle[lang]}</h2>
                 <ul>
-                    <li>
-                        <StyledLink to={"quiz/"}>
-                            <span>{langPack.presentSimple.title[lang]}: </span>
-                            <span>{langPack.presentSimple.subtitle[lang]}</span>
-                        </StyledLink>
-                    </li>
-
-                    {/* <li>
-                        <StyledLink>some future task</StyledLink>
-                    </li>
-                    <li>
-                        <StyledLink>another task</StyledLink>
-                    </li>
-                    <li>
-                        <StyledLink>once more task</StyledLink>
-                    </li>
-                    <li>
-                        <StyledLink>and maybe even more</StyledLink>
-                    </li>
-                    <li>
-                        <StyledLink>next one</StyledLink>
-                    </li>
-                    <li>
-                        <StyledLink>more and more...</StyledLink>
-                    </li> */}
+                    {modules
+                        .map((module) => (
+                            <li key={module.title}>
+                                <StyledLink to={module.path}>
+                                    {lang === "en"
+                                        ? module.title
+                                        : module.titleRu}
+                                </StyledLink>
+                            </li>
+                        ))
+                        .slice(1)}
                 </ul>
             </div>
         </StyledIndexPage>

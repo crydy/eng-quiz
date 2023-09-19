@@ -51,7 +51,7 @@ function reducer(state, action) {
             };
 
         case "quiz/startMenu":
-            return { ...initialState };
+            return { ...initialState, lang: state.lang };
 
         case "menu/languageChanged":
             const newLang = state.lang === "en" ? "ru" : "en";

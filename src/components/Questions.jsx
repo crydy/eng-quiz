@@ -15,7 +15,7 @@ import buttonClickSound from "../assets/sounds/button-click.wav";
 import Progress from "./Progress";
 import Button from "./ui/Button";
 import VariantButton from "./ui/VariantButton";
-import Modal from "./Modal";
+import Modal from "./layout/Modal";
 import Rules from "./Rules";
 
 const StyledQuestions = styled.div`

@@ -1,10 +1,15 @@
 import { styled } from "styled-components";
 import { container } from "../../styles/stylesPatterns";
 
+import { useLocation, useNavigate } from "react-router-dom";
+import { useQuiz } from "../../contexts/QuizContext";
+import { useState } from "react";
+
 import ColorThemeSwitcher from "../ColorThemeSwitcher";
 import LanguageButton from "../LanguageButton";
 import Button from "../ui/Button";
-import { useLocation, useNavigate } from "react-router-dom";
+import ModalConfirm from "./ModalConfirm";
+import { langPack } from "../../data/langPack";
 
 const StyledTopBar = styled.div`
     ${container};
@@ -23,14 +28,24 @@ const StyledTopBar = styled.div`
 `;
 
 function TopBar() {
-    const currentLocation = useLocation();
-    const isIndexPage = currentLocation.pathname === "/";
+    const { isQuizMode, lang, dispatch } = useQuiz();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const navigate = useNavigate();
+    const isIndexPage = useLocation().pathname === "/";
 
     const buttonsFontSize = ".6em";
-    const navigate = useNavigate();
 
     function handleOnHomeButtonClick() {
+        if (isQuizMode) {
+            setIsModalOpen(true);
+        } else navigateToHome();
+    }
+
+    function navigateToHome() {
+        setIsModalOpen(false);
         navigate("/");
+        dispatch({ type: "quiz/startMenu" });
     }
 
     return (
@@ -43,11 +58,20 @@ function TopBar() {
                     sizePadding="0.35em 0.8em"
                     onClick={handleOnHomeButtonClick}
                 >
-                    Back to index
+                    {langPack.buttons.backToHome[lang]}
                 </Button>
             )}
 
             <LanguageButton size={buttonsFontSize} />
+
+            {isModalOpen && (
+                <ModalConfirm
+                    onConfirm={navigateToHome}
+                    onClose={() => setIsModalOpen(false)}
+                >
+                    {langPack.buttons.backToHome.modalMessage[lang]}
+                </ModalConfirm>
+            )}
         </StyledTopBar>
     );
 }

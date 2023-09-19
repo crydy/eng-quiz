@@ -7,9 +7,11 @@ import { useLocalStorageState } from "../hooks/useLocalStorageState";
 import { useForbidBodyScroll } from "../hooks/useForbidBodyScroll";
 // Data and utils
 import { LOCAL_STORAGE_KEY as KEY } from "../config/localStorageConfig";
-import { verbs } from "../data/words/verbs";
 import { langPack } from "../data/langPack";
+import { pronouns } from "../data/words/pronouns";
+import { verbs } from "../data/words/verbs";
 import { rulesData } from "../data/rulesData";
+import { constructQuestions } from "../utils/questionConstructors";
 import { capitalize, rem } from "../utils/helpers";
 // Styles
 import { doubleLine, flexRow } from "../styles/stylesPatterns";
@@ -18,10 +20,8 @@ import Button from "./ui/Button";
 import RangeBlock from "./ui/RangeBlock";
 import ToggleSet from "./ui/ToggleSet";
 import CheckboxesSet from "./ui/CheckboxesSet";
-import Modal from "./Modal";
+import Modal from "./layout/Modal";
 import Rules from "./Rules";
-import { constructQuestions } from "../utils/questionConstructors";
-import { pronouns } from "../data/words/pronouns";
 
 const StyledStartScreen = styled.div`
     /* & > * {
