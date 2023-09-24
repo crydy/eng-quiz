@@ -60,7 +60,7 @@ const MistakesList = styled.ul`
 
     display: flex;
     flex-direction: column;
-    gap: ${rem(8)};
+    gap: ${rem(12)};
 
     color: var(--color-text-main);
 
@@ -129,6 +129,7 @@ function FinishScreen() {
                     .filter((item) => !item.isCorrect)
                     .map((item) => (
                         <li key={item.correctVariant}>
+                            <span>{item.question}:</span>
                             <Wrong>{item.wrongVariant}</Wrong>
                             <Correct>{item.correctVariant}</Correct>
                         </li>

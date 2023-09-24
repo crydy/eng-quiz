@@ -3,8 +3,8 @@ import { useQuiz } from "../../../contexts/QuizContext";
 import { useLocalStorageState } from "../../../hooks/useLocalStorageState";
 // Data and utils
 import { LOCAL_STORAGE_KEY as KEY } from "../../../config/localStorageConfig";
+import { pronouns } from "../../../data/words/pronouns";
 import { langPack } from "../../../data/langPack";
-import { verbs } from "../../../data/words/verbs";
 import { constructWordsCheckingQuestionsPack } from "../../../utils/questionConstructors";
 // Components
 import Button from "../../../components/ui/Button";
@@ -14,34 +14,34 @@ import TaskScreenSettings from "../../../features/taskScreen/TaskScreenSettings"
 import TaskScreenRange from "../../../features/taskScreen/TaskScreenRange";
 import TaskScreenToggleSet from "../../../features/taskScreen/TaskScreenToggleSet";
 import TaskScreenButtons from "../../../features/taskScreen/TaskScreenButtons";
-import { pronouns } from "../../../data/words/pronouns";
 
 function TaskScreen() {
     const { lang, dispatch } = useQuiz();
+
     const [amount, setAmount] = useLocalStorageState(KEY.questionsAmount, "10");
 
-    // const [wordsVariety, setwordsVariety] = useLocalStorageState(
-    //     KEY.wordsVariety,
-    //     verbs.getVariants().at(0)
-    // );
+    const pronounVariants = Object.keys(pronouns.personal);
+    const [pronounsVariant, setPronounsVariant] = useLocalStorageState(
+        "pronounVariant",
+        "10"
+    );
 
     const [isEngToRus, setIsEngToRus] = useLocalStorageState(
         KEY.isEngToRusDirection,
         true
     );
 
-    // function handleToggleChange(e) {
-    //     const wordsVariety = e.target.value;
-    //     setwordsVariety(() => wordsVariety);
-    // }
-
     function handleTranslationDirectionChange(e) {
         setIsEngToRus(e.target.value === "English");
     }
 
+    function handleChangeVariant(e) {
+        setPronounsVariant(e.target.value);
+    }
+
     function handleStartQuiz() {
-        const wordsEng = pronouns.personal.subject;
-        const wordsRus = pronouns.personalRus.subject;
+        const wordsEng = pronouns.personal[pronounsVariant];
+        const wordsRus = pronouns.personalRus[pronounsVariant];
 
         const wordsPack = isEngToRus
             ? [wordsEng, wordsRus]
@@ -57,12 +57,6 @@ function TaskScreen() {
             payload: { questions: questions },
         });
     }
-
-    // const en = verbs.common.n200;
-    // const ru = verbs.commonRus.n200;
-
-    // const x = en.map((word, index) => `${word}: ${ru[index]}`);
-    // console.log(x);
 
     return (
         <TaskScreenWrapper>
@@ -101,17 +95,17 @@ function TaskScreen() {
                     onChange={handleTranslationDirectionChange}
                 />
 
-                {/* <TaskScreenToggleSet
+                <TaskScreenToggleSet
                     title={
                         {
-                            ru: "количество глаголов:",
-                            en: "verbs amount:",
+                            ru: "типы местоимений:",
+                            en: "types of pronouns:",
                         }[lang]
                     }
-                    options={verbs.getVariants().slice(0, 3)}
-                    selectedOption={wordsVariety}
-                    onChange={handleToggleChange}
-                /> */}
+                    options={pronounVariants}
+                    selectedOption={pronounVariants.at(0)}
+                    onChange={handleChangeVariant}
+                />
             </TaskScreenSettings>
 
             <TaskScreenButtons>

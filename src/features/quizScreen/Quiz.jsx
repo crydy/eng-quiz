@@ -36,6 +36,7 @@ function Quiz({ partsOfSpeach, modal: RulesModal }) {
         dispatch({
             type: "quiz/questionAnswered",
             payload: {
+                question,
                 isCorrect,
                 correctVariant: variants[correctIndex],
                 wrongVariant: variants[index],
