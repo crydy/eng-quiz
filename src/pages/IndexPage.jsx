@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
-import { langPack } from "../data/langPack";
+
 import { useQuiz } from "../contexts/QuizContext";
 import { modules } from "../main";
+import { langPack } from "../data/langPack";
 
 const StyledIndexPage = styled.div`
     flex-grow: 1;
@@ -20,15 +21,16 @@ const StyledIndexPage = styled.div`
     }
 
     & > div {
-        text-align: left;
-
         & > h2 {
             font-size: 1.2em;
             line-height: 1.6;
+            margin-bottom: 0.6em;
         }
 
         & > ul {
-            list-style: circle;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
         }
     }
 
@@ -37,7 +39,21 @@ const StyledIndexPage = styled.div`
     }
 `;
 
-const StyledLink = styled(Link)``;
+const StyledLink = styled(Link)`
+    display: block;
+    width: 100%;
+    line-height: 1;
+
+    border-radius: 100px;
+    padding: 0.4em 1.2em;
+
+    color: var(--color-button-text);
+    background-color: var(--color-button-bg);
+
+    &:not(:disabled):hover {
+        background-color: var(--color-button-bg-hover);
+    }
+`;
 
 function IndexPage() {
     const { lang } = useQuiz();

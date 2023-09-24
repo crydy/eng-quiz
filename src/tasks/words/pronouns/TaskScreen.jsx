@@ -69,6 +69,15 @@ function TaskScreen() {
                         }[lang]
                     }
                 </h2>
+
+                <h3>
+                    {
+                        {
+                            ru: "личные",
+                            en: "personal",
+                        }[lang]
+                    }
+                </h3>
             </TaskScreenHeadings>
 
             <TaskScreenSettings>

@@ -1,7 +1,10 @@
 import { styled } from "styled-components";
 import { rem } from "../../utils/helpers";
+import { englishFontOnly } from "../../styles/styles";
 
 const StyledToggleSet = styled.div`
+    ${englishFontOnly}
+
     display: flex;
     flex-direction: column;
     align-items: center;
