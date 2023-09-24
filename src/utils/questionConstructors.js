@@ -9,9 +9,20 @@ export function constructWordsCheckingQuestionsPack(
     const questions = [];
 
     for (let i = 0; i < amount; i++) {
-        questions.push(
-            constructWordsCheckingQuestion(wordsTargets, wordsVariants)
+        let nextQuestion;
+
+        // avoid repeating previous question
+        do {
+            nextQuestion = constructWordsCheckingQuestion(
+                wordsTargets,
+                wordsVariants
+            );
+        } while (
+            questions.at(-1) &&
+            nextQuestion.question === questions.at(-1).question
         );
+
+        questions.push(nextQuestion);
     }
 
     return questions;
