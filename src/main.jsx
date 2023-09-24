@@ -12,8 +12,9 @@ import GlobalStyles from "./styles/GlobalStyles.js";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import App from "./App.jsx";
 import IndexPage from "./pages/IndexPage.jsx";
-import PresSimPronounVerb from "./pages/PresSimPronounVerb.jsx";
-import Pronouns from "./pages/Pronouns.jsx";
+import Pronouns from "./tasks/words/pronouns/Pronouns.jsx";
+import Verbs from "./tasks/words/verbs/Verbs.jsx";
+import PronounAndVerb from "./tasks/presentSimple/pronounAndVerb/PronounAndVerb.jsx";
 
 export const modules = [
     {
@@ -28,22 +29,16 @@ export const modules = [
         element: <Pronouns />,
     },
     {
-        title: "learn first 50 verbs",
-        titleRu: "учить первые 50 глаголов",
-        path: "verbs50/",
-        element: <ErrorPage />,
+        title: "learn verbs",
+        titleRu: "учить глаголы",
+        path: "verbs/",
+        element: <Verbs />,
     },
     {
         title: "present simple: pronount + verb",
         titleRu: "настоящее простое: местоимение + глагол",
         path: "pronoun+verb/",
-        element: <PresSimPronounVerb />,
-    },
-    {
-        title: "learn more verbs",
-        titleRu: "учить больше глаголов",
-        path: "verbs50/",
-        element: <ErrorPage />,
+        element: <PronounAndVerb />,
     },
 ];
 

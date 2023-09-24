@@ -1,5 +1,48 @@
 import { getRandomItem, getRandomItems, getShuffledArrayCopy } from "./helpers";
 
+export function constructWordsCheckingQuestionsPack(
+    wordsTargets,
+    wordsVariants,
+    amount,
+    variantsAmount = 3
+) {
+    const questions = [];
+
+    for (let i = 0; i < amount; i++) {
+        questions.push(
+            constructWordsCheckingQuestion(wordsTargets, wordsVariants)
+        );
+    }
+
+    return questions;
+
+    function constructWordsCheckingQuestion(wordsTargets, wordsVariants) {
+        const wordCouples = wordsTargets.map((word, index) => [
+            word,
+            wordsVariants[index],
+        ]);
+
+        const targetCouple = getRandomItem(wordCouples);
+
+        let variants = getRandomItems(wordsVariants, variantsAmount);
+
+        if (!variants.includes(targetCouple.at(1))) {
+            variants.pop(); // keep same quantity
+            variants.push(targetCouple.at(1));
+        }
+
+        variants = getShuffledArrayCopy(variants);
+
+        return {
+            question: targetCouple.at(0),
+            variants,
+            correctIndex: variants.findIndex(
+                (word) => word === targetCouple.at(1)
+            ),
+        };
+    }
+}
+
 export function constructPresentSimplePositive(pronoun, verb) {
     const transformerPronouns = ["he", "she", "it"];
 

@@ -4,12 +4,12 @@ import { container } from "../../styles/styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useQuiz } from "../../contexts/QuizContext";
 import { useState } from "react";
+import { langPack } from "../../data/langPack";
 
 import ColorThemeSwitcher from "../ColorThemeSwitcher";
 import LanguageButton from "../LanguageButton";
 import Button from "../ui/Button";
 import ModalConfirm from "./ModalConfirm";
-import { langPack } from "../../data/langPack";
 
 const StyledTopBar = styled.div`
     ${container};
@@ -57,6 +57,7 @@ function TopBar() {
                     sizeFont={buttonsFontSize}
                     sizePadding="0.35em 0.8em"
                     onClick={handleOnHomeButtonClick}
+                    disabled={isModalOpen}
                 >
                     {langPack.buttons.backToHome[lang]}
                 </Button>

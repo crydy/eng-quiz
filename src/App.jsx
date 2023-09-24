@@ -29,7 +29,9 @@ function App() {
         <StyledApp>
             <TopBar />
             <Body>
-                <Outlet />
+                <div>
+                    <Outlet />
+                </div>
             </Body>
         </StyledApp>
     );

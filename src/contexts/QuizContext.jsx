@@ -7,7 +7,6 @@ import { updateLangAttribute } from "../utils/helpers";
 const QuizContext = createContext();
 
 const initialState = {
-    isPartsOfSpeechMarked: true,
     lang: localStorage.getItem(KEY.userLanguage) || config.defaultLanguage,
 
     isQuizMode: false,

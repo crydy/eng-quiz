@@ -3,10 +3,14 @@ const pronouns = {
         subject: ["I", "you", "he", "she", "it", "we", "they"],
         object: ["me", "you", "him", "her", "it", "us", "them"],
         possessive: ["mine", "yours", "his", "hers", "its", "ours", "theirs"],
-
-        // subjectRus: ["я", "ты", "он", "она", "оно (это)", "мы", "они"],
     },
-    demonstrative: ["this", "these", "that", "those"],
+
+    personalRus: {
+        subject: ["я", "ты", "он", "она", "оно (это)", "мы", "они"],
+        object: ["мне", "тебе", "ему", "ей", "этому", "нам", "им"],
+        possessive: ["мой", "твой", "его", "её", "этого", "наше", "их"],
+    },
+
     interrogative: ["who", "whom", "which", "what"],
     relative: [
         "who",

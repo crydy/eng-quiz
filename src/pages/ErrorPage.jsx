@@ -12,6 +12,10 @@ const StyledErrorPage = styled.div`
     gap: 1.5em;
 `;
 
+const StyledErrorText = styled.p`
+    max-width: 70vw;
+`;
+
 function ErrorPage() {
     const { lang } = useQuiz();
     const navigate = useNavigate();
@@ -26,10 +30,12 @@ function ErrorPage() {
     return (
         <StyledErrorPage id="error-page">
             <h1>{langPack.errors.errorPage.title[lang]}..</h1>
-            <p>{langPack.errors.errorPage.mainMessage[lang]}:</p>
-            <p>
+            <StyledErrorText>
+                {langPack.errors.errorPage.mainMessage[lang]}:
+            </StyledErrorText>
+            <StyledErrorText>
                 <i>{error.statusText || error.message}</i>
-            </p>
+            </StyledErrorText>
 
             <Button onClick={handleBackToHome}>
                 {langPack.buttons.backToHome[lang]}

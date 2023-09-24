@@ -26,12 +26,29 @@ const StyledButton = styled.button`
     }
 `;
 
-function VariantButton({ version, children, ...props }) {
+function QuizVariantButton({
+    isAnswered,
+    isCorrectVersion,
+    isWrongVersion,
+    children,
+    ...props
+}) {
     return (
-        <StyledButton {...props} $version={version}>
+        <StyledButton
+            {...props}
+            type="button"
+            disabled={isAnswered}
+            $version={
+                !isAnswered
+                    ? "neutral"
+                    : isCorrectVersion
+                    ? "correct"
+                    : isWrongVersion && "wrong"
+            }
+        >
             {children}
         </StyledButton>
     );
 }
 
-export default VariantButton;
+export default QuizVariantButton;
