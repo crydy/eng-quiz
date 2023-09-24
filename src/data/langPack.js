@@ -4,6 +4,11 @@ const langPack = {
         ru: "Английский язык",
     },
 
+    tastChoiceTitle: {
+        en: "Choose your practice:",
+        ru: "Выберите занятие:",
+    },
+
     presentSimple: {
         title: {
             en: "present simple",
@@ -80,9 +85,30 @@ const langPack = {
             ru: "Больше практики!",
         },
 
+        backToHome: {
+            en: "Back to home",
+            ru: "На главную",
+
+            modalMessage: {
+                en: "Interrupt the quiz and return to main page?",
+                ru: "Прервать упражнение и вернуться к списку заданий?",
+            },
+        },
+
         modal: {
             en: "Close",
             ru: "Закрыть",
+        },
+
+        modalConfirm: {
+            yes: {
+                en: "Yes",
+                ru: "Да",
+            },
+            no: {
+                en: "No",
+                ru: "Нет",
+            },
         },
 
         modalSpecial: {
@@ -118,9 +144,9 @@ const langPack = {
             ],
             ru: [
                 "Вы правы!",
-                "Абсолютно верно!",
-                "Отличная работа!",
-                "Правильный ответ!",
+                "Абсолютно!",
+                "В яблочко!",
+                "Правильно!",
                 "Молодец!",
                 "Великолепно!",
                 "Прекрасно!",
@@ -186,6 +212,19 @@ const langPack = {
                     "Не сдавайтесь!",
                     "Впереди будет лучше!",
                 ],
+            },
+        },
+    },
+
+    errors: {
+        errorPage: {
+            title: {
+                en: "Oops",
+                ru: "Ой",
+            },
+            mainMessage: {
+                en: "Sorry, an unexpected error has occurred",
+                ru: "К сожалению, произошла непредвиденная ошибка",
             },
         },
     },

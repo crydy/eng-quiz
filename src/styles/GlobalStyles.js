@@ -10,10 +10,15 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Share Tech Mono', monospace;          
     ********************************************************/
 
-    // en => 'Kanit' (russian not supported)
-    // ru => 'Yanone Kaffeesatz'
+    // en => 'Kanit' (russian is not supported)
     --font-main: 'Kanit', 'Yanone Kaffeesatz', sans-serif;
+    // ru => 'Yanone Kaffeesatz'
+    &[lang="ru"] { --font-main: 'Yanone Kaffeesatz', sans-serif; }
+    // monospace for numbers only
     --font-numbers: "Share Tech Mono", monospace;
+    // for english blocks when app language isn't english
+    --font-main-english-only: 'Kanit', sans-serif;
+
 
     /************************ Sizings ***********************/
     
@@ -112,6 +117,7 @@ body {
 
     font-family: var(--font-main); // 300 and 500
     font-weight: 300;
+    line-height: 1.4;
 
     color: var(--color-text-main);
     background-color: var(--color-bg);

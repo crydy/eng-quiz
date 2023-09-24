@@ -2,9 +2,9 @@ import { createPortal } from "react-dom";
 import { styled } from "styled-components";
 import { CgCloseR } from "react-icons/cg";
 
-import { rem } from "../utils/helpers";
-import { useQuiz } from "../contexts/QuizContext";
-import { langPack } from "../data/langPack";
+import { rem } from "../../../utils/helpers";
+import { useQuiz } from "../../../contexts/QuizContext";
+import { langPack } from "../../../data/langPack";
 
 const StyledModal = styled.div`
     z-index: var(--z-index-modal);
@@ -20,13 +20,14 @@ const StyledModal = styled.div`
     align-items: center;
 
     width: 90vw;
-    min-width: max-content;
+    min-width: min-content;
     max-width: var(--size-max-width);
     max-height: 90vh;
 
     padding: ${(props) =>
         rem(props.$padding[0]) + " " + rem(props.$padding[1]) + ";"};
-    padding-bottom: 0;
+
+    padding-bottom: ${(props) => (props.$noCloseButton ? "" : "0")};
 
     background-color: var(--color-bg);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
@@ -73,7 +74,13 @@ const Overlay = styled.div`
     backdrop-filter: blur(2px) grayscale(70%);
 `;
 
-function Modal({ onClose, closeButtonTitle, padding = [20, 8], children }) {
+function Modal({
+    onClose,
+    closeButtonTitle,
+    noCloseButton,
+    padding = [20, 8],
+    children,
+}) {
     const { lang } = useQuiz();
 
     closeButtonTitle = closeButtonTitle
@@ -84,20 +91,25 @@ function Modal({ onClose, closeButtonTitle, padding = [20, 8], children }) {
         <>
             {createPortal(
                 <>
-                    <StyledModal $padding={padding}>
+                    <StyledModal
+                        $padding={padding}
+                        $noCloseButton={noCloseButton}
+                    >
                         <CloseButton onClick={onClose} $padding={padding}>
                             <CgCloseR />
                         </CloseButton>
 
                         {children}
 
-                        <CloseButton
-                            onClick={onClose}
-                            $padding={padding}
-                            $inStream
-                        >
-                            - {closeButtonTitle} -
-                        </CloseButton>
+                        {!noCloseButton && (
+                            <CloseButton
+                                onClick={onClose}
+                                $padding={padding}
+                                $inStream
+                            >
+                                - {closeButtonTitle} -
+                            </CloseButton>
+                        )}
                     </StyledModal>
                     <Overlay onClick={onClose} />
                 </>,

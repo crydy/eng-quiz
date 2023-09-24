@@ -1,10 +1,10 @@
 import { HiMoon } from "react-icons/hi";
 import { FaSun } from "react-icons/fa";
 
-import { useColorTheme } from "../contexts/ColorThemeContext";
-import { config } from "../config/config";
+import { useColorTheme } from "../../../contexts/ColorThemeContext";
+import { config } from "../../../config/config";
 
-import ToggleSet from "./ui/ToggleSet";
+import ToggleSet from "../../ui/ToggleSet";
 
 function ColorThemeSwitcher({ size }) {
     const { colorTheme, setColorTheme } = useColorTheme();

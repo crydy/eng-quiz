@@ -1,6 +1,13 @@
 import { css } from "styled-components";
 import { rem } from "../utils/helpers";
 
+// Fonts
+export const englishFontOnly = css`
+    // for english blocks when app language isn't english
+    font-family: var(--font-main-english-only);
+`;
+
+// Sizes
 export const container = css`
     max-width: var(--size-max-width);
     margin-left: auto;
@@ -30,6 +37,7 @@ export const flexRow = css`
     text-align: center;
 `;
 
+// Visual stilization
 export const doubleLine = css`
     position: relative;
 

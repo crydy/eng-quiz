@@ -2,34 +2,16 @@ import { createContext, useContext, useReducer } from "react";
 
 import { LOCAL_STORAGE_KEY as KEY } from "../config/localStorageConfig";
 import { config } from "../config/config";
-
-import { pronouns } from "../data/words/pronouns";
-import { verbs } from "../data/words/verbs";
-import { constructQuestions } from "../utils/questionConstructors";
 import { updateLangAttribute } from "../utils/helpers";
 
 const QuizContext = createContext();
 
-// const testQuestions = [
-//     {
-//         question: "Who can run?",
-//         variants: ["turtle", "cat", "worm", "flower"],
-//         correctIndex: 1,
-//     },
-//     {
-//         question: "Are you animal?",
-//         variants: ["Absolutely", "I am the god"],
-//         correctIndex: 0,
-//     },
-// ];
-
 const initialState = {
+    lang: localStorage.getItem(KEY.userLanguage) || config.defaultLanguage,
+
     isQuizMode: false,
     isFinished: false,
     isAnswered: false,
-    isPartsOfSpeechMarked: true,
-
-    lang: localStorage.getItem(KEY.userLanguage) || config.defaultLanguage,
 
     current: 0,
     questions: [],
@@ -43,12 +25,7 @@ function reducer(state, action) {
                 ...initialState,
                 lang: state.lang,
                 isQuizMode: true,
-                questions: constructQuestions(
-                    pronouns.personal.subject,
-                    verbs.common[`n${action.payload.verbsVariety}`],
-                    action.payload.amount,
-                    action.payload.options
-                ),
+                questions: action.payload.questions,
             };
 
         case "quiz/questionAnswered":
@@ -73,7 +50,7 @@ function reducer(state, action) {
             };
 
         case "quiz/startMenu":
-            return { ...initialState };
+            return { ...initialState, lang: state.lang };
 
         case "menu/languageChanged":
             const newLang = state.lang === "en" ? "ru" : "en";

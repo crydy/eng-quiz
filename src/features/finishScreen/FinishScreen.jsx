@@ -1,11 +1,11 @@
 import { styled } from "styled-components";
 
-import { container, scrollNoBars } from "../styles/stylesPatterns";
-import { useQuiz } from "../contexts/QuizContext";
-import { getRandomItem, rem } from "../utils/helpers";
-import { langPack } from "../data/langPack";
+import { container, englishFontOnly, scrollNoBars } from "../../styles/styles";
+import { useQuiz } from "../../contexts/QuizContext";
+import { getRandomItem, rem } from "../../utils/helpers";
+import { langPack } from "../../data/langPack";
 
-import Button from "./ui/Button";
+import Button from "../../components/ui/Button";
 
 const StyledFinishScreen = styled.div`
     ${container};
@@ -56,10 +56,11 @@ const NumericSpan = styled.span`
 
 const MistakesList = styled.ul`
     ${scrollNoBars};
+    ${englishFontOnly};
 
     display: flex;
     flex-direction: column;
-    gap: ${rem(8)};
+    gap: ${rem(12)};
 
     color: var(--color-text-main);
 
@@ -128,6 +129,7 @@ function FinishScreen() {
                     .filter((item) => !item.isCorrect)
                     .map((item) => (
                         <li key={item.correctVariant}>
+                            <span>{item.question}:</span>
                             <Wrong>{item.wrongVariant}</Wrong>
                             <Correct>{item.correctVariant}</Correct>
                         </li>
