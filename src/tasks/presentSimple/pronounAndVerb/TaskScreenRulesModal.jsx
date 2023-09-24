@@ -8,8 +8,8 @@ import { langPack } from "../../../data/langPack";
 import { rulesData } from "../../../data/rulesData";
 import { capitalize, rem } from "../../../utils/helpers";
 
-import Modal from "../../../components/layout/Modal";
-import Rules from "../../../components/Rules";
+import Modal from "../../../components/layout/modal/Modal";
+import Table from "../../../components/ui/Table";
 
 const RulesModalHeader = styled.h3`
     font-size: ${rem(31)};
@@ -38,7 +38,7 @@ function RulesModal() {
                     </RulesModalHeader>
 
                     {selectedOptions.map((type) => (
-                        <Rules
+                        <Table
                             subtitle={
                                 langPack.presentSimple.taskSettings.types
                                     .labels[type][lang]
@@ -52,7 +52,7 @@ function RulesModal() {
                     ))}
 
                     {selectedOptions.includes("positives") && (
-                        <Rules
+                        <Table
                             noTitle
                             subtitle={
                                 langPack.presentSimple

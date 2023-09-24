@@ -2,7 +2,7 @@ import { useQuiz } from "../../../contexts/QuizContext";
 
 import TaskScreen from "./TaskScreen";
 import Quiz from "../../../features/quizScreen/Quiz";
-import FinishScreen from "../../../components/FinishScreen";
+import FinishScreen from "../../../features/finishScreen/FinishScreen";
 
 function Pronouns() {
     const { isQuizMode, isFinished } = useQuiz();

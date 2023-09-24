@@ -1,15 +1,15 @@
-import { styled } from "styled-components";
-import { container } from "../../styles/styles";
-
-import { useLocation, useNavigate } from "react-router-dom";
-import { useQuiz } from "../../contexts/QuizContext";
 import { useState } from "react";
-import { langPack } from "../../data/langPack";
+import { useLocation, useNavigate } from "react-router-dom";
+import { styled } from "styled-components";
 
-import ColorThemeSwitcher from "../ColorThemeSwitcher";
-import LanguageButton from "../LanguageButton";
-import Button from "../ui/Button";
-import ModalConfirm from "./ModalConfirm";
+import { useQuiz } from "../../../contexts/QuizContext";
+import { langPack } from "../../../data/langPack";
+import { container } from "../../../styles/styles";
+
+import ColorThemeSwitcher from "./ColorThemeSwitcher";
+import LanguageButton from "./LanguageButton";
+import Button from "../../ui/Button";
+import ModalConfirm from "../modal/ModalConfirm";
 
 const StyledTopBar = styled.div`
     ${container};

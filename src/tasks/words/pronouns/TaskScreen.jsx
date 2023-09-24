@@ -3,27 +3,31 @@ import { useQuiz } from "../../../contexts/QuizContext";
 import { useLocalStorageState } from "../../../hooks/useLocalStorageState";
 // Data and utils
 import { LOCAL_STORAGE_KEY as KEY } from "../../../config/localStorageConfig";
+import { config } from "../../../config/config";
 import { pronouns } from "../../../data/words/pronouns";
 import { langPack } from "../../../data/langPack";
-import { constructWordsCheckingQuestionsPack } from "../../../utils/questionConstructors";
+import { constructWordsCheckingQuestionsPack as constructQuestions } from "../../../utils/questionConstructors";
 // Components
-import Button from "../../../components/ui/Button";
 import TaskScreenWrapper from "../../../features/taskScreen/TaskScreenWrapper";
 import TaskScreenHeadings from "../../../features/taskScreen/TaskScreenHeadings";
 import TaskScreenSettings from "../../../features/taskScreen/TaskScreenSettings";
 import TaskScreenRange from "../../../features/taskScreen/TaskScreenRange";
 import TaskScreenToggleSet from "../../../features/taskScreen/TaskScreenToggleSet";
 import TaskScreenButtons from "../../../features/taskScreen/TaskScreenButtons";
+import Button from "../../../components/ui/Button";
 
 function TaskScreen() {
     const { lang, dispatch } = useQuiz();
 
-    const [amount, setAmount] = useLocalStorageState(KEY.questionsAmount, "10");
+    const [amount, setAmount] = useLocalStorageState(
+        KEY.questionsAmount,
+        config.quistionsAmount.default
+    );
 
     const pronounVariants = Object.keys(pronouns.personal);
     const [pronounsVariant, setPronounsVariant] = useLocalStorageState(
-        "pronounVariant",
-        "10"
+        KEY.pronounsVariant,
+        pronounVariants.at(0)
     );
 
     const [isEngToRus, setIsEngToRus] = useLocalStorageState(
@@ -47,10 +51,7 @@ function TaskScreen() {
             ? [wordsEng, wordsRus]
             : [wordsRus, wordsEng];
 
-        const questions = constructWordsCheckingQuestionsPack(
-            ...wordsPack,
-            amount
-        );
+        const questions = constructQuestions(...wordsPack, amount);
 
         dispatch({
             type: "quiz/started",
@@ -84,8 +85,8 @@ function TaskScreen() {
                 <TaskScreenRange
                     title={
                         {
-                            ru: "количество вопросов",
-                            en: "questions amount",
+                            ru: "количество вопросов:",
+                            en: "questions amount:",
                         }[lang]
                     }
                     value={amount}

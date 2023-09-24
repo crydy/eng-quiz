@@ -1,11 +1,11 @@
 import { styled } from "styled-components";
 
-import { container, englishFontOnly, scrollNoBars } from "../styles/styles";
-import { useQuiz } from "../contexts/QuizContext";
-import { getRandomItem, rem } from "../utils/helpers";
-import { langPack } from "../data/langPack";
+import { container, englishFontOnly, scrollNoBars } from "../../styles/styles";
+import { useQuiz } from "../../contexts/QuizContext";
+import { getRandomItem, rem } from "../../utils/helpers";
+import { langPack } from "../../data/langPack";
 
-import Button from "./ui/Button";
+import Button from "../../components/ui/Button";
 
 const StyledFinishScreen = styled.div`
     ${container};

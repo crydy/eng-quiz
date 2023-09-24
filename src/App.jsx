@@ -1,7 +1,7 @@
 // Libs
 import { Outlet } from "react-router-dom";
 // Components
-import TopBar from "./components/layout/TopBar";
+import TopBar from "./components/layout/topBar/TopBar";
 import { styled } from "styled-components";
 
 const StyledApp = styled.div`

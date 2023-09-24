@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
 import { styled } from "styled-components";
 
-import { useQuiz } from "../contexts/QuizContext";
-import { rem } from "../utils/helpers";
-import { container } from "../styles/styles";
+import { useQuiz } from "../../contexts/QuizContext";
+import { rem } from "../../utils/helpers";
+import { container } from "../../styles/styles";
 
 const StyledProgress = styled.div`
     ${container};
@@ -34,7 +34,7 @@ const ProgressCore = styled.div`
     transition: width 0.5s ease-in-out;
 `;
 
-function Progress() {
+function QuizProgress() {
     const { questions, current, isAnswered } = useQuiz();
 
     const prevPercentageProgress = (current / questions.length) * 100;
@@ -72,4 +72,4 @@ function Progress() {
     );
 }
 
-export default Progress;
+export default QuizProgress;

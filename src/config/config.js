@@ -1,7 +1,13 @@
 const config = {
     base: "/eng-verbs-quiz/",
-    localStoragePrefix: "10",
+    localStoragePrefix: "11",
     defaultLanguage: "ru",
+
+    quistionsAmount: {
+        default: 15,
+        min: 10,
+        max: 30,
+    },
 
     colorThemes: {
         classNamesPrefix: "color-theme-",

@@ -2,8 +2,8 @@ import { useQuiz } from "../../../contexts/QuizContext";
 import { capitalize } from "../../../utils/helpers";
 import { langPack } from "../../../data/langPack";
 import { rulesData } from "../../../data/rulesData";
-import Modal from "../../../components/layout/Modal";
-import Rules from "../../../components/Rules";
+import Modal from "../../../components/layout/modal/Modal";
+import Table from "../../../components/ui/Table";
 
 function QuizModal({ isModalOpen, onClose }) {
     const { current, questions, lang } = useQuiz();
@@ -19,7 +19,7 @@ function QuizModal({ isModalOpen, onClose }) {
                         langPack.buttons.modalSpecial.rulesClose[lang]
                     }
                 >
-                    <Rules
+                    <Table
                         title={capitalize(langPack.presentSimple.title[lang])}
                         subtitle={
                             langPack.presentSimple.taskSettings.types.labels[

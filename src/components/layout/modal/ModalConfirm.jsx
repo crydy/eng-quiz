@@ -1,11 +1,11 @@
 import { styled } from "styled-components";
 
-import { rem } from "../../utils/helpers";
-import { useQuiz } from "../../contexts/QuizContext";
-import { langPack } from "../../data/langPack";
+import { rem } from "../../../utils/helpers";
+import { useQuiz } from "../../../contexts/QuizContext";
+import { langPack } from "../../../data/langPack";
 
 import Modal from "./Modal";
-import Button from "../ui/Button";
+import Button from "../../ui/Button";
 
 const Content = styled.div`
     text-align: center;

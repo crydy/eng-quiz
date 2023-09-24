@@ -1,6 +1,6 @@
 import { useQuiz } from "../contexts/QuizContext";
 
-import FinishScreen from "../components/FinishScreen";
+import FinishScreen from "../features/finishScreen/FinishScreen";
 import Questions from "../components/Questions";
 import StartScreen from "../components/StartScreen";
 

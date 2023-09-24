@@ -2,9 +2,9 @@ import { createPortal } from "react-dom";
 import { styled } from "styled-components";
 import { CgCloseR } from "react-icons/cg";
 
-import { rem } from "../../utils/helpers";
-import { useQuiz } from "../../contexts/QuizContext";
-import { langPack } from "../../data/langPack";
+import { rem } from "../../../utils/helpers";
+import { useQuiz } from "../../../contexts/QuizContext";
+import { langPack } from "../../../data/langPack";
 
 const StyledModal = styled.div`
     z-index: var(--z-index-modal);

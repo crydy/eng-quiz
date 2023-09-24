@@ -6,13 +6,14 @@ import { useLocalStorageState } from "../../../hooks/useLocalStorageState";
 import { useModalState } from "../../../hooks/useModalState";
 // Data and utils
 import { LOCAL_STORAGE_KEY as KEY } from "../../../config/localStorageConfig";
+import { config } from "../../../config/config";
 import { verbs } from "../../../data/words/verbs";
 import { langPack } from "../../../data/langPack";
 import { pronouns } from "../../../data/words/pronouns";
 import { constructQuestions } from "../../../utils/questionConstructors";
 // Components
 import TaskScreen from "./TaskScreen";
-import FinishScreen from "../../../components/FinishScreen";
+import FinishScreen from "../../../features/finishScreen/FinishScreen";
 import Quiz from "../../../features/quizScreen/Quiz";
 import QuizModal from "./QuizModal";
 
@@ -21,7 +22,10 @@ export const PronounAndVerbContext = createContext();
 function PronounAndVerb() {
     const { isQuizMode, isFinished, lang, dispatch } = useQuiz();
 
-    const [amount, setAmount] = useLocalStorageState(KEY.questionsAmount, "10");
+    const [amount, setAmount] = useLocalStorageState(
+        KEY.questionsAmount,
+        config.quistionsAmount.default
+    );
     const [options, setOptions] = useLocalStorageState(KEY.questionsTypes, {
         positives: true,
         negatives: false,

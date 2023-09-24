@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { englishFontOnly } from "../../styles/styles";
 import { rem } from "../../utils/helpers";
 
-import Progress from "../../components/Progress";
+import QuizProgress from "./QuizProgress";
 
 const StyledQuizWrapper = styled.div`
     ${englishFontOnly}
@@ -27,7 +27,7 @@ const StyledQuizWrapper = styled.div`
 function QuizWrapper({ children }) {
     return (
         <StyledQuizWrapper>
-            <Progress />
+            <QuizProgress />
             {children}
         </StyledQuizWrapper>
     );

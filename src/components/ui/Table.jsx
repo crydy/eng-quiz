@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import { rem, trimEndIfMatch } from "../utils/helpers";
-import { englishFontOnly } from "../styles/styles";
+import { rem, trimEndIfMatch } from "../../utils/helpers";
+import { englishFontOnly } from "../../styles/styles";
 
 const Grid = styled.div`
     ${englishFontOnly};
@@ -40,7 +40,7 @@ const MarkedSpan = styled.span`
     text-decoration-color: var(--color-text-rules-underline-mark);
 `;
 
-function Rules({
+function Table({
     title = "Present simple: questions",
     subtitle = "Subtitle example",
     content = [
@@ -89,4 +89,4 @@ function Rules({
     );
 }
 
-export default Rules;
+export default Table;
