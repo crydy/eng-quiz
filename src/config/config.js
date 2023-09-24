@@ -1,6 +1,6 @@
 const config = {
-    base: "/eng-verbs-quiz/",
-    localStoragePrefix: "11",
+    base: "/eng-quiz/",
+    localStoragePrefix: "12",
     defaultLanguage: "ru",
 
     quistionsAmount: {
