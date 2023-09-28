@@ -9,12 +9,14 @@ import { ColorThemeProvider } from "./contexts/ColorThemeContext.jsx";
 // Styles
 import GlobalStyles from "./styles/GlobalStyles.js";
 // Components
-import ErrorPage from "./pages/ErrorPage.jsx";
 import App from "./App.jsx";
 import IndexPage from "./pages/IndexPage.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
+
 import Pronouns from "./tasks/words/pronouns/Pronouns.jsx";
 import Verbs from "./tasks/words/verbs/Verbs.jsx";
 import PronounAndVerb from "./tasks/presentSimple/pronounAndVerb/PronounAndVerb.jsx";
+import Test from "./components/test/Test.jsx";
 
 export const modules = [
     {
@@ -39,6 +41,12 @@ export const modules = [
         titleRu: "настоящее простое: местоимение + глагол",
         path: "pronoun+verb/",
         element: <PronounAndVerb />,
+    },
+    {
+        title: "TEST",
+        titleRu: "TEST",
+        path: "test/",
+        element: <Test />,
     },
 ];
 

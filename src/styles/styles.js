@@ -1,6 +1,19 @@
 import { css } from "styled-components";
 import { rem } from "../utils/helpers";
 
+// Resets
+
+export const buttonReset = css`
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    outline: none; /* Remove the outline on focus if desired */
+`;
+
 // Fonts
 export const englishFontOnly = css`
     // for english blocks when app language isn't english
