@@ -1,4 +1,5 @@
 // Context and hooks
+import { useLang } from "../../../contexts/LangContext";
 import { useQuiz } from "../../../contexts/QuizContext";
 import { useLocalStorageState } from "../../../hooks/useLocalStorageState";
 // Data and utils
@@ -17,7 +18,8 @@ import TaskScreenButtons from "../../../features/taskScreen/TaskScreenButtons";
 import Button from "../../../components/ui/Button";
 
 function TaskScreen() {
-    const { lang, dispatch } = useQuiz();
+    const { lang } = useLang();
+    const { dispatch } = useQuiz();
     const [amount, setAmount] = useLocalStorageState(
         KEY.questionsAmount,
         config.quistionsAmount.default

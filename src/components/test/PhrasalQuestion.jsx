@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import { styled } from "styled-components";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { css, styled } from "styled-components";
 import { DndContext } from "@dnd-kit/core";
 
 import { getShuffledArrayCopy } from "../../utils/helpers";
@@ -7,15 +7,9 @@ import { getShuffledArrayCopy } from "../../utils/helpers";
 import Droppable from "./dnd/Droppable";
 import Draggable from "./dnd/Draggable";
 
-const Container = styled.div`
+const ulStyle = css`
     display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-
-    & ul {
-        display: flex;
-        gap: 0.4em;
-    }
+    gap: 0.4em;
 
     & li,
     & span {
@@ -24,13 +18,15 @@ const Container = styled.div`
     }
 `;
 
-const ReceiverList = styled.ul`
+const StyledReceiverList = styled.ul`
+    ${ulStyle};
+
     & li {
-        background-color: red;
+        background-color: var(--color-quiz-phrase-constructor-cell-bg-empty);
     }
 
     & span {
-        background-color: pink;
+        background-color: var(--color-quiz-phrase-constructor-cell-bg);
         padding: 0.3em 0.8em;
 
         &.placeholder {
@@ -40,17 +36,22 @@ const ReceiverList = styled.ul`
     }
 `;
 
-const TransmitterList = styled.ul`
+const StyledTransmitterList = styled.ul`
+    ${ulStyle};
+
     & span {
-        color: red;
-        background-color: pink;
+        color: var(--color-text-main);
+        background-color: var(--color-quiz-phrase-constructor-cell-bg);
         padding: 0.3em 0.8em;
     }
 `;
 
-function Test({
+const PhrasalQuestionContext = createContext();
+
+function PhrasalQuestion({
     phraseWords = ["have", "you", "seen", "her", "?"],
     wrongWords = ["did", "were", "see", "was"],
+    children,
 }) {
     // stringify for correct dependency
     const plainPhraseArray = JSON.stringify(phraseWords);
@@ -135,59 +136,77 @@ function Test({
             onDragOver={handleDragOver}
             onDragEnd={handleDragEnd}
         >
-            <Container>
-                <ReceiverList>
-                    {phraseWords.map((_, index) => (
-                        <>
-                            <li key={`li ${index}`}>
-                                <Droppable id={`field ${index}`}>
-                                    {droppedElems.find(
-                                        (obj) => obj.cell === `field ${index}`
-                                    ) ? (
-                                        <Draggable
-                                            id={
-                                                droppedElems.find(
-                                                    (obj) =>
-                                                        obj.cell ===
-                                                        `field ${index}`
-                                                ).elem
-                                            }
-                                        >
-                                            <span>
-                                                {
-                                                    droppedElems.find(
-                                                        (obj) =>
-                                                            obj.cell ===
-                                                            `field ${index}`
-                                                    ).elem
-                                                }
-                                            </span>
-                                        </Draggable>
-                                    ) : (
-                                        <span className="placeholder">xxx</span>
-                                    )}
-                                </Droppable>
-                            </li>
-                        </>
-                    ))}
-                </ReceiverList>
-
-                <TransmitterList>
-                    {words.map((word) => (
-                        <>
-                            {!droppedElems.find((obj) => obj.elem === word) && (
-                                <li key={word}>
-                                    <Draggable id={word}>
-                                        <span>{word}</span>
-                                    </Draggable>
-                                </li>
-                            )}
-                        </>
-                    ))}
-                </TransmitterList>
-            </Container>
+            <PhrasalQuestionContext.Provider
+                value={{ phraseWords, words, droppedElems }}
+            >
+                {children}
+            </PhrasalQuestionContext.Provider>
         </DndContext>
     );
 }
 
-export default Test;
+function ReceiverList() {
+    const { phraseWords, droppedElems } = useContext(PhrasalQuestionContext);
+
+    return (
+        <StyledReceiverList>
+            {phraseWords.map((_, index) => (
+                <>
+                    <li key={`li ${index}`}>
+                        <Droppable id={`field ${index}`}>
+                            {droppedElems.find(
+                                (obj) => obj.cell === `field ${index}`
+                            ) ? (
+                                <Draggable
+                                    id={
+                                        droppedElems.find(
+                                            (obj) =>
+                                                obj.cell === `field ${index}`
+                                        ).elem
+                                    }
+                                >
+                                    <span>
+                                        {
+                                            droppedElems.find(
+                                                (obj) =>
+                                                    obj.cell ===
+                                                    `field ${index}`
+                                            ).elem
+                                        }
+                                    </span>
+                                </Draggable>
+                            ) : (
+                                <span className="placeholder">xxx</span>
+                            )}
+                        </Droppable>
+                    </li>
+                </>
+            ))}
+        </StyledReceiverList>
+    );
+}
+
+function TransmitterList() {
+    const { words, droppedElems } = useContext(PhrasalQuestionContext);
+
+    return (
+        <StyledTransmitterList>
+            {words.map((word) => (
+                <>
+                    {!droppedElems.find((obj) => obj.elem === word) && (
+                        <li key={word}>
+                            <Draggable id={word}>
+                                <span>{word}</span>
+                            </Draggable>
+                        </li>
+                    )}
+                </>
+            ))}
+        </StyledTransmitterList>
+    );
+}
+
+PhrasalQuestion.TransmitterList = TransmitterList;
+PhrasalQuestion.ReceiverList = ReceiverList;
+
+export default PhrasalQuestion;

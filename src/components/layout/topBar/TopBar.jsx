@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
+import { useLang } from "../../../contexts/LangContext";
 import { useQuiz } from "../../../contexts/QuizContext";
 import { langPack } from "../../../data/langPack";
 import { container } from "../../../styles/styles";
@@ -28,7 +29,8 @@ const StyledTopBar = styled.div`
 `;
 
 function TopBar() {
-    const { isQuizMode, lang, dispatch } = useQuiz();
+    const { lang } = useLang();
+    const { isQuizMode, dispatch } = useQuiz();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const navigate = useNavigate();

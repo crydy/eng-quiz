@@ -1,7 +1,7 @@
 // Libs
 import { useContext } from "react";
 // Context and hooks
-import { useQuiz } from "../../../contexts/QuizContext";
+import { useLang } from "../../../contexts/LangContext";
 import { PronounAndVerbContext } from "./PronounAndVerb";
 // Data and utils
 import { langPack } from "../../../data/langPack";
@@ -18,7 +18,7 @@ import Button from "../../../components/ui/Button";
 import TaskScreenRulesModal from "./TaskScreenRulesModal";
 
 function TaskScreen() {
-    const { lang } = useQuiz();
+    const { lang } = useLang();
 
     const {
         amount,

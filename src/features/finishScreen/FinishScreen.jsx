@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 
 import { container, englishFontOnly, scrollNoBars } from "../../styles/styles";
+import { useLang } from "../../contexts/LangContext";
 import { useQuiz } from "../../contexts/QuizContext";
 import { getRandomItem, rem } from "../../utils/helpers";
 import { langPack } from "../../data/langPack";
@@ -86,7 +87,8 @@ const Correct = styled.span`
 `;
 
 function FinishScreen() {
-    const { lang, answers, dispatch } = useQuiz();
+    const { lang } = useLang();
+    const { answers, dispatch } = useQuiz();
     const correctAmount = answers.filter((item) => item.isCorrect).length;
     const total = answers.length;
 

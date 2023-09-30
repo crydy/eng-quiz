@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { useLang } from "../../contexts/LangContext";
 import { useQuiz } from "../../contexts/QuizContext";
 import { useSound } from "../../hooks/useSound";
 import { useModalState } from "../../hooks/useModalState";
@@ -13,7 +14,8 @@ import QuizAnswersButtons from "./QuizAnswersButtons";
 import QuizQuestionWithPartsOfSpeach from "./QuizQuestionWithPartsOfSpeach";
 
 function Quiz({ partsOfSpeach, modal: RulesModal }) {
-    const { current, questions, lang, dispatch } = useQuiz();
+    const { lang } = useLang();
+    const { current, questions, dispatch } = useQuiz();
     const { soundCorrect } = useSound();
 
     const { question, variants, correctIndex } = questions.at(current);

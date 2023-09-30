@@ -1,6 +1,7 @@
 // Libs
 import { createContext, useState } from "react";
 // Context and hooks
+import { useLang } from "../../../contexts/LangContext";
 import { useQuiz } from "../../../contexts/QuizContext";
 import { useLocalStorageState } from "../../../hooks/useLocalStorageState";
 import { useModalState } from "../../../hooks/useModalState";
@@ -20,7 +21,8 @@ import QuizModal from "./QuizModal";
 export const PronounAndVerbContext = createContext();
 
 function PronounAndVerb() {
-    const { isQuizMode, isFinished, lang, dispatch } = useQuiz();
+    const { lang } = useLang();
+    const { isQuizMode, isFinished, dispatch } = useQuiz();
 
     const [amount, setAmount] = useLocalStorageState(
         KEY.questionsAmount,
