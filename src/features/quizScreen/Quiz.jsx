@@ -41,7 +41,7 @@ function Quiz({ partsOfSpeach, modal: RulesModal }) {
                 question,
                 isCorrect,
                 correctVariant: variants[correctIndex],
-                wrongVariant: variants[index],
+                wrongVariant: isCorrect ? null : variants[index],
             },
         });
     }

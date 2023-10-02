@@ -17,6 +17,17 @@ export function trimEndIfMatch(str, ending) {
     return str;
 }
 
+export function assembleSentence(arr) {
+    let sentence = arr.join(" ");
+
+    // Remove spaces before punctuation marks
+    sentence = sentence.replace(/\s([.,!?;:])/g, "$1");
+    // Capitalize the first letter of the sentence
+    sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1);
+
+    return sentence;
+}
+
 // Arrays
 
 export function removeDuplicates(arr) {

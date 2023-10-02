@@ -6,33 +6,65 @@ import { useLocalStorageState } from "../../../hooks/useLocalStorageState";
 import { LOCAL_STORAGE_KEY as KEY } from "../../../config/localStorageConfig";
 import { config } from "../../../config/config";
 import { langPack } from "../../../data/langPack";
+import { verbs } from "../../../data/words/verbs";
+import { constructWordsCheckingQuestionsPack as constructQuestions } from "../../../utils/questionConstructors";
 // Components
 import TaskScreenWrapper from "../../../features/taskScreen/TaskScreenWrapper";
 import TaskScreenHeadings from "../../../features/taskScreen/TaskScreenHeadings";
 import TaskScreenSettings from "../../../features/taskScreen/TaskScreenSettings";
 import TaskScreenRange from "../../../features/taskScreen/TaskScreenRange";
+import TaskScreenToggleSet from "../../../features/taskScreen/TaskScreenToggleSet";
 import TaskScreenButtons from "../../../features/taskScreen/TaskScreenButtons";
 import Button from "../../../components/ui/Button";
-
-import { testPhraseQuestions } from "../../../data/mockQuestions";
-import { getShuffledArrayCopy } from "../../../utils/helpers";
-import TaskScreenCheckboxes from "../../../features/taskScreen/TaskScreenCheckboxes";
 
 function TaskScreen() {
     const { lang } = useLang();
     const { dispatch } = useQuiz();
-
     const [amount, setAmount] = useLocalStorageState(
         KEY.questionsAmount,
         config.quistionsAmount.default
     );
 
+    const [wordsVariety, setwordsVariety] = useLocalStorageState(
+        KEY.wordsVariety,
+        verbs.getVariants().at(0)
+    );
+
+    const [isEngToRus, setIsEngToRus] = useLocalStorageState(
+        KEY.isEngToRusDirection,
+        true
+    );
+
+    function handleToggleChange(e) {
+        const wordsVariety = e.target.value;
+        setwordsVariety(() => wordsVariety);
+    }
+
+    function handleTranslationDirectionChange(e) {
+        setIsEngToRus(e.target.value === "English");
+    }
+
     function handleStartQuiz() {
+        const wordsEng = verbs.common[`n${wordsVariety}`];
+        const wordsRus = verbs.commonRus[`n${wordsVariety}`];
+
+        const wordsPack = isEngToRus
+            ? [wordsEng, wordsRus]
+            : [wordsRus, wordsEng];
+
+        const questions = constructQuestions(...wordsPack, amount);
+
         dispatch({
             type: "quiz/started",
-            payload: { questions: getShuffledArrayCopy(testPhraseQuestions) },
+            payload: { questions: questions },
         });
     }
+
+    // const en = verbs.common.n200;
+    // const ru = verbs.commonRus.n200;
+
+    // const x = en.map((word, index) => `${word}: ${ru[index]}`);
+    // console.log(x);
 
     return (
         <TaskScreenWrapper>
@@ -40,20 +72,11 @@ function TaskScreen() {
                 <h2>
                     {
                         {
-                            ru: "Аглийские вопросы",
-                            en: "English questions",
+                            ru: "Английские глаголы",
+                            en: "English verbs",
                         }[lang]
                     }
                 </h2>
-
-                <h3>
-                    {
-                        {
-                            ru: "простое время",
-                            en: "simple tense",
-                        }[lang]
-                    }
-                </h3>
             </TaskScreenHeadings>
 
             <TaskScreenSettings>
@@ -68,29 +91,28 @@ function TaskScreen() {
                     onChange={(e) => setAmount(e.target.value)}
                 ></TaskScreenRange>
 
-                <TaskScreenCheckboxes
-                    title={{ en: "Tense:", ru: "Время:" }[lang]}
-                    options={["past simple", "present simple", "future simple"]}
-                    labels={
+                <TaskScreenToggleSet
+                    title={
                         {
-                            en: [
-                                "past simple",
-                                "present simple",
-                                "future simple",
-                            ],
-                            ru: [
-                                "прошедшее простое",
-                                "настоящее простое",
-                                "будущее простое",
-                            ],
+                            ru: "переводить с:",
+                            en: "translate from:",
                         }[lang]
                     }
-                    selectedOptions={[
-                        "past simple",
-                        "present simple",
-                        "future simple",
-                    ]}
-                    onChange={() => {}}
+                    options={["English", "Russian"]}
+                    selectedOption={isEngToRus ? "English" : "Russian"}
+                    onChange={handleTranslationDirectionChange}
+                />
+
+                <TaskScreenToggleSet
+                    title={
+                        {
+                            ru: "количество глаголов:",
+                            en: "verbs amount:",
+                        }[lang]
+                    }
+                    options={verbs.getVariants().slice(0, 3)}
+                    selectedOption={wordsVariety}
+                    onChange={handleToggleChange}
                 />
             </TaskScreenSettings>
 

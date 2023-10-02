@@ -17,8 +17,8 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import Pronouns from "./tasks/words/pronouns/Pronouns.jsx";
 import Verbs from "./tasks/words/verbs/Verbs.jsx";
 import PronounAndVerb from "./tasks/presentSimple/pronounAndVerb/PronounAndVerb.jsx";
-import Test from "./components/test/PhrasalQuestion.jsx";
 import Questions from "./tasks/presentSimple/questions/Questions.jsx";
+import QuestionWords from "./tasks/words/questionWords/QuestionWords.jsx";
 
 export const modules = [
     {
@@ -27,14 +27,14 @@ export const modules = [
     },
 
     {
-        title: "learn pronouns",
-        titleRu: "учить местоимения",
+        title: "words: pronouns",
+        titleRu: "слова: местоимения",
         path: "pronouns/",
         element: <Pronouns />,
     },
     {
-        title: "learn verbs",
-        titleRu: "учить глаголы",
+        title: "words: verbs",
+        titleRu: "слова: глаголы",
         path: "verbs/",
         element: <Verbs />,
     },
@@ -45,17 +45,17 @@ export const modules = [
         element: <PronounAndVerb />,
     },
     {
-        title: "simple tense: questions",
-        titleRu: "простое время: вопросы",
+        title: "words: questions",
+        titleRu: "слова: вопросы",
+        path: "question-words/",
+        element: <QuestionWords />,
+    },
+    {
+        title: "questions: past/present/future",
+        titleRu: "вопросы: прошлое/настоящее/будущее",
         path: "present-tense-questions/",
         element: <Questions />,
     },
-    // {
-    //     title: "TEST",
-    //     titleRu: "TEST",
-    //     path: "test/",
-    //     element: <Test />,
-    // },
 ];
 
 const router = createBrowserRouter(
