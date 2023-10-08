@@ -28,11 +28,14 @@ function PronounAndVerb() {
         KEY.questionsAmount,
         config.quistionsAmount.default
     );
-    const [options, setOptions] = useLocalStorageState(KEY.questionsTypes, {
-        positives: true,
-        negatives: false,
-        questions: false,
-    });
+    const [options, setOptions] = useLocalStorageState(
+        KEY.pronAndVerbQuestionsTypes,
+        {
+            positives: true,
+            negatives: false,
+            questions: false,
+        }
+    );
 
     const [verbsVariety, setVerbsVariety] = useLocalStorageState(
         KEY.verbsVariety,

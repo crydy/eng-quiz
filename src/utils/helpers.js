@@ -4,6 +4,12 @@ export function rem(px) {
     return +px / 16 + "rem";
 }
 
+// Numbers
+
+export function getRandomInteger(min, max) {
+    return Math.floor(min + Math.random() * (max + 1 - min));
+}
+
 // Strings
 
 export function capitalize(string) {

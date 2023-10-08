@@ -9,11 +9,11 @@ import { QuizContextProvider } from "./contexts/QuizContext.jsx";
 import { ColorThemeProvider } from "./contexts/ColorThemeContext.jsx";
 // Styles
 import GlobalStyles from "./styles/GlobalStyles.js";
-// Components
+// Components global
 import App from "./App.jsx";
 import IndexPage from "./pages/IndexPage.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
-
+// Components tasks
 import Pronouns from "./tasks/words/pronouns/Pronouns.jsx";
 import Verbs from "./tasks/words/verbs/Verbs.jsx";
 import PronounAndVerb from "./tasks/presentSimple/pronounAndVerb/PronounAndVerb.jsx";

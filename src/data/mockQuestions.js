@@ -18,8 +18,8 @@ export const testPhraseQuestions = [
         wrongWords: [],
     },
     {
-        question: "Мы будем это есть?",
-        phraseWords: ["will", "we", "eat", "that", "?"],
+        question: "Ты будешь это есть?",
+        phraseWords: ["will", "you", "eat", "that", "?"],
         wrongWords: ["did", "were"],
     },
     {

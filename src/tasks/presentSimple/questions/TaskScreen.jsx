@@ -6,31 +6,55 @@ import { useLocalStorageState } from "../../../hooks/useLocalStorageState";
 import { LOCAL_STORAGE_KEY as KEY } from "../../../config/localStorageConfig";
 import { config } from "../../../config/config";
 import { langPack } from "../../../data/langPack";
+import { constructQuestionsPack } from "../../../data/questions/questionsSimple";
 // Components
 import TaskScreenWrapper from "../../../features/taskScreen/TaskScreenWrapper";
 import TaskScreenHeadings from "../../../features/taskScreen/TaskScreenHeadings";
 import TaskScreenSettings from "../../../features/taskScreen/TaskScreenSettings";
 import TaskScreenRange from "../../../features/taskScreen/TaskScreenRange";
 import TaskScreenButtons from "../../../features/taskScreen/TaskScreenButtons";
-import Button from "../../../components/ui/Button";
-
-import { testPhraseQuestions } from "../../../data/mockQuestions";
-import { getShuffledArrayCopy } from "../../../utils/helpers";
 import TaskScreenCheckboxes from "../../../features/taskScreen/TaskScreenCheckboxes";
+import Button from "../../../components/ui/Button";
 
 function TaskScreen() {
     const { lang } = useLang();
     const { dispatch } = useQuiz();
 
     const [amount, setAmount] = useLocalStorageState(
-        KEY.questionsAmount,
-        config.quistionsAmount.default
+        KEY.questionsAmountHardTasks,
+        config.quistionsAmountHardTasks.default
     );
+
+    const [options, setOptions] = useLocalStorageState(
+        KEY.presentSimpleQuestionTypes,
+        {
+            past: true,
+            present: false,
+            future: false,
+        }
+    );
+
+    const selectedOptions = Object.keys(options).filter(
+        (item) => options[item] === true
+    );
+
+    function handleCheckboxChange(e) {
+        const { name } = e.target;
+
+        setOptions((options) => {
+            return {
+                ...options,
+                [name]: !options[name],
+            };
+        });
+    }
 
     function handleStartQuiz() {
         dispatch({
             type: "quiz/started",
-            payload: { questions: getShuffledArrayCopy(testPhraseQuestions) },
+            payload: {
+                questions: constructQuestionsPack(amount, selectedOptions),
+            },
         });
     }
 
@@ -40,8 +64,8 @@ function TaskScreen() {
                 <h2>
                     {
                         {
-                            ru: "Аглийские вопросы",
-                            en: "English questions",
+                            ru: "Вопросы",
+                            en: "Questions",
                         }[lang]
                     }
                 </h2>
@@ -64,33 +88,23 @@ function TaskScreen() {
                             en: "questions amount:",
                         }[lang]
                     }
+                    min={config.quistionsAmountHardTasks.min}
+                    max={config.quistionsAmountHardTasks.max}
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                 ></TaskScreenRange>
 
                 <TaskScreenCheckboxes
-                    title={{ en: "Tense:", ru: "Время:" }[lang]}
-                    options={["past simple", "present simple", "future simple"]}
+                    title={{ en: "tense:", ru: "время:" }[lang]}
+                    options={Object.keys(options)}
                     labels={
                         {
-                            en: [
-                                "past simple",
-                                "present simple",
-                                "future simple",
-                            ],
-                            ru: [
-                                "прошедшее простое",
-                                "настоящее простое",
-                                "будущее простое",
-                            ],
+                            en: Object.keys(options),
+                            ru: ["прошедшее", "настоящее", "будущее"],
                         }[lang]
                     }
-                    selectedOptions={[
-                        "past simple",
-                        "present simple",
-                        "future simple",
-                    ]}
-                    onChange={() => {}}
+                    selectedOptions={selectedOptions}
+                    onChange={handleCheckboxChange}
                 />
             </TaskScreenSettings>
 
