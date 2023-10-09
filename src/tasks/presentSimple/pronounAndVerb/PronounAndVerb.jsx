@@ -53,7 +53,12 @@ function PronounAndVerb() {
     ).map((item) => item[lang]);
 
     function handleCheckboxChange(e) {
-        const { name } = e.target;
+        const { name, checked } = e.target;
+
+        // keep at least one checkbox active
+        if (!checked && Object.values(options).filter(Boolean).length === 1) {
+            return;
+        }
 
         setOptions((options) => {
             return {

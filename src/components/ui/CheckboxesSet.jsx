@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { rem } from "../../utils/helpers";
 
 import Checkbox from "./Checkbox";
+import { useEffect, useState } from "react";
 
 const StyledCheckboxesSet = styled.div`
     display: flex;
@@ -55,6 +56,22 @@ function CheckboxesSet({
 
     color = "red",
 }) {
+    // function handleChange(e) {
+    //     console.log(e);
+    //     // console.log(e.target.name);
+    //     // console.log(e.target.checked);
+    //     onChange();
+    // }
+
+    // const [checkboxes, setCheckboxes] = useState(
+    //     Object.fromEntries(
+    //         options.map((entry) => [
+    //             entry,
+    //             selectedOptions.includes(entry) ? true : false,
+    //         ])
+    //     )
+    // );
+
     return (
         <StyledCheckboxesSet
             $sizeFont={sizeFont}
@@ -75,9 +92,7 @@ function CheckboxesSet({
                                 sizeFont={sizeFont}
                                 color={color}
                                 sizeLabelIndent={sizeLablesIndent}
-                                defaultChecked={selectedOptions.includes(
-                                    option
-                                )}
+                                isChecked={selectedOptions.includes(option)}
                                 onChange={onChange}
                             >
                                 {labels.at(index)}

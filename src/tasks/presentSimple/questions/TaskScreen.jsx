@@ -39,7 +39,12 @@ function TaskScreen() {
     );
 
     function handleCheckboxChange(e) {
-        const { name } = e.target;
+        const { name, checked } = e.target;
+
+        // keep at least one checkbox active
+        if (!checked && Object.values(options).filter(Boolean).length === 1) {
+            return;
+        }
 
         setOptions((options) => {
             return {
@@ -109,7 +114,10 @@ function TaskScreen() {
             </TaskScreenSettings>
 
             <TaskScreenButtons>
-                <Button onClick={handleStartQuiz}>
+                <Button
+                    onClick={handleStartQuiz}
+                    disabled={selectedOptions.length < 1}
+                >
                     {langPack.buttons.start[lang]}
                 </Button>
             </TaskScreenButtons>
