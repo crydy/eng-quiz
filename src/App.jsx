@@ -20,8 +20,6 @@ const Body = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
-
-    /* outline: 1px solid red; */
 `;
 
 function App() {

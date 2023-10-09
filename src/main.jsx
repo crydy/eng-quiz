@@ -4,11 +4,6 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // Providers
 import { config } from "./config/config.js";
-import { LangContextProvider } from "./contexts/LangContext.jsx";
-import { QuizContextProvider } from "./contexts/QuizContext.jsx";
-import { ColorThemeProvider } from "./contexts/ColorThemeContext.jsx";
-// Styles
-import GlobalStyles from "./styles/GlobalStyles.js";
 // Components global
 import App from "./App.jsx";
 import IndexPage from "./pages/IndexPage.jsx";
@@ -19,6 +14,7 @@ import Verbs from "./tasks/words/verbs/Verbs.jsx";
 import PronounAndVerb from "./tasks/presentSimple/pronounAndVerb/PronounAndVerb.jsx";
 import Questions from "./tasks/presentSimple/questions/Questions.jsx";
 import QuestionWords from "./tasks/words/questionWords/QuestionWords.jsx";
+import GlobalContexts from "./contexts/GlobalContexts.jsx";
 
 export const modules = [
     {
@@ -73,13 +69,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-        <ColorThemeProvider>
-            <LangContextProvider>
-                <QuizContextProvider>
-                    <GlobalStyles />
-                    <RouterProvider router={router} />
-                </QuizContextProvider>
-            </LangContextProvider>
-        </ColorThemeProvider>
+        <GlobalContexts>
+            <RouterProvider router={router} />
+        </GlobalContexts>
     </React.StrictMode>
 );
