@@ -38,7 +38,13 @@ const ListTitle = styled.h3`
 const StyledReceiverList = styled.ul`
     ${ulStyle};
 
+    justify-content: center;
+
+    min-height: ${(props) =>
+        props.$initialHeight ? props.$initialHeight + "px" : ""};
+
     & li {
+        outline: 1px dotted var(--color-quiz-phrase-constructor-cell-bg);
         background-color: var(--color-quiz-phrase-constructor-cell-bg-empty);
     }
 
@@ -184,6 +190,14 @@ function ReceiverList({ title, hideTitle = false }) {
     const { phraseWords, droppedElems } = useContext(PhrasalQuestionContext);
     const isTitleHidden = droppedElems.length !== 0;
 
+    // keep the element's height stable
+    const initialHeightRef = useRef(0);
+    useEffect(() => {
+        const initialHeight =
+            document.getElementById("receiver-list").offsetHeight;
+        initialHeightRef.current = initialHeight;
+    }, []);
+
     return (
         <div>
             {title && (
@@ -192,7 +206,10 @@ function ReceiverList({ title, hideTitle = false }) {
                 </ListTitle>
             )}
 
-            <StyledReceiverList>
+            <StyledReceiverList
+                id="receiver-list"
+                $initialHeight={initialHeightRef.current}
+            >
                 {phraseWords.map((_, index) => (
                     <>
                         <li key={`li ${index}`}>
@@ -254,9 +271,9 @@ function TransmitterList({ title, hideTitle = false }) {
             )}
 
             <StyledTransmitterList
-                $isFilled={isFilled}
-                $initialHeight={initialHeightRef.current}
                 id="transmitter-list"
+                $initialHeight={initialHeightRef.current}
+                $isFilled={isFilled}
             >
                 {words.map((word) => (
                     <>

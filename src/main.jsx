@@ -2,7 +2,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-// Providers
+// Data
 import { config } from "./config/config.js";
 // Components global
 import App from "./App.jsx";

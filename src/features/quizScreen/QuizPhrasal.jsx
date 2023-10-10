@@ -127,14 +127,8 @@ function QuizPhrasal() {
                 <ResultDisplay>
                     <div>
                         <p>
-                            {isCorrectAnswer
-                                ? {
-                                      en: "Your answer is correct:",
-                                      ru: "Твой ответ правильный:",
-                                  }[lang]
-                                : { en: "Your answer:", ru: "Твой ответ:" }[
-                                      lang
-                                  ]}
+                            {!isCorrectAnswer &&
+                                { en: "Your answer:", ru: "Твой ответ:" }[lang]}
                         </p>
                         <AssembledSentence
                             $variant={isCorrectAnswer ? "correct" : "wrong"}

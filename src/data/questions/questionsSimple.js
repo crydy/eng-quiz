@@ -114,6 +114,14 @@ const questionBase = [
             "Он будет чинить компьютеры?",
         ],
     },
+    {
+        phraseWords: ["do", "you", "like", "to swim", "?"],
+        questionVariants: [
+            "Тебе нравится плавать?",
+            "Тебе нравилось плавать?",
+            "Тебе понравится плавать?",
+        ],
+    },
 ];
 
 function constructQuestion(tense, question) {

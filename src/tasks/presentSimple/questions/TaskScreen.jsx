@@ -2,6 +2,7 @@
 import { useLang } from "../../../contexts/LangContext";
 import { useQuiz } from "../../../contexts/QuizContext";
 import { useLocalStorageState } from "../../../hooks/useLocalStorageState";
+import { useModalState } from "../../../hooks/useModalState";
 // Data and utils
 import { LOCAL_STORAGE_KEY as KEY } from "../../../config/localStorageConfig";
 import { config } from "../../../config/config";
@@ -16,7 +17,6 @@ import TaskScreenButtons from "../../../features/taskScreen/TaskScreenButtons";
 import TaskScreenCheckboxes from "../../../features/taskScreen/TaskScreenCheckboxes";
 import TaskScreenRulesModal from "./TaskScreenRulesModal";
 import Button from "../../../components/ui/Button";
-import { useModalState } from "../../../hooks/useModalState";
 
 function TaskScreen() {
     const { lang } = useLang();
