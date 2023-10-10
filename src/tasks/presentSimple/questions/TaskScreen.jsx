@@ -14,11 +14,15 @@ import TaskScreenSettings from "../../../features/taskScreen/TaskScreenSettings"
 import TaskScreenRange from "../../../features/taskScreen/TaskScreenRange";
 import TaskScreenButtons from "../../../features/taskScreen/TaskScreenButtons";
 import TaskScreenCheckboxes from "../../../features/taskScreen/TaskScreenCheckboxes";
+import TaskScreenRulesModal from "./TaskScreenRulesModal";
 import Button from "../../../components/ui/Button";
+import { useModalState } from "../../../hooks/useModalState";
 
 function TaskScreen() {
     const { lang } = useLang();
     const { dispatch } = useQuiz();
+
+    const [isRulesOpened, setIsRulesOpened] = useModalState(false);
 
     const [amount, setAmount] = useLocalStorageState(
         KEY.questionsAmountHardTasks,
@@ -28,8 +32,8 @@ function TaskScreen() {
     const [options, setOptions] = useLocalStorageState(
         KEY.presentSimpleQuestionTypes,
         {
-            past: true,
-            present: false,
+            past: false,
+            present: true,
             future: false,
         }
     );
@@ -52,6 +56,10 @@ function TaskScreen() {
                 [name]: !options[name],
             };
         });
+    }
+
+    function handleOpenRules() {
+        setIsRulesOpened(true);
     }
 
     function handleStartQuiz() {
@@ -115,12 +123,26 @@ function TaskScreen() {
 
             <TaskScreenButtons>
                 <Button
+                    onClick={handleOpenRules}
+                    disabled={!selectedOptions.length || isRulesOpened}
+                    colorless
+                >
+                    {langPack.buttons.modalSpecial.rulesOpenStartScreen[lang]}
+                </Button>
+
+                <Button
                     onClick={handleStartQuiz}
                     disabled={selectedOptions.length < 1}
                 >
                     {langPack.buttons.start[lang]}
                 </Button>
             </TaskScreenButtons>
+
+            <TaskScreenRulesModal
+                isRulesOpened={isRulesOpened}
+                setIsRulesOpened={setIsRulesOpened}
+                selectedOptions={selectedOptions}
+            />
         </TaskScreenWrapper>
     );
 }

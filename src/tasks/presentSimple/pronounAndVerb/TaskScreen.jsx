@@ -14,8 +14,8 @@ import TaskScreenButtons from "../../../features/taskScreen/TaskScreenButtons";
 import TaskScreenRange from "../../../features/taskScreen/TaskScreenRange";
 import TaskScreenCheckboxes from "../../../features/taskScreen/TaskScreenCheckboxes";
 import TaskScreenToggleSet from "../../../features/taskScreen/TaskScreenToggleSet";
-import Button from "../../../components/ui/Button";
 import TaskScreenRulesModal from "./TaskScreenRulesModal";
+import Button from "../../../components/ui/Button";
 
 function TaskScreen() {
     const { lang } = useLang();
