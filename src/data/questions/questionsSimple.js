@@ -1,18 +1,13 @@
-// questionVariants: [
-//     - present
-//     - past
-//     - future
-// ]
-
 import { getRandomItem } from "../../utils/helpers";
 
 const questionBase = [
     {
+        // order: present simple
         phraseWords: ["does", "she", "love", "him", "?"],
         questionVariants: [
-            "Она его любит?",
-            "Она его любила?",
-            "Она будет его любить?",
+            "Она его любит?", //          1. present
+            "Она его любила?", //         2. past
+            "Она будет его любить?", //   3. future
         ],
     },
     {

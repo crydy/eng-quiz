@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
@@ -34,9 +34,8 @@ function TopBar() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const navigate = useNavigate();
-    const isIndexPage = useLocation().pathname === "/";
-
-    const buttonsFontSize = ".6em";
+    const currentPathName = useLocation().pathname;
+    const isIndexPage = currentPathName === "/";
 
     function handleOnHomeButtonClick() {
         if (isQuizMode) {
@@ -44,11 +43,29 @@ function TopBar() {
         } else navigateToHome();
     }
 
-    function navigateToHome() {
+    const navigateToHome = useCallback(() => {
         setIsModalOpen(false);
         navigate("/");
         dispatch({ type: "quiz/startMenu" });
-    }
+    }, [dispatch, navigate]);
+
+    useEffect(() => {
+        function handlePopState(e) {
+            if (isQuizMode) {
+                navigate(currentPathName); // does trigger 'blinking behavior', need better solution
+                setIsModalOpen(true);
+            } else navigateToHome();
+        }
+
+        window.addEventListener("popstate", handlePopState);
+        return () => {
+            window.removeEventListener("popstate", handlePopState);
+        };
+        // !!! adding currentPathName in dependencies is breaking working logic
+        // TODO: find better solution to prevent default 'go back' borwser button behavior
+    }, [isQuizMode, navigate, navigateToHome]);
+
+    const buttonsFontSize = ".6em";
 
     return (
         <StyledTopBar>
