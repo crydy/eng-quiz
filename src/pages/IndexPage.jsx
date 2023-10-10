@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
-import { useQuiz } from "../contexts/QuizContext";
+import { useLang } from "../contexts/LangContext";
 import { modules } from "../main";
 import { langPack } from "../data/langPack";
 
@@ -56,7 +56,7 @@ const StyledLink = styled(Link)`
 `;
 
 function IndexPage() {
-    const { lang } = useQuiz();
+    const { lang } = useLang();
 
     return (
         <StyledIndexPage>

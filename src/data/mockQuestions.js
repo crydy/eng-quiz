@@ -10,3 +10,21 @@ export const testQuestions = [
         correctIndex: 0,
     },
 ];
+
+export const testPhraseQuestions = [
+    {
+        question: "Она его любит?",
+        phraseWords: ["does", "she", "love", "him", "?"],
+        wrongWords: [],
+    },
+    {
+        question: "Ты будешь это есть?",
+        phraseWords: ["will", "you", "eat", "that", "?"],
+        wrongWords: ["did", "were"],
+    },
+    {
+        question: "Ты её видел?",
+        phraseWords: ["have", "you", "seen", "her", "?"],
+        wrongWords: ["did", "were", "see", "was"],
+    },
+];

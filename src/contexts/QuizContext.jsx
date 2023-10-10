@@ -1,14 +1,30 @@
 import { createContext, useContext, useReducer } from "react";
 
-import { LOCAL_STORAGE_KEY as KEY } from "../config/localStorageConfig";
-import { config } from "../config/config";
-import { updateLangAttribute } from "../utils/helpers";
+// QUESTIONS STRUCTURE EXAMPLE
+// const testQuestions = [
+//     {
+//         question: "Who can run?",
+//         variants: ["turtle", "cat", "worm", "flower"],
+//         correctIndex: 1,
+//     },
+//     {
+//         question: "Are you an animal?",
+//         variants: ["Absolutely", "I am the god"],
+//         correctIndex: 0,
+//     },
+// ];
+
+// const testPhraseQuestions = [
+//     {
+//         question: "Put the words in the correct order",
+//         phraseWords: ["have", "you", "seen", "her", "?"],
+//         wrongWords: ["did", "were", "see", "was"],
+//     },
+// ];
 
 const QuizContext = createContext();
 
 const initialState = {
-    lang: localStorage.getItem(KEY.userLanguage) || config.defaultLanguage,
-
     isQuizMode: false,
     isFinished: false,
     isAnswered: false,
@@ -23,7 +39,6 @@ function reducer(state, action) {
         case "quiz/started":
             return {
                 ...initialState,
-                lang: state.lang,
                 isQuizMode: true,
                 questions: action.payload.questions,
             };
@@ -50,13 +65,7 @@ function reducer(state, action) {
             };
 
         case "quiz/startMenu":
-            return { ...initialState, lang: state.lang };
-
-        case "menu/languageChanged":
-            const newLang = state.lang === "en" ? "ru" : "en";
-            localStorage.setItem(KEY.userLanguage, newLang);
-            updateLangAttribute(newLang);
-            return { ...state, lang: newLang };
+            return { ...initialState };
 
         default:
             return state;
@@ -65,8 +74,6 @@ function reducer(state, action) {
 
 function QuizContextProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, initialState);
-
-    updateLangAttribute(state.lang);
 
     return (
         <QuizContext.Provider value={{ ...state, dispatch }}>

@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { useQuiz } from "../../../contexts/QuizContext";
+import { useLang } from "../../../contexts/LangContext";
 import { englishFontOnly } from "../../../styles/styles";
 
 import ToggleSet from "../../ui/ToggleSet";
@@ -9,7 +9,7 @@ const StyledLanguageButton = styled.div`
 `;
 
 function LanguageButton({ size }) {
-    const { lang, dispatch } = useQuiz();
+    const { lang, dispatch } = useLang();
 
     const selectedLang = lang === "en" ? "eng" : "rus";
 

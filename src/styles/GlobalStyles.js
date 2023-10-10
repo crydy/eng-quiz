@@ -60,6 +60,10 @@ const GlobalStyles = createGlobalStyle`
 
     --color-quiz-heading-correct: var(--color-button-bg-correct);
     --color-quiz-heading-wrong: var(--color-button-bg-wrong);
+
+    --color-quiz-phrase-constructor-cell-bg-empty: var(--color-bg);
+    --color-quiz-phrase-constructor-cell-bg: var(--color-button-bg);
+    --color-quiz-phrase-constructor-cell-text: var(--color-text-main);
     
     --color-progress-bar: #93a8ac;
     --color-progress-bar-fill: var(--color-button-bg);

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { styled } from "styled-components";
 
-import { useQuiz } from "../../../contexts/QuizContext";
+import { useLang } from "../../../contexts/LangContext";
 import { PronounAndVerbContext } from "./PronounAndVerb";
 
 import { langPack } from "../../../data/langPack";
@@ -18,7 +18,7 @@ const RulesModalHeader = styled.h3`
 `;
 
 function RulesModal() {
-    const { lang } = useQuiz();
+    const { lang } = useLang();
 
     const { isRulesOpened, setIsRulesOpened, selectedOptions } = useContext(
         PronounAndVerbContext

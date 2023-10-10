@@ -177,3 +177,7 @@ export function constructQuestions(
 
     return result;
 }
+
+// Questions
+
+export function constructSimpleQuestionPhrase(question, tense) {}

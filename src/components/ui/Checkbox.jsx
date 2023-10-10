@@ -72,6 +72,8 @@ const StyledCheckbox = styled.input`
 `;
 
 function Checkbox({
+    isChecked,
+
     // string: valid css-value (as '1em')
     // number: (px size implied, will converted px=>rem)
     sizeFont = "1em",
@@ -94,6 +96,7 @@ function Checkbox({
         >
             <StyledCheckbox
                 type="checkbox"
+                checked={isChecked}
                 $sizeCheckbox={sizeCheckbox}
                 $sizeCheckboxOutline={sizeCheckboxOutline}
                 $sizeCheckboxCoreRatio={sizeCheckboxCoreRatio}

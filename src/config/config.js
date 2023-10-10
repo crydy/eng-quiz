@@ -9,6 +9,12 @@ const config = {
         max: 30,
     },
 
+    quistionsAmountHardTasks: {
+        default: 7,
+        min: 5,
+        max: 15,
+    },
+
     colorThemes: {
         classNamesPrefix: "color-theme-",
         classNames: {

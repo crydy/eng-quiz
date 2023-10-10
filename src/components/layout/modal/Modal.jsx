@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { CgCloseR } from "react-icons/cg";
 
 import { rem } from "../../../utils/helpers";
-import { useQuiz } from "../../../contexts/QuizContext";
+import { useLang } from "../../../contexts/LangContext";
 import { langPack } from "../../../data/langPack";
 
 const StyledModal = styled.div`
@@ -81,7 +81,7 @@ function Modal({
     padding = [20, 8],
     children,
 }) {
-    const { lang } = useQuiz();
+    const { lang } = useLang();
 
     closeButtonTitle = closeButtonTitle
         ? closeButtonTitle

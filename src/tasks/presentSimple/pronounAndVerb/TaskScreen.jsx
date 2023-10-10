@@ -1,7 +1,7 @@
 // Libs
 import { useContext } from "react";
 // Context and hooks
-import { useQuiz } from "../../../contexts/QuizContext";
+import { useLang } from "../../../contexts/LangContext";
 import { PronounAndVerbContext } from "./PronounAndVerb";
 // Data and utils
 import { langPack } from "../../../data/langPack";
@@ -14,11 +14,11 @@ import TaskScreenButtons from "../../../features/taskScreen/TaskScreenButtons";
 import TaskScreenRange from "../../../features/taskScreen/TaskScreenRange";
 import TaskScreenCheckboxes from "../../../features/taskScreen/TaskScreenCheckboxes";
 import TaskScreenToggleSet from "../../../features/taskScreen/TaskScreenToggleSet";
-import Button from "../../../components/ui/Button";
 import TaskScreenRulesModal from "./TaskScreenRulesModal";
+import Button from "../../../components/ui/Button";
 
 function TaskScreen() {
-    const { lang } = useQuiz();
+    const { lang } = useLang();
 
     const {
         amount,

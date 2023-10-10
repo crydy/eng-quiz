@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
+import { useLang } from "../../../contexts/LangContext";
 import { rem } from "../../../utils/helpers";
-import { useQuiz } from "../../../contexts/QuizContext";
 import { langPack } from "../../../data/langPack";
 
 import Modal from "./Modal";
@@ -23,7 +23,7 @@ const ButtonsWrap = styled.div`
 `;
 
 function ModalConfirm({ children: question, onConfirm, onClose, ...rest }) {
-    const { lang } = useQuiz();
+    const { lang } = useLang();
 
     return (
         <Modal noCloseButton onClose={onClose} {...rest}>

@@ -1,7 +1,9 @@
 import { styled } from "styled-components";
+import { useLang } from "../../contexts/LangContext";
 import { useQuiz } from "../../contexts/QuizContext";
 import { langPack } from "../../data/langPack";
 import { rem } from "../../utils/helpers";
+
 import Button from "../../components/ui/Button";
 
 const AnswersButtons = styled.div`
@@ -15,14 +17,19 @@ const AnswersButtons = styled.div`
 `;
 
 function QuizAnswersButtons({
+    onConfirm,
+    isConfirmVisible,
+
     onNext,
     isNextVisible,
+
     onShowRules,
     isRulesExist,
     isShowRulesVisible,
     isRulesOpened,
 }) {
-    const { current, questions, lang } = useQuiz();
+    const { lang } = useLang();
+    const { current, questions } = useQuiz();
     const isLastQuestion = questions.length === current + 1;
 
     function handleNext() {
@@ -31,15 +38,32 @@ function QuizAnswersButtons({
 
     return (
         <AnswersButtons>
-            <Button
-                onClick={handleNext}
-                visible={isNextVisible}
-                disabled={!isNextVisible}
-            >
-                {!isLastQuestion
-                    ? langPack.buttons.next[lang]
-                    : langPack.buttons.finish[lang]}
-            </Button>
+            {onConfirm && (
+                <Button
+                    onClick={onConfirm}
+                    visible={isConfirmVisible}
+                    disabled={!isConfirmVisible}
+                >
+                    {
+                        {
+                            en: "Confirm",
+                            ru: "Подтвердить",
+                        }[lang]
+                    }
+                </Button>
+            )}
+
+            {onNext && (
+                <Button
+                    onClick={handleNext}
+                    visible={isNextVisible}
+                    disabled={!isNextVisible}
+                >
+                    {!isLastQuestion
+                        ? langPack.buttons.next[lang]
+                        : langPack.buttons.finish[lang]}
+                </Button>
+            )}
 
             {isRulesExist && (
                 <Button

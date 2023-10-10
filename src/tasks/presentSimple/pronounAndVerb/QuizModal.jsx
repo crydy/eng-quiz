@@ -1,12 +1,15 @@
+import { useLang } from "../../../contexts/LangContext";
 import { useQuiz } from "../../../contexts/QuizContext";
 import { capitalize } from "../../../utils/helpers";
 import { langPack } from "../../../data/langPack";
 import { rulesData } from "../../../data/rulesData";
+
 import Modal from "../../../components/layout/modal/Modal";
 import Table from "../../../components/ui/Table";
 
 function QuizModal({ isModalOpen, onClose }) {
-    const { current, questions, lang } = useQuiz();
+    const { lang } = useLang();
+    const { current, questions } = useQuiz();
 
     const { type: questionType } = questions.at(current);
 

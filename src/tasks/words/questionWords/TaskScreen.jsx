@@ -16,6 +16,7 @@ import TaskScreenRange from "../../../features/taskScreen/TaskScreenRange";
 import TaskScreenToggleSet from "../../../features/taskScreen/TaskScreenToggleSet";
 import TaskScreenButtons from "../../../features/taskScreen/TaskScreenButtons";
 import Button from "../../../components/ui/Button";
+import { questionWords } from "../../../data/words/questionWords";
 
 function TaskScreen() {
     const { lang } = useLang();
@@ -25,28 +26,18 @@ function TaskScreen() {
         config.quistionsAmount.default
     );
 
-    const [wordsVariety, setwordsVariety] = useLocalStorageState(
-        KEY.wordsVariety,
-        verbs.getVariants().at(0)
-    );
-
     const [isEngToRus, setIsEngToRus] = useLocalStorageState(
         KEY.isEngToRusDirection,
         true
     );
-
-    function handleToggleChange(e) {
-        const wordsVariety = e.target.value;
-        setwordsVariety(() => wordsVariety);
-    }
 
     function handleTranslationDirectionChange(e) {
         setIsEngToRus(e.target.value === "English");
     }
 
     function handleStartQuiz() {
-        const wordsEng = verbs.common[`n${wordsVariety}`];
-        const wordsRus = verbs.commonRus[`n${wordsVariety}`];
+        const wordsEng = questionWords.basic.en;
+        const wordsRus = questionWords.basic.ru;
 
         const wordsPack = isEngToRus
             ? [wordsEng, wordsRus]
@@ -59,12 +50,6 @@ function TaskScreen() {
             payload: { questions: questions },
         });
     }
-
-    // const en = verbs.common.n200;
-    // const ru = verbs.commonRus.n200;
-
-    // const x = en.map((word, index) => `${word}: ${ru[index]}`);
-    // console.log(x);
 
     return (
         <TaskScreenWrapper>
@@ -101,18 +86,6 @@ function TaskScreen() {
                     options={["English", "Russian"]}
                     selectedOption={isEngToRus ? "English" : "Russian"}
                     onChange={handleTranslationDirectionChange}
-                />
-
-                <TaskScreenToggleSet
-                    title={
-                        {
-                            ru: "количество глаголов:",
-                            en: "verbs amount:",
-                        }[lang]
-                    }
-                    options={verbs.getVariants().slice(0, 3)}
-                    selectedOption={wordsVariety}
-                    onChange={handleToggleChange}
                 />
             </TaskScreenSettings>
 

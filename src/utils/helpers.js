@@ -4,6 +4,12 @@ export function rem(px) {
     return +px / 16 + "rem";
 }
 
+// Numbers
+
+export function getRandomInteger(min, max) {
+    return Math.floor(min + Math.random() * (max + 1 - min));
+}
+
 // Strings
 
 export function capitalize(string) {
@@ -15,6 +21,17 @@ export function trimEndIfMatch(str, ending) {
         return str.slice(0, -ending.length);
     }
     return str;
+}
+
+export function assembleSentence(arr) {
+    let sentence = arr.join(" ");
+
+    // Remove spaces before punctuation marks
+    sentence = sentence.replace(/\s([.,!?;:])/g, "$1");
+    // Capitalize the first letter of the sentence
+    sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1);
+
+    return sentence;
 }
 
 // Arrays

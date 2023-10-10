@@ -1,8 +1,10 @@
 import { useNavigate, useRouteError } from "react-router-dom";
-import Button from "../components/ui/Button";
 import { styled } from "styled-components";
+
+import { useLang } from "../contexts/LangContext";
 import { langPack } from "../data/langPack";
-import { useQuiz } from "../contexts/QuizContext";
+
+import Button from "../components/ui/Button";
 
 const StyledErrorPage = styled.div`
     display: flex;
@@ -17,7 +19,7 @@ const StyledErrorText = styled.p`
 `;
 
 function ErrorPage() {
-    const { lang } = useQuiz();
+    const { lang } = useLang();
     const navigate = useNavigate();
 
     const error = useRouteError();
