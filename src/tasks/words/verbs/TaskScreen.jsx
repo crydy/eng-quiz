@@ -60,12 +60,6 @@ function TaskScreen() {
         });
     }
 
-    // const en = verbs.common.n200;
-    // const ru = verbs.commonRus.n200;
-
-    // const x = en.map((word, index) => `${word}: ${ru[index]}`);
-    // console.log(x);
-
     return (
         <TaskScreenWrapper>
             <TaskScreenHeadings>

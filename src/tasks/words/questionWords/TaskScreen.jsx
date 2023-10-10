@@ -6,7 +6,7 @@ import { useLocalStorageState } from "../../../hooks/useLocalStorageState";
 import { LOCAL_STORAGE_KEY as KEY } from "../../../config/localStorageConfig";
 import { config } from "../../../config/config";
 import { langPack } from "../../../data/langPack";
-import { verbs } from "../../../data/words/verbs";
+import { questionWords } from "../../../data/words/questionWords";
 import { constructWordsCheckingQuestionsPack as constructQuestions } from "../../../utils/questionConstructors";
 // Components
 import TaskScreenWrapper from "../../../features/taskScreen/TaskScreenWrapper";
@@ -16,7 +16,6 @@ import TaskScreenRange from "../../../features/taskScreen/TaskScreenRange";
 import TaskScreenToggleSet from "../../../features/taskScreen/TaskScreenToggleSet";
 import TaskScreenButtons from "../../../features/taskScreen/TaskScreenButtons";
 import Button from "../../../components/ui/Button";
-import { questionWords } from "../../../data/words/questionWords";
 
 function TaskScreen() {
     const { lang } = useLang();
@@ -57,8 +56,8 @@ function TaskScreen() {
                 <h2>
                     {
                         {
-                            ru: "Английские глаголы",
-                            en: "English verbs",
+                            en: "Question words",
+                            ru: "Вопросительные слова",
                         }[lang]
                     }
                 </h2>
@@ -68,8 +67,8 @@ function TaskScreen() {
                 <TaskScreenRange
                     title={
                         {
-                            ru: "количество вопросов:",
                             en: "questions amount:",
+                            ru: "количество вопросов:",
                         }[lang]
                     }
                     value={amount}
@@ -79,8 +78,8 @@ function TaskScreen() {
                 <TaskScreenToggleSet
                     title={
                         {
-                            ru: "переводить с:",
                             en: "translate from:",
+                            ru: "переводить с:",
                         }[lang]
                     }
                     options={["English", "Russian"]}

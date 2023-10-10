@@ -111,8 +111,6 @@ function PhrasalQuestion({
             .sort((a, b) => a.cell.localeCompare(b.cell))
             .map((item) => item.elem);
 
-        console.log(assembleSentence(userSequenceArray));
-
         onAssemble(userSequenceArray);
     } else onDisassemble();
 
