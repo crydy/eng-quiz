@@ -9,7 +9,7 @@ import {
 import { css, styled } from "styled-components";
 import { DndContext } from "@dnd-kit/core";
 
-import { assembleSentence, getShuffledArrayCopy } from "../../../utils/helpers";
+import { getShuffledArrayCopy } from "../../../utils/helpers";
 
 import Droppable from "./Droppable";
 import Draggable from "./Draggable";
@@ -39,6 +39,7 @@ const StyledReceiverList = styled.ul`
     ${ulStyle};
 
     justify-content: center;
+    align-items: flex-start;
 
     min-height: ${(props) =>
         props.$initialHeight ? props.$initialHeight + "px" : ""};
